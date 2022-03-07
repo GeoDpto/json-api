@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+build/
+
+vendor/
+composer.lock
+perf/blackfire.io.env
