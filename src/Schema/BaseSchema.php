@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Schema;
 
@@ -39,25 +41,16 @@ abstract class BaseSchema implements SchemaInterface
      */
     private $subUrl = null;
 
-    /**
-     * @param FactoryInterface $factory
-     */
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getSelfLink($resource): LinkInterface
     {
         return $this->factory->createLink(true, $this->getSelfSubUrl($resource), false);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getLinks($resource): iterable
     {
         $links = [
@@ -67,9 +60,6 @@ abstract class BaseSchema implements SchemaInterface
         return $links;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getRelationshipSelfLink($resource, string $name): LinkInterface
     {
         // Feel free to override this method to change default URL or add meta
@@ -79,9 +69,6 @@ abstract class BaseSchema implements SchemaInterface
         return $this->factory->createLink(true, $url, false);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getRelationshipRelatedLink($resource, string $name): LinkInterface
     {
         // Feel free to override this method to change default URL or add meta
@@ -91,16 +78,13 @@ abstract class BaseSchema implements SchemaInterface
         return $this->factory->createLink(true, $url, false);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasIdentifierMeta($resource): bool
     {
         return false;
     }
 
     /**
-     * @inheritdoc
+     * @return mixed
      */
     public function getIdentifierMeta($resource)
     {
@@ -108,16 +92,13 @@ abstract class BaseSchema implements SchemaInterface
         throw new LogicException();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasResourceMeta($resource): bool
     {
         return false;
     }
 
     /**
-     * @inheritdoc
+     * @return mixed
      */
     public function getResourceMeta($resource)
     {
@@ -125,35 +106,21 @@ abstract class BaseSchema implements SchemaInterface
         throw new LogicException();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isAddSelfLinkInRelationshipByDefault(string $relationshipName): bool
     {
         return true;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isAddRelatedLinkInRelationshipByDefault(string $relationshipName): bool
     {
         return true;
     }
 
-    /**
-     * @return FactoryInterface
-     */
     protected function getFactory(): FactoryInterface
     {
         return $this->factory;
     }
 
-    /**
-     * Get resources sub-URL.
-     *
-     * @return string
-     */
     protected function getResourcesSubUrl(): string
     {
         if ($this->subUrl === null) {
@@ -165,8 +132,6 @@ abstract class BaseSchema implements SchemaInterface
 
     /**
      * @param mixed $resource
-     *
-     * @return string
      */
     protected function getSelfSubUrl($resource): string
     {

@@ -29,17 +29,11 @@ use function property_exists;
  */
 class AuthorSchema extends DevSchema
 {
-    /**
-     * @inheritdoc
-     */
     public function getType(): string
     {
         return 'people';
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getId($resource): ?string
     {
         assert($resource instanceof Author);
@@ -49,9 +43,6 @@ class AuthorSchema extends DevSchema
         return $index === null ? $index : (string)$index;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getAttributes($resource, ContextInterface $context): iterable
     {
         assert($resource instanceof Author);
@@ -62,9 +53,6 @@ class AuthorSchema extends DevSchema
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getRelationships($resource, ContextInterface $context): iterable
     {
         assert($resource instanceof Author);
@@ -103,9 +91,6 @@ class AuthorSchema extends DevSchema
         return parent::hasIdentifierMeta($resource) || property_exists($resource, Author::IDENTIFIER_META);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifierMeta($resource)
     {
         assert($resource instanceof Author);
@@ -113,9 +98,6 @@ class AuthorSchema extends DevSchema
         return $resource->{Author::IDENTIFIER_META};
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasResourceMeta($resource): bool
     {
         assert($resource instanceof Author);

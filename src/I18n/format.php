@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\I18n;
 
@@ -19,12 +21,9 @@ namespace Neomerx\JsonApi\I18n;
  */
 
 /**
- * @param string $message
- * @param mixed  ...$parameters
+ * @param mixed ...$parameters
  *
  * @see Messages::compose
- *
- * @return string
  *
  * @SuppressWarnings(PHPMD.StaticAccess)
  */

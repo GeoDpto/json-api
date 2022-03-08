@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Schema;
 
@@ -30,37 +32,37 @@ use Neomerx\JsonApi\Contract\Schema\LinkInterface;
 class Error implements ErrorInterface
 {
     /**
-     * @var int|string|null
+     * @var int|null|string
      */
     private $index;
 
     /**
-     * @var null|iterable
+     * @var iterable|null
      */
     private $links;
 
     /**
-     * @var null|iterable
+     * @var iterable|null
      */
     private $typeLinks;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $status;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $code;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $title;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $detail;
 
@@ -80,16 +82,8 @@ class Error implements ErrorInterface
     private $meta;
 
     /**
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $status
-     * @param string|null        $code
-     * @param string|null        $title
-     * @param string|null        $detail
-     * @param array|null         $source
-     * @param bool               $hasMeta
-     * @param mixed              $meta
+     * @param int|null|string $idx
+     * @param mixed           $meta
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      * @SuppressWarnings(PHPMD.IfStatementAssignment)
@@ -122,18 +116,13 @@ class Error implements ErrorInterface
         }
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getId()
     {
         return $this->index;
     }
 
     /**
-     * @param string|int|null $index
-     *
-     * @return self
+     * @param int|null|string $index
      */
     public function setId($index): self
     {
@@ -144,28 +133,17 @@ class Error implements ErrorInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getLinks(): ?iterable
     {
         return $this->links;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getTypeLinks(): ?iterable
     {
         return $this->typeLinks;
     }
 
     /**
-     * @param string             $name
-     * @param LinkInterface|null $link
-     *
-     * @return self
-     *
      * @SuppressWarnings(PHPMD.ElseExpression)
      */
     public function setLink(string $name, ?LinkInterface $link): self
@@ -179,11 +157,6 @@ class Error implements ErrorInterface
         return $this;
     }
 
-    /**
-     * @param iterable|null $typeLinks
-     *
-     * @return self
-     */
     public function setTypeLinks(?iterable $typeLinks): self
     {
         $this->typeLinks = $typeLinks;
@@ -191,19 +164,11 @@ class Error implements ErrorInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    /**
-     * @param string|null $status
-     *
-     * @return self
-     */
     public function setStatus(?string $status): self
     {
         $this->status = $status;
@@ -211,19 +176,11 @@ class Error implements ErrorInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     *
-     * @return self
-     */
     public function setCode(?string $code): self
     {
         $this->code = $code;
@@ -231,19 +188,11 @@ class Error implements ErrorInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param null|string $title
-     *
-     * @return self
-     */
     public function setTitle(?string $title): self
     {
         $this->title = $title;
@@ -251,19 +200,11 @@ class Error implements ErrorInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getDetail(): ?string
     {
         return $this->detail;
     }
 
-    /**
-     * @param null|string $detail
-     *
-     * @return self
-     */
     public function setDetail(?string $detail): self
     {
         $this->detail = $detail;
@@ -271,19 +212,11 @@ class Error implements ErrorInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getSource(): ?array
     {
         return $this->source;
     }
 
-    /**
-     * @param array|null $source
-     *
-     * @return self
-     */
     public function setSource(?array $source): self
     {
         $this->source = $source;
@@ -291,17 +224,11 @@ class Error implements ErrorInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasMeta(): bool
     {
         return $this->hasMeta;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getMeta()
     {
         return $this->meta;
@@ -309,8 +236,6 @@ class Error implements ErrorInterface
 
     /**
      * @param mixed|null $meta
-     *
-     * @return self
      */
     public function setMeta($meta): self
     {

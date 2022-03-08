@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Parser\RelationshipData;
 
@@ -37,15 +39,6 @@ use function Neomerx\JsonApi\I18n\format as _;
 trait ParseRelationshipDataTrait
 {
     /**
-     * @param FactoryInterface         $factory
-     * @param SchemaContainerInterface $container
-     * @param EditableContextInterface $context
-     * @param string                   $parentType
-     * @param string                   $name
-     * @param array                    $description
-     * @param int                      $nextLevel
-     * @param string                   $nextPathPrefix
-     *
      * @return array [has data, parsed data, next position]
      */
     private function parseRelationshipData(
@@ -88,13 +81,7 @@ trait ParseRelationshipDataTrait
     }
 
     /**
-     * @param FactoryInterface         $factory
-     * @param SchemaContainerInterface $container
-     * @param EditableContextInterface $context
-     * @param PositionInterface        $position
-     * @param mixed                    $data
-     *
-     * @return RelationshipDataInterface
+     * @param mixed $data
      */
     private function parseData(
         FactoryInterface $factory,

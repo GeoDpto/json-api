@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Http\Query;
 
@@ -28,12 +30,6 @@ use Neomerx\JsonApi\Schema\Error;
  */
 trait BaseQueryParserTrait
 {
-    /**
-     * @param array  $parameters
-     * @param string $errorTitle
-     *
-     * @return iterable
-     */
     protected function getIncludes(array $parameters, string $errorTitle): iterable
     {
         if (\array_key_exists(P::PARAM_INCLUDE, $parameters) === true) {
@@ -45,12 +41,6 @@ trait BaseQueryParserTrait
         }
     }
 
-    /**
-     * @param array  $parameters
-     * @param string $errorTitle
-     *
-     * @return iterable
-     */
     protected function getIncludePaths(array $parameters, string $errorTitle): iterable
     {
         $aIncludes = $this->getIncludes($parameters, $errorTitle);
@@ -60,12 +50,6 @@ trait BaseQueryParserTrait
         }
     }
 
-    /**
-     * @param array  $parameters
-     * @param string $errorTitle
-     *
-     * @return iterable
-     */
     protected function getFields(array $parameters, string $errorTitle): iterable
     {
         if (\array_key_exists(P::PARAM_FIELDS, $parameters) === true) {
@@ -80,12 +64,6 @@ trait BaseQueryParserTrait
         }
     }
 
-    /**
-     * @param array  $parameters
-     * @param string $errorTitle
-     *
-     * @return iterable
-     */
     protected function getSorts(array $parameters, string $errorTitle): iterable
     {
         if (\array_key_exists(P::PARAM_SORT, $parameters) === true) {
@@ -95,15 +73,18 @@ trait BaseQueryParserTrait
                 switch ($orderAndField[0]) {
                     case '-':
                         $isAsc = false;
-                        $field = \substr($orderAndField, 1);
+                        $field = \mb_substr($orderAndField, 1);
+
                         break;
                     case '+':
                         $isAsc = true;
-                        $field = \substr($orderAndField, 1);
+                        $field = \mb_substr($orderAndField, 1);
+
                         break;
                     default:
                         $isAsc = true;
                         $field = $orderAndField;
+
                         break;
                 }
 
@@ -112,12 +93,6 @@ trait BaseQueryParserTrait
         }
     }
 
-    /**
-     * @param array  $parameters
-     * @param string $errorTitle
-     *
-     * @return iterable
-     */
     protected function getProfileUrls(array $parameters, string $errorTitle): iterable
     {
         if (\array_key_exists(P::PARAM_PROFILE, $parameters) === true) {
@@ -132,11 +107,7 @@ trait BaseQueryParserTrait
     }
 
     /**
-     * @param string       $paramName
-     * @param string|mixed $shouldBeString
-     * @param string       $errorTitle
-     *
-     * @return iterable
+     * @param mixed|string $shouldBeString
      */
     private function splitCommaSeparatedStringAndCheckNoEmpties(
         string $paramName,
@@ -147,11 +118,7 @@ trait BaseQueryParserTrait
     }
 
     /**
-     * @param string       $paramName
-     * @param string|mixed $shouldBeString
-     * @param string       $errorTitle
-     *
-     * @return iterable
+     * @param mixed|string $shouldBeString
      */
     private function splitSpaceSeparatedStringAndCheckNoEmpties(
         string $paramName,
@@ -162,12 +129,7 @@ trait BaseQueryParserTrait
     }
 
     /**
-     * @param string       $paramName
-     * @param string|mixed $shouldBeString
-     * @param string       $separator
-     * @param string       $errorTitle
-     *
-     * @return iterable
+     * @param mixed|string $shouldBeString
      *
      * @SuppressWarnings(PHPMD.IfStatementAssignment)
      */
@@ -191,12 +153,6 @@ trait BaseQueryParserTrait
         }
     }
 
-    /**
-     * @param string $paramName
-     * @param string $errorTitle
-     *
-     * @return ErrorInterface
-     */
     private function createParameterError(string $paramName, string $errorTitle): ErrorInterface
     {
         $source = [Error::SOURCE_PARAMETER => $paramName];

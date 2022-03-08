@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Http\Header;
 
@@ -33,17 +35,11 @@ class HeaderParametersParser implements HeaderParametersParserInterface
      */
     private $factory;
 
-    /**
-     * @param FactoryInterface $factory
-     */
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function parseAcceptHeader(string $value): iterable
     {
         if (empty($value) === true) {
@@ -55,7 +51,7 @@ class HeaderParametersParser implements HeaderParametersParserInterface
         for ($idx = 0; $idx < $count; ++$idx) {
             $fields = \explode(';', $ranges[$idx]);
 
-            if (\strpos($fields[0], '/') === false) {
+            if (!\str_contains($fields[0], '/')) {
                 throw new InvalidArgumentException('mediaType');
             }
 
@@ -68,14 +64,11 @@ class HeaderParametersParser implements HeaderParametersParserInterface
         }
     }
 
-    /**
-     * @inheritdoc
-     */
     public function parseContentTypeHeader(string $mediaType): MediaTypeInterface
     {
         $fields = \explode(';', $mediaType);
 
-        if (\strpos($fields[0], '/') === false) {
+        if (!\str_contains($fields[0], '/')) {
             throw new InvalidArgumentException('mediaType');
         }
 
@@ -89,7 +82,7 @@ class HeaderParametersParser implements HeaderParametersParserInterface
                 continue;
             }
 
-            if (\strpos($fieldValue, '=') === false) {
+            if (!\str_contains($fieldValue, '=')) {
                 throw new InvalidArgumentException('mediaType');
             }
 
@@ -100,11 +93,6 @@ class HeaderParametersParser implements HeaderParametersParserInterface
         return $this->factory->createMediaType($type, $subType, $parameters);
     }
 
-    /**
-     * @param array $fields
-     *
-     * @return array
-     */
     private function parseQualityAndParameters(array $fields): array
     {
         $quality     = 1;
@@ -118,7 +106,7 @@ class HeaderParametersParser implements HeaderParametersParserInterface
                 continue;
             }
 
-            if (\strpos($fieldValue, '=') === false) {
+            if (!\str_contains($fieldValue, '=')) {
                 throw new InvalidArgumentException('mediaType');
             }
 
@@ -132,6 +120,7 @@ class HeaderParametersParser implements HeaderParametersParserInterface
             if ($key === 'q' && $qParamFound === false) {
                 $quality     = (float)$value;
                 $qParamFound = true;
+
                 continue;
             }
 

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Parser;
 
@@ -23,30 +25,13 @@ namespace Neomerx\JsonApi\Contract\Parser;
  */
 interface IdentifierInterface extends ParsedResultInterface
 {
-    /**
-     * Get identifier's type.
-     *
-     * @return string
-     */
     public function getType(): string;
 
-    /**
-     * Get identifier's ID.
-     *
-     * @return string|null
-     */
     public function getId(): ?string;
 
-    /**
-     * If identifier has meta.
-     *
-     * @return bool
-     */
     public function hasIdentifierMeta(): bool;
 
     /**
-     * Get identifier meta.
-     *
      * @return mixed
      */
     public function getIdentifierMeta();

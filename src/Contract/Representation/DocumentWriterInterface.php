@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Representation;
 
@@ -26,31 +28,11 @@ use Neomerx\JsonApi\Contract\Parser\ResourceInterface;
  */
 interface DocumentWriterInterface extends BaseWriterInterface
 {
-    /**
-     * @return self
-     */
     public function setNullToData(): self;
 
-    /**
-     * @param IdentifierInterface $identifier
-     *
-     * @return self
-     */
     public function addIdentifierToData(IdentifierInterface $identifier): self;
 
-    /**
-     * @param ResourceInterface       $resource
-     * @param FieldSetFilterInterface $filter
-     *
-     * @return self
-     */
     public function addResourceToData(ResourceInterface $resource, FieldSetFilterInterface $filter): self;
 
-    /**
-     * @param ResourceInterface       $resource
-     * @param FieldSetFilterInterface $filter
-     *
-     * @return self
-     */
     public function addResourceToIncluded(ResourceInterface $resource, FieldSetFilterInterface $filter): self;
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Representation;
 
@@ -23,59 +25,28 @@ namespace Neomerx\JsonApi\Contract\Representation;
  */
 interface BaseWriterInterface
 {
-    /**
-     * Get final document.
-     *
-     * @return array
-     */
     public function getDocument(): array;
 
     /**
      * Main data section will be an array of resources or identifiers.
-     *
-     * @return self
      */
     public function setDataAsArray(): self;
 
     /**
      * @param mixed $meta
-     *
-     * @return self
      */
     public function setMeta($meta): self;
 
-    /**
-     * @param string $version
-     *
-     * @return self
-     */
     public function setJsonApiVersion(string $version): self;
 
     /**
      * @param mixed $meta
-     *
-     * @return self
      */
     public function setJsonApiMeta($meta): self;
 
-    /**
-     * @param string $prefix
-     *
-     * @return self
-     */
     public function setUrlPrefix(string $prefix): self;
 
-    /**
-     * @param iterable $links
-     *
-     * @return self
-     */
     public function setLinks(iterable $links): self;
 
-    /**
-     * @param iterable $links
-     *
-     * @return self
-     */
     public function setProfile(iterable $links): self;
 }

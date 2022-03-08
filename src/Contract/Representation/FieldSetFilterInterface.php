@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Representation;
 
@@ -28,21 +30,14 @@ interface FieldSetFilterInterface
 {
     /**
      * Get resource's filtered attributes.
-     *
-     * @param ResourceInterface $resource
-     *
-     * @return iterable
      */
     public function getAttributes(ResourceInterface $resource): iterable;
 
     /**
      * Get resource's filtered relationships.
      *
-     * @param ResourceInterface $resource
-     *
      * @see RelationshipInterface
      *
-     * @return iterable
      */
     public function getRelationships(ResourceInterface $resource): iterable;
 
@@ -53,9 +48,7 @@ interface FieldSetFilterInterface
      *
      * This method answers if specific relationship passes field set filters and should be in output.
      *
-     * @param PositionInterface $position
      *
-     * @return bool
      */
     public function shouldOutputRelationship(PositionInterface $position): bool;
 }

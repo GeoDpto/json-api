@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Exception;
 
@@ -27,23 +29,12 @@ use Neomerx\JsonApi\Schema\ErrorCollection;
  */
 class JsonApiException extends BaseJsonApiException
 {
-    /** Default HTTP code */
-    const HTTP_CODE_BAD_REQUEST = 400;
-
-    /** Default HTTP code */
-    const HTTP_CODE_FORBIDDEN = 403;
-
-    /** Default HTTP code */
-    const HTTP_CODE_NOT_ACCEPTABLE = 406;
-
-    /** Default HTTP code */
-    const HTTP_CODE_CONFLICT = 409;
-
-    /** Default HTTP code */
-    const HTTP_CODE_UNSUPPORTED_MEDIA_TYPE = 415;
-
-    /** Default HTTP code */
-    const DEFAULT_HTTP_CODE = self::HTTP_CODE_BAD_REQUEST;
+    public const HTTP_CODE_BAD_REQUEST = 400;
+    public const HTTP_CODE_FORBIDDEN = 403;
+    public const HTTP_CODE_NOT_ACCEPTABLE = 406;
+    public const HTTP_CODE_CONFLICT = 409;
+    public const HTTP_CODE_UNSUPPORTED_MEDIA_TYPE = 415;
+    public const DEFAULT_HTTP_CODE = self::HTTP_CODE_BAD_REQUEST;
 
     /**
      * @var ErrorCollection
@@ -57,8 +48,6 @@ class JsonApiException extends BaseJsonApiException
 
     /**
      * @param ErrorInterface|iterable $errors
-     * @param int                     $httpCode
-     * @param Exception|null          $previous
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.ElseExpression)
@@ -81,21 +70,11 @@ class JsonApiException extends BaseJsonApiException
         $this->httpCode = $httpCode;
     }
 
-    /**
-     * @param ErrorInterface $error
-     *
-     * @return void
-     */
     public function addError(ErrorInterface $error): void
     {
         $this->errors[] = $error;
     }
 
-    /**
-     * @param iterable $errors
-     *
-     * @return void
-     */
     public function addErrors(iterable $errors): void
     {
         foreach ($errors as $error) {
@@ -103,17 +82,11 @@ class JsonApiException extends BaseJsonApiException
         }
     }
 
-    /**
-     * @return ErrorCollection
-     */
     public function getErrors(): ErrorCollection
     {
         return $this->errors;
     }
 
-    /**
-     * @return int
-     */
     public function getHttpCode(): int
     {
         return $this->httpCode;

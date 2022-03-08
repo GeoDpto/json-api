@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Parser\RelationshipData;
 
@@ -47,13 +49,6 @@ class RelationshipDataIsIdentifier extends BaseRelationshipData implements Relat
      */
     private $parsedIdentifier = null;
 
-    /**
-     * @param FactoryInterface          $factory
-     * @param SchemaContainerInterface  $schemaContainer
-     * @param EditableContextInterface  $context
-     * @param PositionInterface         $position
-     * @param SchemaIdentifierInterface $identifier
-     */
     public function __construct(
         FactoryInterface $factory,
         SchemaContainerInterface $schemaContainer,
@@ -66,41 +61,26 @@ class RelationshipDataIsIdentifier extends BaseRelationshipData implements Relat
         $this->identifier = $identifier;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isCollection(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isNull(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isResource(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isIdentifier(): bool
     {
         return true;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifier(): ParserIdentifierInterface
     {
         if ($this->parsedIdentifier === null) {
@@ -110,25 +90,16 @@ class RelationshipDataIsIdentifier extends BaseRelationshipData implements Relat
         return $this->parsedIdentifier;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifiers(): iterable
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getResource(): ResourceInterface
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getResources(): iterable
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));

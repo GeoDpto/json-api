@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Representation;
 
@@ -27,9 +29,6 @@ use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
  */
 class ErrorWriter extends BaseWriter implements ErrorWriterInterface
 {
-    /**
-     * @inheritdoc
-     */
     public function __construct()
     {
         parent::__construct();
@@ -37,9 +36,6 @@ class ErrorWriter extends BaseWriter implements ErrorWriterInterface
         $this->data[DocumentInterface::KEYWORD_ERRORS] = [];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function addError(ErrorInterface $error): ErrorWriterInterface
     {
         $representation = \array_filter([
@@ -50,7 +46,7 @@ class ErrorWriter extends BaseWriter implements ErrorWriterInterface
             DocumentInterface::KEYWORD_ERRORS_TITLE  => $error->getTitle(),
             DocumentInterface::KEYWORD_ERRORS_DETAIL => $error->getDetail(),
             DocumentInterface::KEYWORD_ERRORS_SOURCE => $error->getSource(),
-         ]);
+        ]);
 
         if ($error->hasMeta() === true) {
             $representation[DocumentInterface::KEYWORD_ERRORS_META] = $error->getMeta();
@@ -66,10 +62,6 @@ class ErrorWriter extends BaseWriter implements ErrorWriterInterface
     }
 
     /**
-     * @param ErrorInterface $error
-     *
-     * @return array|null
-     *
      * @SuppressWarnings(PHPMD.IfStatementAssignment)
      */
     private function getErrorLinksRepresentation(ErrorInterface $error): ?array

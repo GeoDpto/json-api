@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\I18n;
 
@@ -31,10 +33,8 @@ class Messages
     /**
      * Try to translate the message and format it with the given parameters.
      *
-     * @param string $message
-     * @param mixed  ...$parameters
+     * @param mixed ...$parameters
      *
-     * @return string
      */
     public static function compose(string $message, ...$parameters): string
     {
@@ -47,10 +47,6 @@ class Messages
     /**
      * Translate message if configured or return the original untranslated message.
      *
-     * @param string $message
-     *
-     * @return string
-     *
      * @SuppressWarnings(PHPMD.UndefinedVariable) PHPMD currently has a glitch with `$message`
      */
     public static function getTranslation(string $message): string
@@ -60,10 +56,6 @@ class Messages
 
     /**
      * Set translations for messages.
-     *
-     * @param array $translations
-     *
-     * @return void
      */
     public static function setTranslations(array $translations): void
     {

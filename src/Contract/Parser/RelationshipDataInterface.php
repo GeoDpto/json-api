@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Parser;
 
@@ -23,63 +25,19 @@ namespace Neomerx\JsonApi\Contract\Parser;
  */
 interface RelationshipDataInterface
 {
-    /**
-     * If data is a collection.
-     *
-     * @return bool
-     */
     public function isCollection(): bool;
 
-    /**
-     * If data is null.
-     *
-     * @return bool
-     */
     public function isNull(): bool;
 
-    /**
-     * If data is a resource.
-     *
-     * @return bool
-     */
     public function isResource(): bool;
 
-    /**
-     * If data is an identifier.
-     *
-     * @return bool
-     */
     public function isIdentifier(): bool;
 
-    /**
-     * Get identifier from the relationship (if is a resource or an identifier).
-     *
-     * @return IdentifierInterface
-     */
     public function getIdentifier(): IdentifierInterface;
 
-    /**
-     * Get identifiers from the relationship (if is a collection).
-     *
-     * @see IdentifierInterface
-     *
-     * @return iterable
-     */
     public function getIdentifiers(): iterable;
 
-    /**
-     * Get resource from the relationship (if is a resource).
-     *
-     * @return ResourceInterface
-     */
     public function getResource(): ResourceInterface;
 
-    /**
-     * Get resources from the relationship (if is a collection).
-     *
-     * @see ResourceInterface
-     *
-     * @return iterable
-     */
     public function getResources(): iterable;
 }

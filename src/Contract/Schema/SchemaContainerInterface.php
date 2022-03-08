@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Schema;
 
@@ -28,7 +30,6 @@ interface SchemaContainerInterface
      *
      * @param object $resourceObject
      *
-     * @return SchemaInterface
      */
     public function getSchema($resourceObject): SchemaInterface;
 
@@ -37,7 +38,6 @@ interface SchemaContainerInterface
      *
      * @param mixed $resourceObject
      *
-     * @return bool
      */
     public function hasSchema($resourceObject): bool;
 }

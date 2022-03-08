@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Parser\RelationshipData;
 
@@ -32,65 +34,41 @@ class RelationshipDataIsNull implements RelationshipDataInterface
     /** @var string */
     public const MSG_INVALID_OPERATION = 'Invalid operation.';
 
-    /**
-     * @inheritdoc
-     */
     public function isCollection(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isNull(): bool
     {
         return true;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isResource(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isIdentifier(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifier(): IdentifierInterface
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifiers(): iterable
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getResource(): ResourceInterface
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getResources(): iterable
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));

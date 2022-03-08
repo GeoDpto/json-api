@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Schema;
 
@@ -37,11 +39,7 @@ class LinkWithAliases extends Link implements LinkWithAliasesInterface
     private $hasAliases;
 
     /**
-     * @param bool     $isSubUrl
-     * @param string   $value
-     * @param iterable $aliases
-     * @param bool     $hasMeta
-     * @param null     $meta
+     * @param null $meta
      */
     public function __construct(bool $isSubUrl, string $value, iterable $aliases, bool $hasMeta, $meta = null)
     {
@@ -58,17 +56,11 @@ class LinkWithAliases extends Link implements LinkWithAliasesInterface
         parent::__construct($isSubUrl, $value, $hasMeta, $meta);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function canBeShownAsString(): bool
     {
         return parent::canBeShownAsString() && $this->hasAliases === false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getArrayRepresentation(string $prefix): array
     {
         $linkRepresentation = parent::canBeShownAsString() === true ? [

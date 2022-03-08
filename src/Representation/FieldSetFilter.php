@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Representation;
 
@@ -54,25 +56,16 @@ class FieldSetFilter implements FieldSetFilterInterface
         }
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getAttributes(ResourceInterface $resource): iterable
     {
         yield from $this->filterFields($resource->getType(), $resource->getAttributes());
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getRelationships(ResourceInterface $resource): iterable
     {
         yield from $this->filterFields($resource->getType(), $resource->getRelationships());
     }
 
-    /**
-     * @inheritdoc
-     */
     public function shouldOutputRelationship(PositionInterface $position): bool
     {
         $parentType = $position->getParentType();
@@ -83,21 +76,11 @@ class FieldSetFilter implements FieldSetFilterInterface
         return true;
     }
 
-    /**
-     * @param string $type
-     *
-     * @return bool
-     */
     protected function hasFilter(string $type): bool
     {
         return isset($this->fieldSets[$type]) === true;
     }
 
-    /**
-     * @param string $type
-     *
-     * @return array
-     */
     protected function getAllowedFields(string $type): array
     {
         \assert($this->hasFilter($type) === true);
@@ -105,12 +88,6 @@ class FieldSetFilter implements FieldSetFilterInterface
         return $this->fieldSets[$type];
     }
 
-    /**
-     * @param string   $type
-     * @param iterable $fields
-     *
-     * @return iterable
-     */
     protected function filterFields(string $type, iterable $fields): iterable
     {
         if ($this->hasFilter($type) === false) {

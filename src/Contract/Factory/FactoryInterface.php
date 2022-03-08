@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Factory;
 
@@ -40,47 +42,15 @@ use Neomerx\JsonApi\Contract\Schema\SchemaContainerInterface;
  */
 interface FactoryInterface
 {
-    /**
-     * Create encoder.
-     *
-     * @param SchemaContainerInterface $container
-     *
-     * @return EncoderInterface
-     */
     public function createEncoder(SchemaContainerInterface $container): EncoderInterface;
 
-    /**
-     * Create Schema container.
-     *
-     * @param iterable $schemas
-     *
-     * @return SchemaContainerInterface
-     */
     public function createSchemaContainer(iterable $schemas): SchemaContainerInterface;
 
-    /**
-     * Create resources parser.
-     *
-     * @param SchemaContainerInterface $container
-     * @param EditableContextInterface $context
-     *
-     * @return ParserInterface
-     */
     public function createParser(
         SchemaContainerInterface $container,
         EditableContextInterface $context
     ): ParserInterface;
 
-    /**
-     * Create position for a parsed result.
-     *
-     * @param int         $level
-     * @param string      $path
-     * @param null|string $parentType
-     * @param null|string $parentRelationship
-     *
-     * @return PositionInterface
-     */
     public function createPosition(
         int $level,
         string $path,
@@ -88,38 +58,20 @@ interface FactoryInterface
         ?string $parentRelationship
     ): PositionInterface;
 
-    /**
-     * Create JSON API document writer.
-     *
-     * @return DocumentWriterInterface
-     */
     public function createDocumentWriter(): DocumentWriterInterface;
 
-    /**
-     * Create JSON API error writer.
-     *
-     * @return ErrorWriterInterface
-     */
     public function createErrorWriter(): ErrorWriterInterface;
 
     /**
      * Create filter for attributes and relationships.
-     *
-     * @param array $fieldSets
-     *
-     * @return FieldSetFilterInterface
      */
     public function createFieldSetFilter(array $fieldSets): FieldSetFilterInterface;
 
     /**
      * Create parsed resource over raw resource data.
      *
-     * @param EditableContextInterface $context
-     * @param PositionInterface        $position
-     * @param SchemaContainerInterface $container
-     * @param mixed                    $data
+     * @param mixed $data
      *
-     * @return ResourceInterface
      */
     public function createParsedResource(
         EditableContextInterface $context,
@@ -131,10 +83,6 @@ interface FactoryInterface
     /**
      * Create parsed identifier over raw resource identifier.
      *
-     * @param PositionInterface         $position
-     * @param SchemaIdentifierInterface $identifier
-     *
-     * @return ParserIdentifierInterface
      */
     public function createParsedIdentifier(
         PositionInterface $position,
@@ -149,22 +97,14 @@ interface FactoryInterface
      * @param bool   $hasMeta  If links has meta information.
      * @param null   $meta     Value for meta.
      *
-     * @return LinkInterface
      */
     public function createLink(bool $isSubUrl, string $value, bool $hasMeta, $meta = null): LinkInterface;
 
     /**
      * Create parsed relationship.
      *
-     * @param PositionInterface              $position
-     * @param bool                           $hasData
-     * @param RelationshipDataInterface|null $data
-     * @param bool                           $hasLinks
-     * @param iterable|null                  $links
-     * @param bool                           $hasMeta
-     * @param mixed                          $meta
+     * @param mixed $meta
      *
-     * @return RelationshipInterface
      */
     public function createRelationship(
         PositionInterface $position,
@@ -179,12 +119,8 @@ interface FactoryInterface
     /**
      * Create relationship that represents resource.
      *
-     * @param SchemaContainerInterface $schemaContainer
-     * @param EditableContextInterface $context
-     * @param PositionInterface        $position
-     * @param mixed                    $resource
+     * @param mixed $resource
      *
-     * @return RelationshipDataInterface
      */
     public function createRelationshipDataIsResource(
         SchemaContainerInterface $schemaContainer,
@@ -195,13 +131,6 @@ interface FactoryInterface
 
     /**
      * Create relationship that represents identifier.
-     *
-     * @param SchemaContainerInterface  $schemaContainer
-     * @param EditableContextInterface  $context
-     * @param PositionInterface         $position
-     * @param SchemaIdentifierInterface $identifier
-     *
-     * @return RelationshipDataInterface
      */
     public function createRelationshipDataIsIdentifier(
         SchemaContainerInterface $schemaContainer,
@@ -212,13 +141,6 @@ interface FactoryInterface
 
     /**
      * Create relationship that represents collection.
-     *
-     * @param SchemaContainerInterface $schemaContainer
-     * @param EditableContextInterface $context
-     * @param PositionInterface        $position
-     * @param iterable                 $resources
-     *
-     * @return RelationshipDataInterface
      */
     public function createRelationshipDataIsCollection(
         SchemaContainerInterface $schemaContainer,
@@ -230,31 +152,22 @@ interface FactoryInterface
     /**
      * Create relationship that represents `null`.
      *
-     * @return RelationshipDataInterface
      */
     public function createRelationshipDataIsNull(): RelationshipDataInterface;
 
     /**
      * Create media type.
      *
-     * @param string $type
-     * @param string $subType
      * @param array<string,string>|null $parameters
      *
-     * @return MediaTypeInterface
      */
     public function createMediaType(string $type, string $subType, array $parameters = null): MediaTypeInterface;
 
     /**
      * Create media type for Accept HTTP header.
      *
-     * @param int    $position
-     * @param string $type
-     * @param string $subType
      * @param array<string,string>|null $parameters
-     * @param float  $quality
      *
-     * @return AcceptMediaTypeInterface
      */
     public function createAcceptMediaType(
         int $position,
@@ -264,11 +177,5 @@ interface FactoryInterface
         float $quality = 1.0
     ): AcceptMediaTypeInterface;
 
-    /**
-     * @param array $fieldSets
-     * @param array $includePaths
-     *
-     * @return EditableContextInterface
-     */
     public function createParserContext(array $fieldSets, array $includePaths): EditableContextInterface;
 }

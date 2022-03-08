@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Http;
 
@@ -30,34 +32,29 @@ use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
 abstract class BaseResponses implements ResponsesInterface
 {
     /** Header name that contains format of input data from client */
-    const HEADER_CONTENT_TYPE = HeaderParametersParserInterface::HEADER_CONTENT_TYPE;
+    public const HEADER_CONTENT_TYPE = HeaderParametersParserInterface::HEADER_CONTENT_TYPE;
 
     /** Header name that location of newly created resource */
-    const HEADER_LOCATION = 'Location';
+    public const HEADER_LOCATION = 'Location';
 
     /**
      * Create HTTP response.
      *
-     * @param string|null $content
-     * @param int         $statusCode
-     * @param array       $headers
      *
      * @return mixed
      */
     abstract protected function createResponse(?string $content, int $statusCode, array $headers);
 
     /**
-     * @return EncoderInterface
      */
     abstract protected function getEncoder(): EncoderInterface;
 
     /**
-     * @return MediaTypeInterface
      */
     abstract protected function getMediaType(): MediaTypeInterface;
 
     /**
-     * @inheritdoc
+     *
      */
     public function getContentResponse($data, int $statusCode = self::HTTP_OK, array $headers = [])
     {
@@ -67,7 +64,7 @@ abstract class BaseResponses implements ResponsesInterface
     }
 
     /**
-     * @inheritdoc
+     *
      */
     public function getCreatedResponse($resource, string $url, array $headers = [])
     {
@@ -78,7 +75,7 @@ abstract class BaseResponses implements ResponsesInterface
     }
 
     /**
-     * @inheritdoc
+     *
      */
     public function getCodeResponse(int $statusCode, array $headers = [])
     {
@@ -86,7 +83,7 @@ abstract class BaseResponses implements ResponsesInterface
     }
 
     /**
-     * @inheritdoc
+     *
      */
     public function getMetaResponse($meta, int $statusCode = self::HTTP_OK, array $headers = [])
     {
@@ -96,7 +93,7 @@ abstract class BaseResponses implements ResponsesInterface
     }
 
     /**
-     * @inheritDoc
+     *
      */
     public function getIdentifiersResponse($data, int $statusCode = self::HTTP_OK, array $headers = [])
     {
@@ -106,7 +103,7 @@ abstract class BaseResponses implements ResponsesInterface
     }
 
     /**
-     * @inheritdoc
+     *
      *
      * @SuppressWarnings(PHPMD.ElseExpression)
      */
@@ -124,10 +121,7 @@ abstract class BaseResponses implements ResponsesInterface
     }
 
     /**
-     * @param string|null $content
-     * @param int         $statusCode
-     * @param array       $headers
-     * @param bool        $addContentType
+     * @param bool $addContentType
      *
      * @return mixed
      *

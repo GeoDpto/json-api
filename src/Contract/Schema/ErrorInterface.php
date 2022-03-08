@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Schema;
 
@@ -26,17 +28,17 @@ interface ErrorInterface
     /**
      * Key for 'Source' field.
      */
-    const SOURCE_POINTER = 'pointer';
+    public const SOURCE_POINTER = 'pointer';
 
     /**
      * Key for 'Source' field.
      */
-    const SOURCE_PARAMETER = 'parameter';
+    public const SOURCE_PARAMETER = 'parameter';
 
     /**
      * Get a unique identifier for this particular occurrence of the problem.
      *
-     * @return int|string|null
+     * @return int|null|string
      */
     public function getId();
 
@@ -45,7 +47,6 @@ interface ErrorInterface
      *
      * @see LinkInterface
      *
-     * @return null|iterable
      */
     public function getLinks(): ?iterable;
 
@@ -54,21 +55,18 @@ interface ErrorInterface
      *
      * @see BaseLinkInterface
      *
-     * @return null|iterable
      */
     public function getTypeLinks(): ?iterable;
 
     /**
      * Get the HTTP status code applicable to this problem, expressed as a string value.
      *
-     * @return string|null
      */
     public function getStatus(): ?string;
 
     /**
      * Get an application-specific error code, expressed as a string value.
      *
-     * @return string|null
      */
     public function getCode(): ?string;
 
@@ -77,14 +75,12 @@ interface ErrorInterface
      *
      * It should not change from occurrence to occurrence of the problem, except for purposes of localization.
      *
-     * @return string|null
      */
     public function getTitle(): ?string;
 
     /**
      * Get a human-readable explanation specific to this occurrence of the problem.
      *
-     * @return string|null
      */
     public function getDetail(): ?string;
 
@@ -93,15 +89,11 @@ interface ErrorInterface
      *    "pointer"   - A JSON Pointer [RFC6901] to the associated entity in the request document
      *                  [e.g. "/data" for a primary data object, or "/data/attributes/title" for a specific attribute].
      *    "parameter" - An optional string indicating which query parameter caused the error.
-     *
-     * @return array|null
      */
     public function getSource(): ?array;
 
     /**
      * If error has meta information.
-     *
-     * @return bool
      */
     public function hasMeta(): bool;
 

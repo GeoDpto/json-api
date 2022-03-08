@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Parser;
 
@@ -23,47 +25,15 @@ namespace Neomerx\JsonApi\Contract\Parser;
  */
 interface RelationshipInterface extends ParsedResultInterface
 {
-    /**
-     * If relationship has data.
-     *
-     * @return bool
-     */
     public function hasData(): bool;
 
-    /**
-     * Get relationship data.
-     *
-     * @return RelationshipDataInterface
-     */
     public function getData(): RelationshipDataInterface;
 
-    /**
-     * If relationship has links.
-     *
-     * @return bool
-     */
     public function hasLinks(): bool;
 
-    /**
-     * Get relationship links.
-     *
-     * @see LinkInterface
-     *
-     * @return iterable
-     */
     public function getLinks(): iterable;
 
-    /**
-     * If relationship has meta.
-     *
-     * @return bool
-     */
     public function hasMeta(): bool;
 
-    /**
-     * Get relationship meta.
-     *
-     * @return mixed
-     */
     public function getMeta();
 }

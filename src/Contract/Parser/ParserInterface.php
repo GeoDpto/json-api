@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Parser;
 
@@ -23,25 +25,14 @@ namespace Neomerx\JsonApi\Contract\Parser;
  */
 interface ParserInterface
 {
-    /**
-     * Root level for parsed items.
-     */
-    const ROOT_LEVEL = 0;
+    public const ROOT_LEVEL = 0;
+    public const ROOT_PATH = '';
 
     /**
-     * Root path for parsed items.
-     */
-    const ROOT_PATH = '';
-
-    /**
-     * Parse data.
-     *
      * @param mixed $data
-     * @param array $paths
      *
      * @see ParsedResultInterface
      *
-     * @return iterable
      */
     public function parse($data, array $paths = []): iterable;
 }

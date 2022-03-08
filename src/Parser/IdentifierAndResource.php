@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Parser;
 
@@ -36,10 +38,7 @@ class IdentifierAndResource implements ResourceInterface
 {
     use ParseRelationshipDataTrait, ParseRelationshipLinksTrait;
 
-    /** @var string */
     public const MSG_NO_SCHEMA_FOUND = 'No Schema found for resource `%s` at path `%s`.';
-
-    /** @var string */
     public const MSG_INVALID_OPERATION = 'Invalid operation.';
 
     /**
@@ -83,21 +82,17 @@ class IdentifierAndResource implements ResourceInterface
     private $type;
 
     /**
-     * @var null|array
+     * @var array|null
      */
     private $links = null;
 
     /**
-     * @var null|array
+     * @var array|null
      */
     private $relationshipsCache = null;
 
     /**
-     * @param EditableContextInterface $context
-     * @param PositionInterface        $position
-     * @param FactoryInterface         $factory
-     * @param SchemaContainerInterface $container
-     * @param mixed                    $data
+     * @param mixed $data
      */
     public function __construct(
         EditableContextInterface $context,
@@ -120,49 +115,31 @@ class IdentifierAndResource implements ResourceInterface
         $this->type            = $schema->getType();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getPosition(): PositionInterface
     {
         return $this->position;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getId(): ?string
     {
         return $this->index;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasIdentifierMeta(): bool
     {
         return $this->schema->hasIdentifierMeta($this->data);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifierMeta()
     {
         return $this->schema->getIdentifierMeta($this->data);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getAttributes(): iterable
     {
         $this->getContext()->setPosition($this->getPosition());
@@ -171,8 +148,6 @@ class IdentifierAndResource implements ResourceInterface
     }
 
     /**
-     * @inheritdoc
-     *
      * @SuppressWarnings(PHPMD.UndefinedVariable) PHPMD currently do not support `list` in `[]` syntax
      */
     public function getRelationships(): iterable
@@ -231,9 +206,6 @@ class IdentifierAndResource implements ResourceInterface
         }
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasLinks(): bool
     {
         $this->cacheLinks();
@@ -241,9 +213,6 @@ class IdentifierAndResource implements ResourceInterface
         return empty($this->links) === false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getLinks(): iterable
     {
         $this->cacheLinks();
@@ -251,25 +220,16 @@ class IdentifierAndResource implements ResourceInterface
         return $this->links;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasResourceMeta(): bool
     {
         return $this->schema->hasResourceMeta($this->data);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getResourceMeta()
     {
         return $this->schema->getResourceMeta($this->data);
     }
 
-    /**
-     * @return EditableContextInterface
-     */
     protected function getContext(): EditableContextInterface
     {
         return $this->context;
@@ -290,12 +250,6 @@ class IdentifierAndResource implements ResourceInterface
         }
     }
 
-    /**
-     * @param string $name
-     * @param array  $description
-     *
-     * @return bool
-     */
     private function assertRelationshipNameAndDescription(string $name, array $description): bool
     {
         \assert(

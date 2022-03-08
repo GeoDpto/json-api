@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Parser\RelationshipData;
 
@@ -47,11 +49,7 @@ class RelationshipDataIsResource extends BaseRelationshipData implements Relatio
     private $parsedResource = null;
 
     /**
-     * @param FactoryInterface         $factory
-     * @param SchemaContainerInterface $schemaContainer
-     * @param EditableContextInterface $context
-     * @param PositionInterface        $position
-     * @param mixed                    $resource
+     * @param mixed $resource
      */
     public function __construct(
         FactoryInterface $factory,
@@ -65,57 +63,36 @@ class RelationshipDataIsResource extends BaseRelationshipData implements Relatio
         $this->resource = $resource;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isCollection(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isNull(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isResource(): bool
     {
         return true;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isIdentifier(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifier(): IdentifierInterface
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifiers(): iterable
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getResource(): ResourceInterface
     {
         if ($this->parsedResource === null) {
@@ -125,9 +102,6 @@ class RelationshipDataIsResource extends BaseRelationshipData implements Relatio
         return $this->parsedResource;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getResources(): iterable
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Parser;
 
@@ -25,10 +27,5 @@ use Neomerx\JsonApi\Contract\Schema\PositionInterface;
  */
 interface ParsedResultInterface
 {
-    /**
-     * Get position of the parsed result.
-     *
-     * @return PositionInterface
-     */
     public function getPosition(): PositionInterface;
 }

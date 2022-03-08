@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Schema;
 
@@ -24,25 +26,20 @@ namespace Neomerx\JsonApi\Contract\Schema;
 interface SchemaInterface
 {
     /** @var int Relationship's data section */
-    const RELATIONSHIP_DATA = 0;
+    public const RELATIONSHIP_DATA = 0;
 
     /** @var int Relationship's links section */
-    const RELATIONSHIP_LINKS = self::RELATIONSHIP_DATA + 1;
+    public const RELATIONSHIP_LINKS = self::RELATIONSHIP_DATA + 1;
 
     /** @var int Relationship's meta section */
-    const RELATIONSHIP_META = self::RELATIONSHIP_LINKS + 1;
+    public const RELATIONSHIP_META = self::RELATIONSHIP_LINKS + 1;
 
     /** @var int If `self` link should be added in relationship */
-    const RELATIONSHIP_LINKS_SELF = self::RELATIONSHIP_META + 1;
+    public const RELATIONSHIP_LINKS_SELF = self::RELATIONSHIP_META + 1;
 
     /** @var int If `related` link should be added in relationship */
-    const RELATIONSHIP_LINKS_RELATED = self::RELATIONSHIP_LINKS_SELF + 1;
+    public const RELATIONSHIP_LINKS_RELATED = self::RELATIONSHIP_LINKS_SELF + 1;
 
-    /**
-     * Get resource type.
-     *
-     * @return string
-     */
     public function getType(): string;
 
     /**
@@ -50,27 +47,22 @@ interface SchemaInterface
      *
      * @param object $resource
      *
-     * @return string|null
      */
     public function getId($resource): ?string;
 
     /**
      * Get resource attributes.
      *
-     * @param mixed            $resource
-     * @param ContextInterface $context
+     * @param mixed $resource
      *
-     * @return iterable
      */
     public function getAttributes($resource, ContextInterface $context): iterable;
 
     /**
      * Get resource relationship descriptions.
      *
-     * @param mixed            $resource
-     * @param ContextInterface $context
+     * @param mixed $resource
      *
-     * @return iterable
      */
     public function getRelationships($resource, ContextInterface $context): iterable;
 
@@ -79,7 +71,6 @@ interface SchemaInterface
      *
      * @param mixed $resource
      *
-     * @return LinkInterface
      */
     public function getSelfLink($resource): LinkInterface;
 
@@ -90,27 +81,22 @@ interface SchemaInterface
      *
      * @see LinkInterface
      *
-     * @return iterable
      */
     public function getLinks($resource): iterable;
 
     /**
      * Get 'self' URL link to resource relationship.
      *
-     * @param mixed  $resource
-     * @param string $name
+     * @param mixed $resource
      *
-     * @return LinkInterface
      */
     public function getRelationshipSelfLink($resource, string $name): LinkInterface;
 
     /**
      * Get 'related' URL link to resource relationship.
      *
-     * @param mixed  $resource
-     * @param string $name
+     * @param mixed $resource
      *
-     * @return LinkInterface
      */
     public function getRelationshipRelatedLink($resource, string $name): LinkInterface;
 
@@ -119,7 +105,6 @@ interface SchemaInterface
      *
      * @param mixed $resource
      *
-     * @return bool
      */
     public function hasIdentifierMeta($resource): bool;
 
@@ -137,7 +122,6 @@ interface SchemaInterface
      *
      * @param mixed $resource
      *
-     * @return bool
      */
     public function hasResourceMeta($resource): bool;
 
@@ -152,19 +136,11 @@ interface SchemaInterface
 
     /**
      * If `self` links should be added in relationships by default.
-     *
-     * @param string $relationshipName
-     *
-     * @return bool
      */
     public function isAddSelfLinkInRelationshipByDefault(string $relationshipName): bool;
 
     /**
      * If `related` links should be added in relationships by default.
-     *
-     * @param string $relationshipName
-     *
-     * @return bool
      */
     public function isAddRelatedLinkInRelationshipByDefault(string $relationshipName): bool;
 }

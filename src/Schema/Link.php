@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Schema;
 
@@ -53,10 +55,7 @@ class Link implements LinkInterface
     private $meta;
 
     /**
-     * @param bool   $isSubUrl
-     * @param string $value
-     * @param bool   $hasMeta
-     * @param mixed  $meta
+     * @param mixed $meta
      */
     public function __construct(bool $isSubUrl, string $value, bool $hasMeta, $meta = null)
     {
@@ -66,17 +65,11 @@ class Link implements LinkInterface
         $this->meta     = $meta;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function canBeShownAsString(): bool
     {
         return $this->hasMeta === false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getStringRepresentation(string $prefix): string
     {
         \assert($this->canBeShownAsString() === true);
@@ -84,9 +77,6 @@ class Link implements LinkInterface
         return $this->buildUrl($prefix);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getArrayRepresentation(string $prefix): array
     {
         \assert($this->canBeShownAsString() === false);
@@ -99,11 +89,6 @@ class Link implements LinkInterface
         ];
     }
 
-    /**
-     * @param string $prefix
-     *
-     * @return string
-     */
     protected function buildUrl(string $prefix): string
     {
         return $this->isSubUrl ? $prefix . $this->value : $this->value;

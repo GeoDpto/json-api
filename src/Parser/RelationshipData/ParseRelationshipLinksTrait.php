@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Parser\RelationshipData;
 
@@ -27,12 +29,7 @@ use Neomerx\JsonApi\Contract\Schema\SchemaInterface;
 trait ParseRelationshipLinksTrait
 {
     /**
-     * @param SchemaInterface $parentSchema
-     * @param mixed           $parentData
-     * @param string          $name
-     * @param array           $description
-     *
-     * @return array
+     * @param mixed $parentData
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
@@ -78,14 +75,7 @@ trait ParseRelationshipLinksTrait
     }
 
     /**
-     * @param SchemaInterface $parentSchema
-     * @param mixed           $parentData
-     * @param string          $relationshipName
-     * @param iterable        $schemaLinks
-     * @param bool            $addSelfLink
-     * @param bool            $addRelatedLink
-     *
-     * @return iterable
+     * @param mixed $parentData
      */
     private function parseLinks(
         SchemaInterface $parentSchema,

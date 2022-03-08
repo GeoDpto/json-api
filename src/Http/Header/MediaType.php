@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Http\Header;
 
@@ -56,8 +58,6 @@ class MediaType implements MediaTypeInterface
     ];
 
     /**
-     * @param string $type
-     * @param string $subType
      * @param array<string,string>|null $parameters
      */
     public function __construct(string $type, string $subType, array $parameters = null)
@@ -77,25 +77,16 @@ class MediaType implements MediaTypeInterface
         $this->parameters = $parameters;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getSubType(): string
     {
         return $this->subType;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getMediaType(): string
     {
         if ($this->mediaType === null) {
@@ -105,17 +96,11 @@ class MediaType implements MediaTypeInterface
         return $this->mediaType;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getParameters(): ?array
     {
         return $this->parameters;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function matchesTo(MediaTypeInterface $mediaType): bool
     {
         return
@@ -124,9 +109,6 @@ class MediaType implements MediaTypeInterface
             $this->isMediaParametersMatch($mediaType);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function equalsTo(MediaTypeInterface $mediaType): bool
     {
         return
@@ -135,21 +117,11 @@ class MediaType implements MediaTypeInterface
             $this->isMediaParametersEqual($mediaType);
     }
 
-    /**
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
-     */
     private function isTypeMatches(MediaTypeInterface $mediaType): bool
     {
         return $mediaType->getType() === '*' || $this->isTypeEquals($mediaType);
     }
 
-    /**
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
-     */
     private function isTypeEquals(MediaTypeInterface $mediaType): bool
     {
         // Type, subtype and param name should be compared case-insensitive
@@ -157,21 +129,11 @@ class MediaType implements MediaTypeInterface
         return \strcasecmp($this->type, $mediaType->getType()) === 0;
     }
 
-    /**
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
-     */
     private function isSubTypeMatches(MediaTypeInterface $mediaType): bool
     {
         return $mediaType->getSubType() === '*' || $this->isSubTypeEquals($mediaType);
     }
 
-    /**
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
-     */
     private function isSubTypeEquals(MediaTypeInterface $mediaType): bool
     {
         // Type, subtype and param name should be compared case-insensitive
@@ -179,11 +141,6 @@ class MediaType implements MediaTypeInterface
         return \strcasecmp($this->getSubType(), $mediaType->getSubType()) === 0;
     }
 
-    /**
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
-     */
     private function isMediaParametersMatch(MediaTypeInterface $mediaType): bool
     {
         if ($this->bothMediaTypeParamsEmpty($mediaType) === true) {
@@ -215,11 +172,6 @@ class MediaType implements MediaTypeInterface
         return false;
     }
 
-    /**
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
-     */
     private function isMediaParametersEqual(MediaTypeInterface $mediaType): bool
     {
         if ($this->bothMediaTypeParamsEmpty($mediaType) === true) {
@@ -251,21 +203,11 @@ class MediaType implements MediaTypeInterface
         return false;
     }
 
-    /**
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
-     */
     private function bothMediaTypeParamsEmpty(MediaTypeInterface $mediaType): bool
     {
         return $this->parameters === null && $mediaType->getParameters() === null;
     }
 
-    /**
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
-     */
     private function bothMediaTypeParamsNotEmptyAndEqualInSize(MediaTypeInterface $mediaType): bool
     {
         $pr1 = $this->parameters;
@@ -274,42 +216,19 @@ class MediaType implements MediaTypeInterface
         return (empty($pr1) === false && empty($pr2) === false) && (\count($pr1) === \count($pr2));
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
     private function isParamCaseInsensitive(string $name): bool
     {
         return isset(static::PARAMETER_NAMES[$name]);
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @param string $valueToCompare
-     *
-     * @return bool
-     */
     private function paramValuesEqual(string $name, string $value, string $valueToCompare): bool
     {
-        $valuesEqual = $this->isParamCaseInsensitive($name) === true ?
+        return $this->isParamCaseInsensitive($name) ?
             \strcasecmp($value, $valueToCompare) === 0 : $value === $valueToCompare;
-
-        return $valuesEqual;
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @param string $valueToCompare
-     *
-     * @return bool
-     */
     private function paramValuesMatch(string $name, string $value, string $valueToCompare): bool
     {
-        $valuesEqual = $valueToCompare === '*' || $this->paramValuesEqual($name, $value, $valueToCompare);
-
-        return $valuesEqual;
+        return $valueToCompare === '*' || $this->paramValuesEqual($name, $value, $valueToCompare);
     }
 }

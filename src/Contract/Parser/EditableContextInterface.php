@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Parser;
 
@@ -28,10 +30,6 @@ interface EditableContextInterface extends ContextInterface
 {
     /**
      * Remember current position for parsed data.
-     *
-     * @param PositionInterface $position
-     *
-     * @return void
      */
     public function setPosition(PositionInterface $position): void;
 }

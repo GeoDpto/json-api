@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Parser;
 
@@ -25,15 +27,11 @@ interface DocumentDataInterface extends ParsedResultInterface
 {
     /**
      * If data is a collection.
-     *
-     * @return bool
      */
     public function isCollection(): bool;
 
     /**
      * If data is null.
-     *
-     * @return bool
      */
     public function isNull(): bool;
 }

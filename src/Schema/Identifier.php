@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Schema;
 
@@ -46,10 +48,7 @@ class Identifier implements IdentifierInterface
     private $meta;
 
     /**
-     * @param string $index
-     * @param string $type
-     * @param bool   $hasMeta
-     * @param mixed  $meta
+     * @param mixed $meta
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
@@ -62,19 +61,11 @@ class Identifier implements IdentifierInterface
         $this->meta    = $meta;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getId(): string
     {
         return $this->index;
     }
 
-    /**
-     * @param string $index
-     *
-     * @return self
-     */
     public function setId(string $index): self
     {
         $this->index = $index;
@@ -82,19 +73,11 @@ class Identifier implements IdentifierInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     *
-     * @return self
-     */
     public function setType(string $type): self
     {
         $this->type = $type;
@@ -102,17 +85,11 @@ class Identifier implements IdentifierInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasIdentifierMeta(): bool
     {
         return $this->hasMeta;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifierMeta()
     {
         return $this->meta;
@@ -120,8 +97,6 @@ class Identifier implements IdentifierInterface
 
     /**
      * @param mixed $meta
-     *
-     * @return self
      */
     public function setIdentifierMeta($meta): self
     {

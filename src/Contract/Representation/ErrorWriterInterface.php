@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Representation;
 
@@ -25,10 +27,5 @@ use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
  */
 interface ErrorWriterInterface extends BaseWriterInterface
 {
-    /**
-     * @param ErrorInterface $error
-     *
-     * @return self
-     */
     public function addError(ErrorInterface $error): self;
 }

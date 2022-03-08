@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Schema;
 
@@ -23,30 +25,13 @@ namespace Neomerx\JsonApi\Contract\Schema;
  */
 interface IdentifierInterface
 {
-    /**
-     * Get identifier's ID.
-     *
-     * @return string
-     */
     public function getId(): string;
 
-    /**
-     * Get identifier's type.
-     *
-     * @return string
-     */
     public function getType(): string;
 
-    /**
-     * If identifier has meta.
-     *
-     * @return bool
-     */
     public function hasIdentifierMeta(): bool;
 
     /**
-     * Get identifier meta.
-     *
      * @return mixed
      */
     public function getIdentifierMeta();
