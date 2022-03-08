@@ -18,10 +18,10 @@ namespace Neomerx\JsonApi\Encoder;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Encoder\EncoderInterface;
-use Neomerx\JsonApi\Contracts\Factories\FactoryInterface;
-use Neomerx\JsonApi\Contracts\Schema\LinkInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaContainerInterface;
+use Neomerx\JsonApi\Contract\Encoder\EncoderInterface;
+use Neomerx\JsonApi\Contract\Factory\FactoryInterface;
+use Neomerx\JsonApi\Contract\Schema\LinkInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaContainerInterface;
 use Traversable;
 
 /**

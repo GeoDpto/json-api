@@ -19,14 +19,14 @@ namespace Neomerx\JsonApi\Parser\RelationshipData;
  */
 
 use IteratorAggregate;
-use Neomerx\JsonApi\Contracts\Factories\FactoryInterface;
-use Neomerx\JsonApi\Contracts\Parser\EditableContextInterface;
-use Neomerx\JsonApi\Contracts\Parser\RelationshipDataInterface;
-use Neomerx\JsonApi\Contracts\Schema\IdentifierInterface;
-use Neomerx\JsonApi\Contracts\Schema\PositionInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaContainerInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaInterface;
-use Neomerx\JsonApi\Exceptions\InvalidArgumentException;
+use Neomerx\JsonApi\Contract\Factory\FactoryInterface;
+use Neomerx\JsonApi\Contract\Parser\EditableContextInterface;
+use Neomerx\JsonApi\Contract\Parser\RelationshipDataInterface;
+use Neomerx\JsonApi\Contract\Schema\IdentifierInterface;
+use Neomerx\JsonApi\Contract\Schema\PositionInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaContainerInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaInterface;
+use Neomerx\JsonApi\Exception\InvalidArgumentException;
 use Neomerx\JsonApi\Parser\IdentifierAndResource;
 use Traversable;
 use function Neomerx\JsonApi\I18n\format as _;

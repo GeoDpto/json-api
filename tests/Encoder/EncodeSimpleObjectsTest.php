@@ -20,21 +20,21 @@ namespace Neomerx\Tests\JsonApi\Encoder;
 
 use ArrayIterator;
 use Neomerx\JsonApi\Encoder\Encoder;
-use Neomerx\JsonApi\Factories\Factory;
+use Neomerx\JsonApi\Factory\Factory;
 use Neomerx\JsonApi\Schema\Link;
 use Neomerx\JsonApi\Schema\LinkWithAliases;
 use Neomerx\Tests\JsonApi\BaseTestCase;
 use Neomerx\Tests\JsonApi\Data\Collection;
-use Neomerx\Tests\JsonApi\Data\Models\Author;
-use Neomerx\Tests\JsonApi\Data\Models\AuthorCModel;
-use Neomerx\Tests\JsonApi\Data\Models\AuthorIdentity;
-use Neomerx\Tests\JsonApi\Data\Models\Comment;
-use Neomerx\Tests\JsonApi\Data\Models\CommentIdentity;
-use Neomerx\Tests\JsonApi\Data\Models\Site;
-use Neomerx\Tests\JsonApi\Data\Schemas\AuthorCModelSchema;
-use Neomerx\Tests\JsonApi\Data\Schemas\AuthorSchema;
-use Neomerx\Tests\JsonApi\Data\Schemas\CommentSchema;
-use Neomerx\Tests\JsonApi\Data\Schemas\SiteSchema;
+use Neomerx\Tests\JsonApi\Data\Model\Author;
+use Neomerx\Tests\JsonApi\Data\Model\AuthorCModel;
+use Neomerx\Tests\JsonApi\Data\Model\AuthorIdentity;
+use Neomerx\Tests\JsonApi\Data\Model\Comment;
+use Neomerx\Tests\JsonApi\Data\Model\CommentIdentity;
+use Neomerx\Tests\JsonApi\Data\Model\Site;
+use Neomerx\Tests\JsonApi\Data\Schema\AuthorCModelSchema;
+use Neomerx\Tests\JsonApi\Data\Schema\AuthorSchema;
+use Neomerx\Tests\JsonApi\Data\Schema\CommentSchema;
+use Neomerx\Tests\JsonApi\Data\Schema\SiteSchema;
 
 /**
  * @package Neomerx\Tests\JsonApi

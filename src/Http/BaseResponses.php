@@ -18,11 +18,11 @@ namespace Neomerx\JsonApi\Http;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Encoder\EncoderInterface;
-use Neomerx\JsonApi\Contracts\Http\Headers\HeaderParametersParserInterface;
-use Neomerx\JsonApi\Contracts\Http\Headers\MediaTypeInterface;
-use Neomerx\JsonApi\Contracts\Http\ResponsesInterface;
-use Neomerx\JsonApi\Contracts\Schema\ErrorInterface;
+use Neomerx\JsonApi\Contract\Encoder\EncoderInterface;
+use Neomerx\JsonApi\Contract\Http\Header\HeaderParametersParserInterface;
+use Neomerx\JsonApi\Contract\Http\Header\MediaTypeInterface;
+use Neomerx\JsonApi\Contract\Http\ResponsesInterface;
+use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
 
 /**
  * @package Neomerx\JsonApi

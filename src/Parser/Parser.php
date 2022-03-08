@@ -19,18 +19,18 @@ namespace Neomerx\JsonApi\Parser;
  */
 
 use IteratorAggregate;
-use Neomerx\JsonApi\Contracts\Factories\FactoryInterface;
-use Neomerx\JsonApi\Contracts\Parser\DocumentDataInterface;
-use Neomerx\JsonApi\Contracts\Parser\EditableContextInterface;
-use Neomerx\JsonApi\Contracts\Parser\IdentifierInterface;
-use Neomerx\JsonApi\Contracts\Parser\ParserInterface;
-use Neomerx\JsonApi\Contracts\Parser\RelationshipInterface;
-use Neomerx\JsonApi\Contracts\Parser\ResourceInterface;
-use Neomerx\JsonApi\Contracts\Schema\DocumentInterface;
-use Neomerx\JsonApi\Contracts\Schema\IdentifierInterface as SchemaIdentifierInterface;
-use Neomerx\JsonApi\Contracts\Schema\PositionInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaContainerInterface;
-use Neomerx\JsonApi\Exceptions\InvalidArgumentException;
+use Neomerx\JsonApi\Contract\Factory\FactoryInterface;
+use Neomerx\JsonApi\Contract\Parser\DocumentDataInterface;
+use Neomerx\JsonApi\Contract\Parser\EditableContextInterface;
+use Neomerx\JsonApi\Contract\Parser\IdentifierInterface;
+use Neomerx\JsonApi\Contract\Parser\ParserInterface;
+use Neomerx\JsonApi\Contract\Parser\RelationshipInterface;
+use Neomerx\JsonApi\Contract\Parser\ResourceInterface;
+use Neomerx\JsonApi\Contract\Schema\DocumentInterface;
+use Neomerx\JsonApi\Contract\Schema\IdentifierInterface as SchemaIdentifierInterface;
+use Neomerx\JsonApi\Contract\Schema\PositionInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaContainerInterface;
+use Neomerx\JsonApi\Exception\InvalidArgumentException;
 use Traversable;
 use function Neomerx\JsonApi\I18n\format as _;
 

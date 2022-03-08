@@ -18,14 +18,14 @@ namespace Neomerx\JsonApi\Parser;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Factories\FactoryInterface;
-use Neomerx\JsonApi\Contracts\Parser\EditableContextInterface;
-use Neomerx\JsonApi\Contracts\Parser\ParserInterface;
-use Neomerx\JsonApi\Contracts\Parser\ResourceInterface;
-use Neomerx\JsonApi\Contracts\Schema\LinkInterface;
-use Neomerx\JsonApi\Contracts\Schema\PositionInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaContainerInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaInterface;
+use Neomerx\JsonApi\Contract\Factory\FactoryInterface;
+use Neomerx\JsonApi\Contract\Parser\EditableContextInterface;
+use Neomerx\JsonApi\Contract\Parser\ParserInterface;
+use Neomerx\JsonApi\Contract\Parser\ResourceInterface;
+use Neomerx\JsonApi\Contract\Schema\LinkInterface;
+use Neomerx\JsonApi\Contract\Schema\PositionInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaContainerInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaInterface;
 use Neomerx\JsonApi\Parser\RelationshipData\ParseRelationshipDataTrait;
 use Neomerx\JsonApi\Parser\RelationshipData\ParseRelationshipLinksTrait;
 

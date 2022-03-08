@@ -19,8 +19,8 @@ namespace Neomerx\Tests\JsonApi;
  */
 
 use Mockery;
-use Neomerx\JsonApi\Contracts\Factories\FactoryInterface;
-use Neomerx\JsonApi\Factories\Factory;
+use Neomerx\JsonApi\Contract\Factory\FactoryInterface;
+use Neomerx\JsonApi\Factory\Factory;
 use PHPUnit\Framework\TestCase;
 
 /**

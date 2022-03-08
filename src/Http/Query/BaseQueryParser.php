@@ -18,7 +18,7 @@ namespace Neomerx\JsonApi\Http\Query;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Http\Query\BaseQueryParserInterface;
+use Neomerx\JsonApi\Contract\Http\Query\BaseQueryParserInterface;
 
 /**
  * @package Neomerx\JsonApi

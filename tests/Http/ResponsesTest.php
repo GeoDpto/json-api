@@ -20,10 +20,10 @@ namespace Neomerx\Tests\JsonApi\Http;
 
 use Mockery;
 use Mockery\MockInterface;
-use Neomerx\JsonApi\Contracts\Encoder\EncoderInterface;
-use Neomerx\JsonApi\Contracts\Http\ResponsesInterface;
+use Neomerx\JsonApi\Contract\Encoder\EncoderInterface;
+use Neomerx\JsonApi\Contract\Http\ResponsesInterface;
 use Neomerx\JsonApi\Http\BaseResponses;
-use Neomerx\JsonApi\Http\Headers\MediaType;
+use Neomerx\JsonApi\Http\Header\MediaType;
 use Neomerx\JsonApi\Schema\Error;
 use Neomerx\JsonApi\Schema\ErrorCollection;
 use Neomerx\Tests\JsonApi\BaseTestCase;

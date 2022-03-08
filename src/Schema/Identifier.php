@@ -18,7 +18,7 @@ namespace Neomerx\JsonApi\Schema;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Schema\IdentifierInterface;
+use Neomerx\JsonApi\Contract\Schema\IdentifierInterface;
 
 /**
  * @package Neomerx\JsonApi

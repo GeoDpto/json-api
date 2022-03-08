@@ -19,10 +19,10 @@ namespace Neomerx\Tests\JsonApi\Parser;
  */
 
 use Mockery;
-use Neomerx\JsonApi\Contracts\Parser\ParserInterface;
-use Neomerx\JsonApi\Contracts\Parser\RelationshipDataInterface;
-use Neomerx\JsonApi\Contracts\Schema\IdentifierInterface;
-use Neomerx\JsonApi\Exceptions\LogicException;
+use Neomerx\JsonApi\Contract\Parser\ParserInterface;
+use Neomerx\JsonApi\Contract\Parser\RelationshipDataInterface;
+use Neomerx\JsonApi\Contract\Schema\IdentifierInterface;
+use Neomerx\JsonApi\Exception\LogicException;
 use Neomerx\JsonApi\Parser\RelationshipData\RelationshipDataIsCollection;
 use Neomerx\JsonApi\Parser\RelationshipData\RelationshipDataIsIdentifier;
 use Neomerx\JsonApi\Parser\RelationshipData\RelationshipDataIsNull;

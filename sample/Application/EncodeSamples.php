@@ -1,4 +1,8 @@
-<?php declare(strict_types=1); namespace Neomerx\Samples\JsonApi\Application;
+<?php
+
+declare(strict_types=1);
+
+namespace Neomerx\Samples\JsonApi\Application;
 
 /**
  * Copyright 2015-2020 info@neomerx.com
@@ -19,14 +23,14 @@
 use Closure;
 use Neomerx\JsonApi\Encoder\Encoder;
 use Neomerx\JsonApi\Schema\Link;
-use Neomerx\Samples\JsonApi\Models\Author;
-use Neomerx\Samples\JsonApi\Models\Comment;
-use Neomerx\Samples\JsonApi\Models\Post;
-use Neomerx\Samples\JsonApi\Models\Site;
-use Neomerx\Samples\JsonApi\Schemas\AuthorSchema;
-use Neomerx\Samples\JsonApi\Schemas\CommentSchema;
-use Neomerx\Samples\JsonApi\Schemas\PostSchema;
-use Neomerx\Samples\JsonApi\Schemas\SiteSchema;
+use Neomerx\Samples\JsonApi\Model\Author;
+use Neomerx\Samples\JsonApi\Model\Comment;
+use Neomerx\Samples\JsonApi\Model\Post;
+use Neomerx\Samples\JsonApi\Model\Site;
+use Neomerx\Samples\JsonApi\Schema\AuthorSchema;
+use Neomerx\Samples\JsonApi\Schema\CommentSchema;
+use Neomerx\Samples\JsonApi\Schema\PostSchema;
+use Neomerx\Samples\JsonApi\Schema\SiteSchema;
 
 /**
  * @package Neomerx\Samples\JsonApi
