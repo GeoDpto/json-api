@@ -18,9 +18,9 @@ namespace Neomerx\JsonApi\Http\Query;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Http\Query\BaseQueryParserInterface as P;
-use Neomerx\JsonApi\Contracts\Schema\ErrorInterface;
-use Neomerx\JsonApi\Exceptions\JsonApiException;
+use Neomerx\JsonApi\Contract\Http\Query\BaseQueryParserInterface as P;
+use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
+use Neomerx\JsonApi\Exception\JsonApiException;
 use Neomerx\JsonApi\Schema\Error;
 
 /**

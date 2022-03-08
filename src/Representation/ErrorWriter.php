@@ -18,9 +18,9 @@ namespace Neomerx\JsonApi\Representation;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Representation\ErrorWriterInterface;
-use Neomerx\JsonApi\Contracts\Schema\DocumentInterface;
-use Neomerx\JsonApi\Contracts\Schema\ErrorInterface;
+use Neomerx\JsonApi\Contract\Representation\ErrorWriterInterface;
+use Neomerx\JsonApi\Contract\Schema\DocumentInterface;
+use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
 
 /**
  * @package Neomerx\JsonApi

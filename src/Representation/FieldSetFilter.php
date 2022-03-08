@@ -18,9 +18,9 @@ namespace Neomerx\JsonApi\Representation;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Parser\ResourceInterface;
-use Neomerx\JsonApi\Contracts\Representation\FieldSetFilterInterface;
-use Neomerx\JsonApi\Contracts\Schema\PositionInterface;
+use Neomerx\JsonApi\Contract\Parser\ResourceInterface;
+use Neomerx\JsonApi\Contract\Representation\FieldSetFilterInterface;
+use Neomerx\JsonApi\Contract\Schema\PositionInterface;
 
 /**
  * @package Neomerx\JsonApi

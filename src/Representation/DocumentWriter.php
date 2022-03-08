@@ -18,13 +18,13 @@ namespace Neomerx\JsonApi\Representation;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Parser\IdentifierInterface;
-use Neomerx\JsonApi\Contracts\Parser\RelationshipDataInterface;
-use Neomerx\JsonApi\Contracts\Parser\RelationshipInterface;
-use Neomerx\JsonApi\Contracts\Parser\ResourceInterface;
-use Neomerx\JsonApi\Contracts\Representation\DocumentWriterInterface;
-use Neomerx\JsonApi\Contracts\Representation\FieldSetFilterInterface;
-use Neomerx\JsonApi\Contracts\Schema\DocumentInterface;
+use Neomerx\JsonApi\Contract\Parser\IdentifierInterface;
+use Neomerx\JsonApi\Contract\Parser\RelationshipDataInterface;
+use Neomerx\JsonApi\Contract\Parser\RelationshipInterface;
+use Neomerx\JsonApi\Contract\Parser\ResourceInterface;
+use Neomerx\JsonApi\Contract\Representation\DocumentWriterInterface;
+use Neomerx\JsonApi\Contract\Representation\FieldSetFilterInterface;
+use Neomerx\JsonApi\Contract\Schema\DocumentInterface;
 
 /**
  * @package Neomerx\JsonApi

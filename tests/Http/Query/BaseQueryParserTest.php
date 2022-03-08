@@ -19,15 +19,15 @@ namespace Neomerx\Tests\JsonApi\Http\Query;
  */
 
 use Generator;
-use Neomerx\JsonApi\Contracts\Http\Query\BaseQueryParserInterface;
+use Neomerx\JsonApi\Contract\Http\Query\BaseQueryParserInterface;
 use Neomerx\JsonApi\Encoder\Encoder;
-use Neomerx\JsonApi\Exceptions\JsonApiException;
+use Neomerx\JsonApi\Exception\JsonApiException;
 use Neomerx\JsonApi\Http\Query\BaseQueryParser;
 use Neomerx\Tests\JsonApi\BaseTestCase;
-use Neomerx\Tests\JsonApi\Data\Models\Author;
-use Neomerx\Tests\JsonApi\Data\Models\Comment;
-use Neomerx\Tests\JsonApi\Data\Schemas\AuthorSchema;
-use Neomerx\Tests\JsonApi\Data\Schemas\CommentSchema;
+use Neomerx\Tests\JsonApi\Data\Model\Author;
+use Neomerx\Tests\JsonApi\Data\Model\Comment;
+use Neomerx\Tests\JsonApi\Data\Schema\AuthorSchema;
+use Neomerx\Tests\JsonApi\Data\Schema\CommentSchema;
 
 /**
  * @package Neomerx\Tests\JsonApi

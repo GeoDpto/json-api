@@ -18,7 +18,7 @@ namespace Neomerx\Tests\JsonApi\Encoder;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Schema\ErrorInterface;
+use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
 use Neomerx\JsonApi\Encoder\Encoder;
 use Neomerx\JsonApi\Schema\Error;
 use Neomerx\JsonApi\Schema\ErrorCollection;

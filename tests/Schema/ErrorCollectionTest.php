@@ -18,7 +18,7 @@ namespace Neomerx\Tests\JsonApi\Schema;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Schema\ErrorInterface;
+use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
 use Neomerx\JsonApi\Schema\ErrorCollection;
 use Neomerx\Tests\JsonApi\BaseTestCase;
 

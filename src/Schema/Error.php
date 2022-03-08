@@ -18,9 +18,9 @@ namespace Neomerx\JsonApi\Schema;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Schema\DocumentInterface;
-use Neomerx\JsonApi\Contracts\Schema\ErrorInterface;
-use Neomerx\JsonApi\Contracts\Schema\LinkInterface;
+use Neomerx\JsonApi\Contract\Schema\DocumentInterface;
+use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
+use Neomerx\JsonApi\Contract\Schema\LinkInterface;
 
 /**
  * @package Neomerx\JsonApi

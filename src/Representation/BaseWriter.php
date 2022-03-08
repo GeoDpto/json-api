@@ -18,10 +18,10 @@ namespace Neomerx\JsonApi\Representation;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Representation\BaseWriterInterface;
-use Neomerx\JsonApi\Contracts\Schema\BaseLinkInterface;
-use Neomerx\JsonApi\Contracts\Schema\DocumentInterface;
-use Neomerx\JsonApi\Contracts\Schema\LinkInterface;
+use Neomerx\JsonApi\Contract\Representation\BaseWriterInterface;
+use Neomerx\JsonApi\Contract\Schema\BaseLinkInterface;
+use Neomerx\JsonApi\Contract\Schema\DocumentInterface;
+use Neomerx\JsonApi\Contract\Schema\LinkInterface;
 
 /**
  * @package Neomerx\JsonApi

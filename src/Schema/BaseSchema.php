@@ -18,11 +18,11 @@ namespace Neomerx\JsonApi\Schema;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Factories\FactoryInterface;
-use Neomerx\JsonApi\Contracts\Schema\DocumentInterface;
-use Neomerx\JsonApi\Contracts\Schema\LinkInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaInterface;
-use Neomerx\JsonApi\Exceptions\LogicException;
+use Neomerx\JsonApi\Contract\Factory\FactoryInterface;
+use Neomerx\JsonApi\Contract\Schema\DocumentInterface;
+use Neomerx\JsonApi\Contract\Schema\LinkInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaInterface;
+use Neomerx\JsonApi\Exception\LogicException;
 
 /**
  * @package Neomerx\JsonApi

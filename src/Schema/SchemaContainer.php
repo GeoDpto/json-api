@@ -19,10 +19,10 @@ namespace Neomerx\JsonApi\Schema;
  */
 
 use Closure;
-use Neomerx\JsonApi\Contracts\Factories\FactoryInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaContainerInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaInterface;
-use Neomerx\JsonApi\Exceptions\InvalidArgumentException;
+use Neomerx\JsonApi\Contract\Factory\FactoryInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaContainerInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaInterface;
+use Neomerx\JsonApi\Exception\InvalidArgumentException;
 use function Neomerx\JsonApi\I18n\format as _;
 
 /**

@@ -21,14 +21,14 @@ namespace Neomerx\Tests\JsonApi\Encoder;
 use Exception;
 use Neomerx\JsonApi\Encoder\Encoder;
 use Neomerx\Tests\JsonApi\BaseTestCase;
-use Neomerx\Tests\JsonApi\Data\Models\Author;
-use Neomerx\Tests\JsonApi\Data\Models\Comment;
-use Neomerx\Tests\JsonApi\Data\Models\Post;
-use Neomerx\Tests\JsonApi\Data\Models\Site;
-use Neomerx\Tests\JsonApi\Data\Schemas\AuthorSchema;
-use Neomerx\Tests\JsonApi\Data\Schemas\CommentSchema;
-use Neomerx\Tests\JsonApi\Data\Schemas\PostSchema;
-use Neomerx\Tests\JsonApi\Data\Schemas\SiteSchema;
+use Neomerx\Tests\JsonApi\Data\Model\Author;
+use Neomerx\Tests\JsonApi\Data\Model\Comment;
+use Neomerx\Tests\JsonApi\Data\Model\Post;
+use Neomerx\Tests\JsonApi\Data\Model\Site;
+use Neomerx\Tests\JsonApi\Data\Schema\AuthorSchema;
+use Neomerx\Tests\JsonApi\Data\Schema\CommentSchema;
+use Neomerx\Tests\JsonApi\Data\Schema\PostSchema;
+use Neomerx\Tests\JsonApi\Data\Schema\SiteSchema;
 
 /**
  * @package Neomerx\Tests\JsonApi

@@ -18,8 +18,8 @@ namespace Neomerx\JsonApi\Parser\RelationshipData;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Schema\LinkInterface;
-use Neomerx\JsonApi\Contracts\Schema\SchemaInterface;
+use Neomerx\JsonApi\Contract\Schema\LinkInterface;
+use Neomerx\JsonApi\Contract\Schema\SchemaInterface;
 
 /**
  * @package Neomerx\JsonApi

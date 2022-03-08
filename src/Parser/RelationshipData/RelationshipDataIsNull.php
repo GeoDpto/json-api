@@ -18,10 +18,10 @@ namespace Neomerx\JsonApi\Parser\RelationshipData;
  * limitations under the License.
  */
 
-use Neomerx\JsonApi\Contracts\Parser\IdentifierInterface;
-use Neomerx\JsonApi\Contracts\Parser\RelationshipDataInterface;
-use Neomerx\JsonApi\Contracts\Parser\ResourceInterface;
-use Neomerx\JsonApi\Exceptions\LogicException;
+use Neomerx\JsonApi\Contract\Parser\IdentifierInterface;
+use Neomerx\JsonApi\Contract\Parser\RelationshipDataInterface;
+use Neomerx\JsonApi\Contract\Parser\ResourceInterface;
+use Neomerx\JsonApi\Exception\LogicException;
 use function Neomerx\JsonApi\I18n\format as _;
 
 /**
