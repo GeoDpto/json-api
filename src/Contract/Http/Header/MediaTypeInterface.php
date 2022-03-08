@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Http\Header;
 
@@ -24,32 +26,26 @@ namespace Neomerx\JsonApi\Contract\Http\Header;
 interface MediaTypeInterface
 {
     /** JSON API type */
-    const JSON_API_MEDIA_TYPE = 'application/vnd.api+json';
+    public const JSON_API_MEDIA_TYPE = 'application/vnd.api+json';
 
     /** JSON API type */
-    const JSON_API_TYPE = 'application';
+    public const JSON_API_TYPE = 'application';
 
     /** JSON API type */
-    const JSON_API_SUB_TYPE = 'vnd.api+json';
+    public const JSON_API_SUB_TYPE = 'vnd.api+json';
 
     /**
      * Get media type (no subtype).
-     *
-     * @return string
      */
     public function getType(): string;
 
     /**
      * Get media subtype.
-     *
-     * @return string
      */
     public function getSubType(): string;
 
     /**
      * Get full media type (type/subtype).
-     *
-     * @return string
      */
     public function getMediaType(): string;
 
@@ -62,19 +58,11 @@ interface MediaTypeInterface
 
     /**
      * Compare media types.
-     *
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
      */
     public function matchesTo(MediaTypeInterface $mediaType): bool;
 
     /**
      * Compare media types.
-     *
-     * @param MediaTypeInterface $mediaType
-     *
-     * @return bool
      */
     public function equalsTo(MediaTypeInterface $mediaType): bool;
 }

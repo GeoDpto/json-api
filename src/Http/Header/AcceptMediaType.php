@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Http\Header;
 
@@ -38,11 +40,7 @@ class AcceptMediaType extends MediaType implements AcceptMediaTypeInterface
     private $position;
 
     /**
-     * @param int    $position
-     * @param string $type
-     * @param string $subType
      * @param array<string,string>|null $parameters
-     * @param float  $quality
      */
     public function __construct(
         int $position,
@@ -68,25 +66,16 @@ class AcceptMediaType extends MediaType implements AcceptMediaTypeInterface
         $this->quality  = $quality;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getPosition(): int
     {
         return $this->position;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getQuality(): float
     {
         return $this->quality;
     }
 
-    /**
-     * @return Closure
-     */
     public static function getCompare(): Closure
     {
         return function (AcceptMediaTypeInterface $lhs, AcceptMediaTypeInterface $rhs) {
@@ -115,11 +104,6 @@ class AcceptMediaType extends MediaType implements AcceptMediaTypeInterface
     }
 
     /**
-     * @param float $lhs
-     * @param float $rhs
-     *
-     * @return int
-     *
      * @SuppressWarnings(PHPMD.ElseExpression)
      */
     private static function compareQuality(float $lhs, float $rhs): int
@@ -134,23 +118,11 @@ class AcceptMediaType extends MediaType implements AcceptMediaTypeInterface
         }
     }
 
-    /**
-     * @param string $lhs
-     * @param string $rhs
-     *
-     * @return int
-     */
     private static function compareStrings(string $lhs, string $rhs): int
     {
         return ($rhs !== '*' ? 1 : 0) - ($lhs !== '*' ? 1 : 0);
     }
 
-    /**
-     * @param array|null $lhs
-     * @param array|null $rhs
-     *
-     * @return int
-     */
     private static function compareParameters(?array $lhs, ?array $rhs): int
     {
         return (empty($lhs) !== false ? 1 : 0) - (empty($rhs) !== false ? 1 : 0);

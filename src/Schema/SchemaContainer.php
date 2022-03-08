@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Schema;
 
@@ -30,20 +32,10 @@ use function Neomerx\JsonApi\I18n\format as _;
  */
 class SchemaContainer implements SchemaContainerInterface
 {
-    /**
-     * Message code.
-     */
-    const MSG_INVALID_MODEL_TYPE = 'Invalid model type.';
-
-    /**
-     * Message code.
-     */
-    const MSG_INVALID_SCHEME = 'Schema for type `%s` must be non-empty string, callable or SchemaInterface instance.';
-
-    /**
-     * Message code.
-     */
-    const MSG_TYPE_REUSE_FORBIDDEN = 'Type should not be used more than once to register a schema (`%s`).';
+    public const MSG_INVALID_MODEL_TYPE = 'Invalid model type.';
+    public const MSG_INVALID_SCHEME = 'Schema for type `%s` must be non-empty string,' .
+    ' callable or SchemaInterface instance.';
+    public const MSG_TYPE_REUSE_FORBIDDEN = 'Type should not be used more than once to register a schema (`%s`).';
 
     /**
      * @var array
@@ -65,10 +57,6 @@ class SchemaContainer implements SchemaContainerInterface
      */
     private $factory;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param iterable         $schemas
-     */
     public function __construct(FactoryInterface $factory, iterable $schemas)
     {
         $this->factory = $factory;
@@ -78,10 +66,7 @@ class SchemaContainer implements SchemaContainerInterface
     /**
      * Register provider for resource type.
      *
-     * @param string         $type
-     * @param string|Closure $schema
-     *
-     * @return void
+     * @param Closure|string $schema
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.ElseExpression)
@@ -98,7 +83,7 @@ class SchemaContainer implements SchemaContainerInterface
                 \is_string($schema) === true &&
                 empty($schema) === false &&
                 \class_exists($schema) === true &&
-                \in_array(SchemaInterface::class, \class_implements($schema)) === true
+                \in_array(SchemaInterface::class, \class_implements($schema), true) === true
             ) ||
             \is_callable($schema) ||
             $schema instanceof SchemaInterface
@@ -122,10 +107,6 @@ class SchemaContainer implements SchemaContainerInterface
 
     /**
      * Register providers for resource types.
-     *
-     * @param iterable $schemas
-     *
-     * @return void
      */
     public function registerCollection(iterable $schemas): void
     {
@@ -134,9 +115,6 @@ class SchemaContainer implements SchemaContainerInterface
         }
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getSchema($resource): SchemaInterface
     {
         \assert($this->hasSchema($resource));
@@ -146,9 +124,6 @@ class SchemaContainer implements SchemaContainerInterface
         return $this->getSchemaByType($resourceType);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasSchema($resourceObject): bool
     {
         return \is_object($resourceObject) === true &&
@@ -156,8 +131,6 @@ class SchemaContainer implements SchemaContainerInterface
     }
 
     /**
-     * @inheritdoc
-     *
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.ElseExpression)
      */
@@ -183,19 +156,12 @@ class SchemaContainer implements SchemaContainerInterface
         return $schema;
     }
 
-    /**
-     * @param string $type
-     *
-     * @return bool
-     */
     protected function hasProviderMapping(string $type): bool
     {
         return isset($this->providerMapping[$type]);
     }
 
     /**
-     * @param string $type
-     *
      * @return mixed
      */
     protected function getProviderMapping(string $type)
@@ -204,53 +170,28 @@ class SchemaContainer implements SchemaContainerInterface
     }
 
     /**
-     * @param string         $type
-     * @param string|Closure $schema
-     *
-     * @return void
+     * @param Closure|string $schema
      */
     protected function setProviderMapping(string $type, $schema): void
     {
         $this->providerMapping[$type] = $schema;
     }
 
-    /**
-     * @param string $type
-     *
-     * @return bool
-     */
     protected function hasCreatedProvider(string $type): bool
     {
         return isset($this->createdProviders[$type]);
     }
 
-    /**
-     * @param string $type
-     *
-     * @return SchemaInterface
-     */
     protected function getCreatedProvider(string $type): SchemaInterface
     {
         return $this->createdProviders[$type];
     }
 
-    /**
-     * @param string          $type
-     * @param SchemaInterface $provider
-     *
-     * @return void
-     */
     protected function setCreatedProvider(string $type, SchemaInterface $provider): void
     {
         $this->createdProviders[$type] = $provider;
     }
 
-    /**
-     * @param string $resourceType
-     * @param string $jsonType
-     *
-     * @return void
-     */
     protected function setResourceToJsonTypeMapping(string $resourceType, string $jsonType): void
     {
         $this->resType2JsonType[$resourceType] = $jsonType;
@@ -258,8 +199,6 @@ class SchemaContainer implements SchemaContainerInterface
 
     /**
      * @param object $resource
-     *
-     * @return string
      */
     protected function getResourceType($resource): string
     {
@@ -271,27 +210,13 @@ class SchemaContainer implements SchemaContainerInterface
         return \get_class($resource);
     }
 
-    /**
-     * @param callable $callable
-     *
-     * @return SchemaInterface
-     */
     protected function createSchemaFromCallable(callable $callable): SchemaInterface
     {
-        $schema = \call_user_func($callable, $this->factory);
-
-        return $schema;
+        return \call_user_func($callable, $this->factory);
     }
 
-    /**
-     * @param string $className
-     *
-     * @return SchemaInterface
-     */
     protected function createSchemaFromClassName(string $className): SchemaInterface
     {
-        $schema = new $className($this->factory);
-
-        return $schema;
+        return new $className($this->factory);
     }
 }

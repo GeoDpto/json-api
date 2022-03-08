@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Parser;
 
@@ -23,49 +25,15 @@ namespace Neomerx\JsonApi\Contract\Parser;
  */
 interface ResourceInterface extends IdentifierInterface
 {
-    /**
-     * Get resource's attributes.
-     *
-     * @return iterable
-     */
     public function getAttributes(): iterable;
 
-    /**
-     * Get resource's relationships.
-     *
-     * @see RelationshipInterface
-     *
-     * @return iterable
-     */
     public function getRelationships(): iterable;
 
-    /**
-     * If resource has links.
-     *
-     * @return bool
-     */
     public function hasLinks(): bool;
 
-    /**
-     * Get resource links.
-     *
-     * @see LinkInterface
-     *
-     * @return iterable
-     */
     public function getLinks(): iterable;
 
-    /**
-     * If resource has meta.
-     *
-     * @return bool
-     */
     public function hasResourceMeta(): bool;
 
-    /**
-     * Get resource meta.
-     *
-     * @return mixed
-     */
     public function getResourceMeta();
 }

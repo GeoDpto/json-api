@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Http\Header;
 
@@ -43,8 +45,6 @@ interface AcceptMediaTypeInterface extends MediaTypeInterface
 
     /**
      * Get initial position of the media type in header (needed for stable sorting).
-     *
-     * @return int
      */
     public function getPosition(): int;
 }

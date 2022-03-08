@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Factory;
 
@@ -59,33 +61,23 @@ use Neomerx\JsonApi\Schema\SchemaContainer;
  */
 class Factory implements FactoryInterface
 {
-    /**
-     * @inheritdoc
-     */
     public function createEncoder(SchemaContainerInterface $container): EncoderInterface
     {
         return new Encoder($this, $container);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createSchemaContainer(iterable $schemas): SchemaContainerInterface
     {
         return new SchemaContainer($this, $schemas);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createPosition(
         int $level,
         string $path,
         ?string $parentType,
         ?string $parentRelationship
     ): PositionInterface {
-        return new class ($level, $path, $parentType, $parentRelationship) implements PositionInterface
-        {
+        return new class($level, $path, $parentType, $parentRelationship) implements PositionInterface {
             /**
              * @var int
              */
@@ -106,12 +98,6 @@ class Factory implements FactoryInterface
              */
             private $parentRelationship;
 
-            /**
-             * @param int         $level
-             * @param string      $path
-             * @param null|string $parentType
-             * @param null|string $parentRelationship
-             */
             public function __construct(int $level, string $path, ?string $parentType, ?string $parentRelationship)
             {
                 $this->level              = $level;
@@ -120,33 +106,21 @@ class Factory implements FactoryInterface
                 $this->parentRelationship = $parentRelationship;
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getLevel(): int
             {
                 return $this->level;
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getPath(): string
             {
                 return $this->path;
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getParentType(): ?string
             {
                 return $this->parentType;
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getParentRelationship(): ?string
             {
                 return $this->parentRelationship;
@@ -154,9 +128,6 @@ class Factory implements FactoryInterface
         };
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createParser(
         SchemaContainerInterface $container,
         EditableContextInterface $context
@@ -164,33 +135,21 @@ class Factory implements FactoryInterface
         return new Parser($this, $container, $context);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createDocumentWriter(): DocumentWriterInterface
     {
         return new DocumentWriter();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createErrorWriter(): ErrorWriterInterface
     {
         return new ErrorWriter();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createFieldSetFilter(array $fieldSets): FieldSetFilterInterface
     {
         return new FieldSetFilter($fieldSets);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createParsedResource(
         EditableContextInterface $context,
         PositionInterface $position,
@@ -200,15 +159,11 @@ class Factory implements FactoryInterface
         return new IdentifierAndResource($context, $position, $this, $container, $data);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createParsedIdentifier(
         PositionInterface $position,
         SchemaIdentifierInterface $identifier
     ): ParserIdentifierInterface {
-        return new class ($position, $identifier) implements ParserIdentifierInterface
-        {
+        return new class($position, $identifier) implements ParserIdentifierInterface {
             /**
              * @var PositionInterface
              */
@@ -219,10 +174,6 @@ class Factory implements FactoryInterface
              */
             private $identifier;
 
-            /**
-             * @param PositionInterface         $position
-             * @param SchemaIdentifierInterface $identifier
-             */
             public function __construct(
                 PositionInterface $position,
                 SchemaIdentifierInterface $identifier
@@ -234,41 +185,26 @@ class Factory implements FactoryInterface
                 \assert($this->getPosition() !== null);
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getType(): string
             {
                 return $this->identifier->getType();
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getId(): ?string
             {
                 return $this->identifier->getId();
             }
 
-            /**
-             * @inheritdoc
-             */
             public function hasIdentifierMeta(): bool
             {
                 return $this->identifier->hasIdentifierMeta();
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getIdentifierMeta()
             {
                 return $this->identifier->getIdentifierMeta();
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getPosition(): PositionInterface
             {
                 return $this->position;
@@ -276,17 +212,12 @@ class Factory implements FactoryInterface
         };
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createLink(bool $isSubUrl, string $value, bool $hasMeta, $meta = null): LinkInterface
     {
         return new Link($isSubUrl, $value, $hasMeta, $meta);
     }
 
     /**
-     * @inheritdoc
-     *
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
@@ -299,161 +230,123 @@ class Factory implements FactoryInterface
         bool $hasMeta,
         $meta
     ): RelationshipInterface {
-        return new class (
-            $position,
-            $hasData,
-            $data,
-            $hasLinks,
-            $links,
-            $hasMeta,
-            $meta
-        ) implements RelationshipInterface
-        {
-            /**
-             * @var PositionInterface
-             */
-            private $position;
+        return
+            new class($position, $hasData, $data, $hasLinks, $links, $hasMeta, $meta) implements RelationshipInterface {
+                /**
+                 * @var PositionInterface
+                 */
+                private $position;
 
-            /**
-             * @var bool
-             */
-            private $hasData;
+                /**
+                 * @var bool
+                 */
+                private $hasData;
 
-            /**
-             * @var ?RelationshipDataInterface
-             */
-            private $data;
+                /**
+                 * @var ?RelationshipDataInterface
+                 */
+                private $data;
 
-            /**
-             * @var bool
-             */
-            private $hasLinks;
+                /**
+                 * @var bool
+                 */
+                private $hasLinks;
 
-            /**
-             * @var ?iterable
-             */
-            private $links;
+                /**
+                 * @var ?iterable
+                 */
+                private $links;
 
-            /**
-             * @var bool
-             */
-            private $hasMeta;
+                /**
+                 * @var bool
+                 */
+                private $hasMeta;
 
-            /**
-             * @var mixed
-             */
-            private $meta;
+                /**
+                 * @var mixed
+                 */
+                private $meta;
 
-            /**
-             * @var bool
-             */
-            private $metaIsCallable;
+                /**
+                 * @var bool
+                 */
+                private $metaIsCallable;
 
-            /**
-             * @param PositionInterface              $position
-             * @param bool                           $hasData
-             * @param RelationshipDataInterface|null $data
-             * @param bool                           $hasLinks
-             * @param iterable|null                  $links
-             * @param bool                           $hasMeta
-             * @param mixed                          $meta
-             */
-            public function __construct(
-                PositionInterface $position,
-                bool $hasData,
-                ?RelationshipDataInterface $data,
-                bool $hasLinks,
-                ?iterable $links,
-                bool $hasMeta,
-                $meta
-            ) {
-                \assert($position->getLevel() > ParserInterface::ROOT_LEVEL);
-                \assert(empty($position->getPath()) === false);
-                \assert(($hasData === false && $data === null) || ($hasData === true && $data !== null));
-                \assert(($hasLinks === false && $links === null) || ($hasLinks === true && $links !== null));
+                /**
+                 * @param mixed $meta
+                 */
+                public function __construct(
+                    PositionInterface $position,
+                    bool $hasData,
+                    ?RelationshipDataInterface $data,
+                    bool $hasLinks,
+                    ?iterable $links,
+                    bool $hasMeta,
+                    $meta
+                ) {
+                    \assert($position->getLevel() > ParserInterface::ROOT_LEVEL);
+                    \assert(empty($position->getPath()) === false);
+                    \assert(($hasData === false && $data === null) || ($hasData === true && $data !== null));
+                    \assert(($hasLinks === false && $links === null) || ($hasLinks === true && $links !== null));
 
-                $this->position       = $position;
-                $this->hasData        = $hasData;
-                $this->data           = $data;
-                $this->hasLinks       = $hasLinks;
-                $this->links          = $links;
-                $this->hasMeta        = $hasMeta;
-                $this->meta           = $meta;
-                $this->metaIsCallable = \is_callable($meta);
-            }
-
-            /**
-             * @inheritdoc
-             */
-            public function getPosition(): PositionInterface
-            {
-                return $this->position;
-            }
-
-            /**
-             * @inheritdoc
-             */
-            public function hasData(): bool
-            {
-                return $this->hasData;
-            }
-
-            /**
-             * @inheritdoc
-             */
-            public function getData(): RelationshipDataInterface
-            {
-                \assert($this->hasData());
-
-                return $this->data;
-            }
-
-            /**
-             * @inheritdoc
-             */
-            public function hasLinks(): bool
-            {
-                return $this->hasLinks;
-            }
-
-            /**
-             * @inheritdoc
-             */
-            public function getLinks(): iterable
-            {
-                \assert($this->hasLinks());
-
-                return $this->links;
-            }
-
-            /**
-             * @inheritdoc
-             */
-            public function hasMeta(): bool
-            {
-                return $this->hasMeta;
-            }
-
-            /**
-             * @inheritdoc
-             */
-            public function getMeta()
-            {
-                \assert($this->hasMeta());
-
-                if ($this->metaIsCallable === true) {
-                    $this->meta           = \call_user_func($this->meta);
-                    $this->metaIsCallable = false;
+                    $this->position       = $position;
+                    $this->hasData        = $hasData;
+                    $this->data           = $data;
+                    $this->hasLinks       = $hasLinks;
+                    $this->links          = $links;
+                    $this->hasMeta        = $hasMeta;
+                    $this->meta           = $meta;
+                    $this->metaIsCallable = \is_callable($meta);
                 }
 
-                return $this->meta;
-            }
-        };
+                public function getPosition(): PositionInterface
+                {
+                    return $this->position;
+                }
+
+                public function hasData(): bool
+                {
+                    return $this->hasData;
+                }
+
+                public function getData(): RelationshipDataInterface
+                {
+                    \assert($this->hasData());
+
+                    return $this->data;
+                }
+
+                public function hasLinks(): bool
+                {
+                    return $this->hasLinks;
+                }
+
+                public function getLinks(): iterable
+                {
+                    \assert($this->hasLinks());
+
+                    return $this->links;
+                }
+
+                public function hasMeta(): bool
+                {
+                    return $this->hasMeta;
+                }
+
+                public function getMeta()
+                {
+                    \assert($this->hasMeta());
+
+                    if ($this->metaIsCallable === true) {
+                        $this->meta           = \call_user_func($this->meta);
+                        $this->metaIsCallable = false;
+                    }
+
+                    return $this->meta;
+                }
+            };
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createRelationshipDataIsResource(
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
@@ -463,9 +356,6 @@ class Factory implements FactoryInterface
         return new RelationshipDataIsResource($this, $schemaContainer, $context, $position, $resource);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createRelationshipDataIsIdentifier(
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
@@ -475,9 +365,6 @@ class Factory implements FactoryInterface
         return new RelationshipDataIsIdentifier($this, $schemaContainer, $context, $position, $identifier);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createRelationshipDataIsCollection(
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
@@ -487,25 +374,16 @@ class Factory implements FactoryInterface
         return new RelationshipDataIsCollection($this, $schemaContainer, $context, $position, $resources);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createRelationshipDataIsNull(): RelationshipDataInterface
     {
         return new RelationshipDataIsNull();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createMediaType(string $type, string $subType, array $parameters = null): MediaTypeInterface
     {
         return new MediaType($type, $subType, $parameters);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function createAcceptMediaType(
         int $position,
         string $type,
@@ -517,14 +395,11 @@ class Factory implements FactoryInterface
     }
 
     /**
-     * @inheritdoc
-     *
      * @SuppressWarnings(PHPMD.UndefinedVariable) PHPMD currently has a glitch with `$position` in `setPosition`
      */
     public function createParserContext(array $fieldSets, array $includePaths): EditableContextInterface
     {
-        return new class ($fieldSets, $includePaths) implements EditableContextInterface
-        {
+        return new class($fieldSets, $includePaths) implements EditableContextInterface {
             /**
              * @var array
              */
@@ -536,39 +411,26 @@ class Factory implements FactoryInterface
             private $includePaths;
 
             /**
-             * @var PositionInterface|null
+             * @var null|PositionInterface
              */
             private $position = null;
 
-            /**
-             * @param array $fieldSets
-             * @param array $includePaths
-             */
             public function __construct(array $fieldSets, array $includePaths)
             {
                 $this->fieldSets    = $fieldSets;
                 $this->includePaths = $includePaths;
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getFieldSets(): array
             {
                 return $this->fieldSets;
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getIncludePaths(): array
             {
                 return $this->includePaths;
             }
 
-            /**
-             * @inheritdoc
-             */
             public function getPosition(): PositionInterface
             {
                 // parser's implementation should guarantee that position will always be initialized
@@ -578,9 +440,6 @@ class Factory implements FactoryInterface
                 return $this->position;
             }
 
-            /**
-             * @inheritdoc
-             */
             public function setPosition(PositionInterface $position): void
             {
                 $this->position = $position;

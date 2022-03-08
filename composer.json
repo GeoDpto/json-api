@@ -19,7 +19,8 @@
     }
   ],
   "require": {
-    "php": ">=7.1.0"
+    "php": ">=7.1.0",
+    "ext-json": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.0",
@@ -27,7 +28,7 @@
     "scrutinizer/ocular": "^1.4",
     "squizlabs/php_codesniffer": "^2.9",
     "phpmd/phpmd": "^2.6",
-    "friendsofphp/php-cs-fixer": "^2.14"
+    "friendsofphp/php-cs-fixer": "^3.0"
   },
   "minimum-stability": "stable",
   "autoload": {
@@ -42,6 +43,9 @@
       "Neomerx\\Samples\\JsonApi\\": "sample/"
     }
   },
+  "config": {
+    "bin-dir": "bin"
+  },
   "scripts": {
     "test": ["@test-unit", "@test-cs", "@test-md", "@test-cs-fixer"],
     "test-unit": "./vendor/phpunit/phpunit/phpunit --coverage-text",
@@ -49,6 +53,6 @@
     "test-cs": "./vendor/bin/phpcs -p -s --standard=PSR2 ./src ./tests",
     "test-md": "./vendor/bin/phpmd ./src text codesize,controversial,cleancode,design,unusedcode,naming",
     "test-cs-fixer": "./vendor/bin/php-cs-fixer fix --diff --dry-run -v",
-    "cs-fixer": "./vendor/bin/php-cs-fixer fix --diff -v --ansi"
+    "cs-fix": "./vendor/bin/php-cs-fixer fix --diff -v --ansi"
   }
 }

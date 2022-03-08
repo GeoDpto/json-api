@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Parser\RelationshipData;
 
@@ -52,12 +54,6 @@ abstract class BaseRelationshipData implements RelationshipDataInterface
      */
     private $position;
 
-    /**
-     * @param FactoryInterface         $factory
-     * @param SchemaContainerInterface $schemaContainer
-     * @param EditableContextInterface $context
-     * @param PositionInterface        $position
-     */
     public function __construct(
         FactoryInterface $factory,
         SchemaContainerInterface $schemaContainer,
@@ -72,8 +68,6 @@ abstract class BaseRelationshipData implements RelationshipDataInterface
 
     /**
      * @param mixed $resource
-     *
-     * @return ResourceInterface
      */
     protected function createParsedResource($resource): ResourceInterface
     {
@@ -91,8 +85,6 @@ abstract class BaseRelationshipData implements RelationshipDataInterface
     }
 
     /**
-     * @param SchemaIdentifierInterface $identifier
-     *
      * @return ResourceInterface
      */
     protected function createParsedIdentifier(SchemaIdentifierInterface $identifier): ParserIdentifierInterface

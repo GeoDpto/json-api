@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Schema;
 
@@ -26,34 +28,26 @@ interface PositionInterface
     /**
      * A symbol used to separate path's parts.
      */
-    const PATH_SEPARATOR = DocumentInterface::PATH_SEPARATOR;
+    public const PATH_SEPARATOR = DocumentInterface::PATH_SEPARATOR;
 
     /**
      * Get level (0 for root, 1 for their children, and so on).
-     *
-     * @return int
      */
     public function getLevel(): int;
 
     /**
      * Get level ('' for root, 'relationship-name' for their children,
      * 'relationship-name.another-name' and so on).
-     *
-     * @return string
      */
     public function getPath(): string;
 
     /**
      * Get JSON type of the parent parsed result (if parent exists).
-     *
-     * @return null|string
      */
     public function getParentType(): ?string;
 
     /**
      * Get parent's relationship where this result is located (if parent exists).
-     *
-     * @return null|string
      */
     public function getParentRelationship(): ?string;
 }

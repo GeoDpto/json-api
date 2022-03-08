@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Schema;
 
@@ -40,68 +42,42 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
      */
     private $items = [];
 
-    /**
-     * @inheritdoc
-     */
     public function getIterator()
     {
         return new ArrayIterator($this->items);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function count()
+    public function count(): int
     {
         return \count($this->items);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function serialize()
+    public function serialize(): string
     {
         return \serialize($this->items);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function unserialize($serialized)
+    public function unserialize($data): void
     {
-        $this->items = \unserialize($serialized);
+        $this->items = \unserialize($data);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->items[$offset]);
     }
 
-    /**
-     * @inheritdoc
-     *
-     * @return ErrorInterface
-     */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ErrorInterface
     {
         return $this->items[$offset];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $offset === null ? $this->add($value) : $this->items[$offset] = $value;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->items[$offset]);
     }
@@ -114,11 +90,6 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         return $this->items;
     }
 
-    /**
-     * @param ErrorInterface $error
-     *
-     * @return self
-     */
     public function add(ErrorInterface $error): self
     {
         $this->items[] = $error;
@@ -127,17 +98,8 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param int|null|string $idx
+     * @param mixed           $meta
      */
     public function addDataError(
         string $title,
@@ -167,17 +129,8 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param int|null|string $idx
+     * @param mixed           $meta
      */
     public function addDataTypeError(
         string $title,
@@ -207,17 +160,8 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param int|null|string $idx
+     * @param mixed           $meta
      */
     public function addDataIdError(
         string $title,
@@ -247,17 +191,8 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param int|null|string $idx
+     * @param mixed           $meta
      */
     public function addAttributesError(
         string $title,
@@ -287,18 +222,9 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $name
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param string          $name
+     * @param int|null|string $idx
+     * @param mixed           $meta
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -331,17 +257,8 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param int|null|string $idx
+     * @param mixed           $meta
      */
     public function addRelationshipsError(
         string $title,
@@ -371,18 +288,9 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $name
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param string          $name
+     * @param int|null|string $idx
+     * @param mixed           $meta
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -415,18 +323,9 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $name
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param string          $name
+     * @param int|null|string $idx
+     * @param mixed           $meta
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -459,18 +358,9 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $name
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param string          $name
+     * @param int|null|string $idx
+     * @param mixed           $meta
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -503,18 +393,8 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string             $name
-     * @param string             $title
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param int|string|null    $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param int|null|string $idx
+     * @param mixed           $meta
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -539,18 +419,8 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /** @noinspection PhpTooManyParametersInspection
-     * @param string             $title
-     * @param string             $pointer
-     * @param string|null        $detail
-     * @param string|null        $status
-     * @param null               $idx
-     * @param LinkInterface|null $aboutLink
-     * @param iterable|null      $typeLinks
-     * @param string|null        $code
-     * @param bool               $hasMeta
-     * @param mixed              $meta
-     *
-     * @return self
+     * @param null  $idx
+     * @param mixed $meta
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -574,82 +444,47 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         return $this;
     }
 
-    /**
-     * @return string
-     */
     protected function getPathToData(): string
     {
         return '/' . DocumentInterface::KEYWORD_DATA;
     }
 
-    /**
-     * @return string
-     */
     protected function getPathToType(): string
     {
         return $this->getPathToData() . '/' . DocumentInterface::KEYWORD_TYPE;
     }
 
-    /**
-     * @return string
-     */
     protected function getPathToId(): string
     {
         return $this->getPathToData() . '/' . DocumentInterface::KEYWORD_ID;
     }
 
-    /**
-     * @return string
-     */
     protected function getPathToAttributes(): string
     {
         return $this->getPathToData() . '/' . DocumentInterface::KEYWORD_ATTRIBUTES;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
     protected function getPathToAttribute(string $name): string
     {
         return $this->getPathToData() . '/' . DocumentInterface::KEYWORD_ATTRIBUTES . '/' . $name;
     }
 
-    /**
-     * @return string
-     */
     protected function getPathToRelationships(): string
     {
         return $this->getPathToData() . '/' . DocumentInterface::KEYWORD_RELATIONSHIPS;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
     protected function getPathToRelationship(string $name): string
     {
         return $this->getPathToRelationships() . '/' . $name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
     protected function getPathToRelationshipType(string $name): string
     {
         return $this->getPathToRelationship($name) . '/' .
             DocumentInterface::KEYWORD_DATA . '/' . DocumentInterface::KEYWORD_TYPE;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
     protected function getPathToRelationshipId(string $name): string
     {
         return $this->getPathToRelationship($name) . '/' .

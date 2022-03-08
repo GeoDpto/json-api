@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Http\Query;
 
@@ -23,36 +25,16 @@ namespace Neomerx\JsonApi\Contract\Http\Query;
  */
 interface BaseQueryParserInterface
 {
-    /** Parameter name */
     public const PARAM_INCLUDE = 'include';
-
-    /** Parameter name */
     public const PARAM_FIELDS = 'fields';
-
-    /** Parameter name */
     public const PARAM_SORT = 'sort';
-
-    /** Parameter name */
     public const PARAM_PAGE = 'page';
-
-    /** Parameter name */
     public const PARAM_FILTER = 'filter';
-
-    /** Parameter name */
     public const PARAM_PROFILE = 'profile';
 
-    /**
-     * @return iterable
-     */
     public function getIncludes(): iterable;
 
-    /**
-     * @return iterable
-     */
     public function getFields(): iterable;
 
-    /**
-     * @return iterable
-     */
     public function getSorts(): iterable;
 }

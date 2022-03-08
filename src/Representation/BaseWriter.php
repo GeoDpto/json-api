@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Representation;
 
@@ -43,17 +45,11 @@ abstract class BaseWriter implements BaseWriterInterface
      */
     private $isDataAnArray;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->reset();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setDataAsArray(): BaseWriterInterface
     {
         \assert($this->isDataAnArray === false);
@@ -65,17 +61,11 @@ abstract class BaseWriter implements BaseWriterInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getDocument(): array
     {
         return $this->data;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setMeta($meta): BaseWriterInterface
     {
         \assert(\is_resource($meta) === false);
@@ -85,9 +75,6 @@ abstract class BaseWriter implements BaseWriterInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setJsonApiVersion(string $version): BaseWriterInterface
     {
         $this->data[DocumentInterface::KEYWORD_JSON_API][DocumentInterface::KEYWORD_VERSION] = $version;
@@ -95,9 +82,6 @@ abstract class BaseWriter implements BaseWriterInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setJsonApiMeta($meta): BaseWriterInterface
     {
         \assert(\is_resource($meta) === false);
@@ -107,9 +91,6 @@ abstract class BaseWriter implements BaseWriterInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setUrlPrefix(string $prefix): BaseWriterInterface
     {
         $this->urlPrefix = $prefix;
@@ -117,9 +98,6 @@ abstract class BaseWriter implements BaseWriterInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setLinks(iterable $links): BaseWriterInterface
     {
         $representation = $this->getLinksRepresentation(
@@ -134,9 +112,6 @@ abstract class BaseWriter implements BaseWriterInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setProfile(iterable $links): BaseWriterInterface
     {
         $representation = $this->getLinksListRepresentation(
@@ -151,9 +126,6 @@ abstract class BaseWriter implements BaseWriterInterface
         return $this;
     }
 
-    /**
-     * @return void
-     */
     protected function reset(): void
     {
         $this->data          = [];
@@ -161,20 +133,11 @@ abstract class BaseWriter implements BaseWriterInterface
         $this->isDataAnArray = false;
     }
 
-    /**
-     * @return string
-     */
     protected function getUrlPrefix(): string
     {
         return $this->urlPrefix;
     }
 
-    /**
-     * @param null|string $prefix
-     * @param iterable    $links
-     *
-     * @return array
-     */
     protected function getLinksRepresentation(?string $prefix, iterable $links): array
     {
         $result = [];
@@ -188,12 +151,6 @@ abstract class BaseWriter implements BaseWriterInterface
         return $result;
     }
 
-    /**
-     * @param null|string $prefix
-     * @param iterable    $links
-     *
-     * @return array
-     */
     protected function getLinksListRepresentation(?string $prefix, iterable $links): array
     {
         $result = [];
@@ -207,9 +164,6 @@ abstract class BaseWriter implements BaseWriterInterface
         return $result;
     }
 
-    /**
-     * @return bool
-     */
     protected function isDataAnArray(): bool
     {
         return $this->isDataAnArray;

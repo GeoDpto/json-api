@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Http;
 
@@ -28,22 +30,22 @@ interface ResponsesInterface
     /**
      * HTTP code constant.
      */
-    const HTTP_OK = 200;
+    public const HTTP_OK = 200;
 
     /**
      * HTTP code constant.
      */
-    const HTTP_CREATED = 201;
+    public const HTTP_CREATED = 201;
 
     /**
      * HTTP code constant.
      */
-    const HTTP_BAD_REQUEST = 400;
+    public const HTTP_BAD_REQUEST = 400;
 
     /**
      * Get response with regular JSON API Document in body.
      *
-     * @param object|array $data       Resource or resources to encode.
+     * @param array|object $data       Resource or resources to encode.
      * @param int          $statusCode HTTP status code.
      * @param array        $headers    Additional headers.
      *
@@ -86,7 +88,7 @@ interface ResponsesInterface
     /**
      * Get response with only resource identifiers.
      *
-     * @param object|array $data       Resource or resources to encode.
+     * @param array|object $data       Resource or resources to encode.
      * @param int          $statusCode HTTP status code.
      * @param array        $headers    Additional headers.
      *

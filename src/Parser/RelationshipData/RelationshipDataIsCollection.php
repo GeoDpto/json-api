@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Parser\RelationshipData;
 
@@ -47,13 +49,6 @@ class RelationshipDataIsCollection extends BaseRelationshipData implements Relat
      */
     private $parsedResources = null;
 
-    /**
-     * @param FactoryInterface         $factory
-     * @param SchemaContainerInterface $schemaContainer
-     * @param EditableContextInterface $context
-     * @param PositionInterface        $position
-     * @param iterable                 $resources
-     */
     public function __construct(
         FactoryInterface $factory,
         SchemaContainerInterface $schemaContainer,
@@ -66,65 +61,41 @@ class RelationshipDataIsCollection extends BaseRelationshipData implements Relat
         $this->resources = $resources;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isCollection(): bool
     {
         return true;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isNull(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isResource(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isIdentifier(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifier(): ParserIdentifierInterface
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getIdentifiers(): iterable
     {
         return $this->getResources();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getResource(): ResourceInterface
     {
         throw new LogicException(_(static::MSG_INVALID_OPERATION));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getResources(): iterable
     {
         if ($this->parsedResources === null) {

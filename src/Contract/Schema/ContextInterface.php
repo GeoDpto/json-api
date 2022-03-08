@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Contract\Schema;
 
@@ -25,22 +27,16 @@ interface ContextInterface
 {
     /**
      * Get filter field sets from encoder.
-     *
-     * @return array
      */
     public function getFieldSets(): array;
 
     /**
      * Get include paths from encoder.
-     *
-     * @return array
      */
     public function getIncludePaths(): array;
 
     /**
      * Get position for the parsed data.
-     *
-     * @return PositionInterface
      */
     public function getPosition(): PositionInterface;
 }

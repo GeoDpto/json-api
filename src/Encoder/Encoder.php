@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Neomerx\JsonApi\Encoder;
 
@@ -41,39 +43,24 @@ class Encoder implements EncoderInterface
 {
     use EncoderPropertiesTrait;
 
-    /**
-     * Default value.
-     */
-    const DEFAULT_URL_PREFIX = '';
-
-    /**
-     * Default value.
-     */
-    const DEFAULT_INCLUDE_PATHS = [];
-
-    /**
-     * Default value.
-     */
-    const DEFAULT_FIELD_SET_FILTERS = [];
+    public const DEFAULT_URL_PREFIX = '';
+    public const DEFAULT_INCLUDE_PATHS = [];
+    public const DEFAULT_FIELD_SET_FILTERS = [];
 
     /**
      * Default encode options.
      *
      * @link http://php.net/manual/en/function.json-encode.php
      */
-    const DEFAULT_JSON_ENCODE_OPTIONS = 0;
+    public const DEFAULT_JSON_ENCODE_OPTIONS = 0;
 
     /**
      * Default encode depth.
      *
      * @link http://php.net/manual/en/function.json-encode.php
      */
-    const DEFAULT_JSON_ENCODE_DEPTH = 512;
+    public const DEFAULT_JSON_ENCODE_DEPTH = 512;
 
-    /**
-     * @param FactoryInterface         $factory
-     * @param SchemaContainerInterface $container
-     */
     public function __construct(
         FactoryInterface $factory,
         SchemaContainerInterface $container
@@ -86,7 +73,6 @@ class Encoder implements EncoderInterface
      *
      * @param array $schemas Schema providers.
      *
-     * @return EncoderInterface
      */
     public static function instance(array $schemas = []): EncoderInterface
     {
@@ -97,9 +83,6 @@ class Encoder implements EncoderInterface
         return $encoder;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function encodeData($data): string
     {
         // encode to json
@@ -109,9 +92,6 @@ class Encoder implements EncoderInterface
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function encodeIdentifiers($data): string
     {
         // encode to json
@@ -121,9 +101,6 @@ class Encoder implements EncoderInterface
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function encodeError(ErrorInterface $error): string
     {
         // encode to json
@@ -133,9 +110,6 @@ class Encoder implements EncoderInterface
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function encodeErrors(iterable $errors): string
     {
         // encode to json
@@ -145,9 +119,6 @@ class Encoder implements EncoderInterface
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function encodeMeta($meta): string
     {
         // encode to json
@@ -157,18 +128,13 @@ class Encoder implements EncoderInterface
         return $result;
     }
 
-    /**
-     * @return FactoryInterface
-     */
     protected static function createFactory(): FactoryInterface
     {
         return new Factory();
     }
 
     /**
-     * @param object|iterable|null $data Data to encode.
-     *
-     * @return array
+     * @param iterable|null|object $data Data to encode.
      *
      * @SuppressWarnings(PHPMD.ElseExpression)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
@@ -220,9 +186,7 @@ class Encoder implements EncoderInterface
     }
 
     /**
-     * @param object|iterable|null $data Data to encode.
-     *
-     * @return array
+     * @param iterable|null|object $data Data to encode.
      *
      * @SuppressWarnings(PHPMD.ElseExpression)
      */
@@ -287,11 +251,6 @@ class Encoder implements EncoderInterface
         return $array;
     }
 
-    /**
-     * @param ErrorInterface $error
-     *
-     * @return array
-     */
     protected function encodeErrorToArray(ErrorInterface $error): array
     {
         $writer = $this->createErrorWriter();
@@ -310,11 +269,6 @@ class Encoder implements EncoderInterface
         return $array;
     }
 
-    /**
-     * @param iterable $errors
-     *
-     * @return array
-     */
     protected function encodeErrorsToArray(iterable $errors): array
     {
         $writer = $this->createErrorWriter();
@@ -338,9 +292,7 @@ class Encoder implements EncoderInterface
     }
 
     /**
-     * @param $meta
-     *
-     * @return array
+     * @param mixed $meta
      */
     protected function encodeMetaToArray($meta): array
     {
@@ -362,11 +314,6 @@ class Encoder implements EncoderInterface
         return $array;
     }
 
-    /**
-     * @param BaseWriterInterface $writer
-     *
-     * @return void
-     */
     protected function writeHeader(BaseWriterInterface $writer): void
     {
         if ($this->hasMeta() === true) {
@@ -390,31 +337,16 @@ class Encoder implements EncoderInterface
         }
     }
 
-    /**
-     * @param BaseWriterInterface $writer
-     *
-     * @return void
-     */
     protected function writeFooter(BaseWriterInterface $writer): void
     {
         \assert($writer !== null);
     }
 
-    /**
-     * Encode array to JSON.
-     *
-     * @param array $document
-     *
-     * @return string
-     */
     protected function encodeToJson(array $document): string
     {
         return \json_encode($document, $this->getEncodeOptions(), $this->getEncodeDepth());
     }
 
-    /**
-     * @return DocumentWriterInterface
-     */
     private function createDocumentWriter(): DocumentWriterInterface
     {
         $writer = $this->getFactory()->createDocumentWriter();
@@ -423,9 +355,6 @@ class Encoder implements EncoderInterface
         return $writer;
     }
 
-    /**
-     * @return ErrorWriterInterface
-     */
     private function createErrorWriter(): ErrorWriterInterface
     {
         $writer = $this->getFactory()->createErrorWriter();
