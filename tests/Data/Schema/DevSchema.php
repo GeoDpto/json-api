@@ -31,30 +31,12 @@ use function is_string;
  */
 abstract class DevSchema extends BaseSchema
 {
-    /**
-     * @var array
-     */
-    private $addToRelationship = [];
+    private array $addToRelationship = [];
+    private array $removeFromRelationship = [];
+    private array $relationshipToRemove = [];
+    private ?Closure $resourceLinksClosure = null;
 
-    /**
-     * @var array
-     */
-    private $removeFromRelationship = [];
-
-    /**
-     * @var array
-     */
-    private $relationshipToRemove = [];
-
-    /**
-     * @var Closure
-     */
-    private $resourceLinksClosure = null;
-
-    /**
-     * @inheritdoc
-     */
-    public function getLinks($resource): array
+    public function getLinks(object $resource): iterable
     {
         if (($linksClosure = $this->resourceLinksClosure) === null) {
             return parent::getLinks($resource);
@@ -63,70 +45,33 @@ abstract class DevSchema extends BaseSchema
         }
     }
 
-    /**
-     * @param Closure $linksClosure
-     *
-     * @return void
-     */
     public function setResourceLinksClosure(Closure $linksClosure): void
     {
         $this->resourceLinksClosure = $linksClosure;
     }
 
-    /**
-     * Add value to relationship description.
-     *
-     * @param string $name  Relationship name.
-     * @param int    $key   Description key.
-     * @param mixed  $value Value to add (might be array of links).
-     *
-     * @return void
-     */
-    public function addToRelationship(string $name, int $key, $value): void
+    public function addToRelationship(string $name, int $key, mixed $value): void
     {
         $this->addToRelationship[] = [$name, $key, $value];
     }
 
-    /**
-     * Remove from relationship description.
-     *
-     * @param string $name Relationship name.
-     * @param int    $key  Description key.
-     *
-     * @return void
-     */
     public function removeFromRelationship(string $name, int $key): void
     {
         $this->removeFromRelationship[] = [$name, $key];
     }
 
-    /**
-     * Remove entire relationship from description.
-     *
-     * @param string $name Relationship name.
-     *
-     * @return void
-     */
     public function removeRelationship(string $name): void
     {
-        assert(is_string($name));
         $this->relationshipToRemove[] = $name;
     }
 
-    /**
-     * @param mixed $resource
-     *
-     * @return string
-     */
-    public function getSelfSubUrl($resource): string
+    public function getSelfSubUrl(object $resource): string
     {
         return parent::getSelfSubUrl($resource);
     }
 
     /**
      * Hide `self` link in relationship.
-     *
-     * @param string $name
      */
     public function hideSelfLinkInRelationship(string $name): void
     {
@@ -135,11 +80,6 @@ abstract class DevSchema extends BaseSchema
 
     /**
      * Set custom `self` link in relationship.
-     *
-     * @param string        $name
-     * @param LinkInterface $link
-     *
-     * @return void
      */
     public function setSelfLinkInRelationship(string $name, LinkInterface $link): void
     {
@@ -148,8 +88,6 @@ abstract class DevSchema extends BaseSchema
 
     /**
      * Hide `related` link in relationship.
-     *
-     * @param string $name
      */
     public function hideRelatedLinkInRelationship(string $name): void
     {
@@ -158,20 +96,12 @@ abstract class DevSchema extends BaseSchema
 
     /**
      * Set custom `related` link in relationship.
-     *
-     * @param string        $name
-     * @param LinkInterface $link
-     *
-     * @return void
      */
     public function setRelatedLinkInRelationship(string $name, LinkInterface $link): void
     {
         $this->addToRelationship($name, AuthorSchema::RELATIONSHIP_LINKS_RELATED, $link);
     }
 
-    /**
-     * @param string $name
-     */
     public function hideDefaultLinksInRelationship(string $name): void
     {
         $this->hideSelfLinkInRelationship($name);
@@ -192,13 +122,8 @@ abstract class DevSchema extends BaseSchema
 
     /**
      * Add/remove values in input array.
-     *
-     * @param object $resource
-     * @param array  $descriptions
-     *
-     * @return array
      */
-    protected function fixDescriptions($resource, array $descriptions): array
+    protected function fixDescriptions(object $resource, array $descriptions): array
     {
         foreach ($this->addToRelationship as list($name, $key, $value)) {
             if ($key === self::RELATIONSHIP_LINKS) {

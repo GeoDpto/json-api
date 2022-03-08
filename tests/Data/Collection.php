@@ -27,47 +27,29 @@ use IteratorAggregate;
  */
 class Collection implements ArrayAccess, IteratorAggregate
 {
-    /**
-     * @var array
-     */
-    private $data = [];
+    private array $data = [];
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return array_key_exists($offset, $this->data);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): bool
     {
         return $this->data[$offset];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $offset === null ? $this->data[] = $value : $this->data[$offset] = $value;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->data[$offset]);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->data);
     }

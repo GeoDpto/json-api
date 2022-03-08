@@ -26,9 +26,6 @@ use Neomerx\JsonApi\Factory\Factory;
  */
 class CustomFactory extends Factory
 {
-    /**
-     * @inheritdoc
-     */
     public function createFieldSetFilter(array $fieldSets): FieldSetFilterInterface
     {
         return new CustomFieldsFilter($fieldSets);

@@ -21,13 +21,11 @@ namespace Neomerx\JsonApi\I18n;
  */
 
 /**
- * @param mixed ...$parameters
- *
  * @see Messages::compose
  *
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-function format(string $message, ...$parameters): string
+function format(string $message, mixed ...$parameters): string
 {
     return Messages::compose(...\array_merge([$message], $parameters));
 }

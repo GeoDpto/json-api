@@ -30,34 +30,21 @@ class Link implements LinkInterface
 {
     /**
      * If link contains sub-URL value and URL prefix should be added.
-     *
-     * @var bool
      */
-    private $isSubUrl;
+    private bool $isSubUrl;
 
     /**
      * Get link’s URL value (full URL or sub-URL).
-     *
-     * @var string
      */
-    private $value;
+    private string $value;
 
     /**
      * If link has meta information.
-     *
-     * @var bool
      */
-    private $hasMeta;
+    private bool $hasMeta;
+    private mixed $meta;
 
-    /**
-     * @var mixed
-     */
-    private $meta;
-
-    /**
-     * @param mixed $meta
-     */
-    public function __construct(bool $isSubUrl, string $value, bool $hasMeta, $meta = null)
+    public function __construct(bool $isSubUrl, string $value, bool $hasMeta, mixed $meta = null)
     {
         $this->isSubUrl = $isSubUrl;
         $this->value    = $value;

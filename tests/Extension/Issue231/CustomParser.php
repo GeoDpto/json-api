@@ -34,9 +34,7 @@ final class CustomParser extends Parser
      */
     private $cachedPathsResults = [];
 
-    /**
-     * @inheritdoc
-     */
+
     public function isPathRequested(string $path): bool
     {
         if (\array_key_exists($path, $this->cachedPathsResults) === true) {

@@ -28,30 +28,17 @@ use Neomerx\JsonApi\Exception\InvalidArgumentException;
  */
 class MediaType implements MediaTypeInterface
 {
-    /**
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @var string
-     */
-    private $subType;
-
-    /**
-     * @var string?
-     */
-    private $mediaType = null;
+    private string $type;
+    private string $subType;
+    private ?string $mediaType = null;
 
     /**
      * @var array<string,string>|null
      */
-    private $parameters;
+    private ?array $parameters;
 
     /**
      * A list of parameter names for case-insensitive compare. Keys must be lower-cased.
-     *
-     * @var array
      */
     protected const PARAMETER_NAMES = [
         'charset' => true,
@@ -60,7 +47,7 @@ class MediaType implements MediaTypeInterface
     /**
      * @param array<string,string>|null $parameters
      */
-    public function __construct(string $type, string $subType, array $parameters = null)
+    public function __construct(string $type, string $subType, ?array $parameters = null)
     {
         $type = \trim($type);
         if (empty($type) === true) {

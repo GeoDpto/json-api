@@ -47,9 +47,7 @@ class ErrorCollectionTest extends BaseTestCase
      */
     private $collection;
 
-    /**
-     * @inheritdoc
-     */
+
     protected function setUp(): void
     {
         parent::setUp();

@@ -32,17 +32,11 @@ interface BaseWriterInterface
      */
     public function setDataAsArray(): self;
 
-    /**
-     * @param mixed $meta
-     */
-    public function setMeta($meta): self;
+    public function setMeta(mixed $meta): self;
 
     public function setJsonApiVersion(string $version): self;
 
-    /**
-     * @param mixed $meta
-     */
-    public function setJsonApiMeta($meta): self;
+    public function setJsonApiMeta(mixed $meta): self;
 
     public function setUrlPrefix(string $prefix): self;
 

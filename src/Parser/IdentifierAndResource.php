@@ -41,65 +41,23 @@ class IdentifierAndResource implements ResourceInterface
     public const MSG_NO_SCHEMA_FOUND = 'No Schema found for resource `%s` at path `%s`.';
     public const MSG_INVALID_OPERATION = 'Invalid operation.';
 
-    /**
-     * @var EditableContextInterface
-     */
-    private $context;
+    private EditableContextInterface $context;
+    private PositionInterface $position;
+    private FactoryInterface $factory;
+    private SchemaContainerInterface $schemaContainer;
+    private SchemaInterface $schema;
+    private mixed $data;
+    private ?string $index;
+    private string $type;
+    private array $links = [];
+    private array $relationshipsCache = [];
 
-    /**
-     * @var PositionInterface
-     */
-    private $position;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
-
-    /**
-     * @var SchemaContainerInterface
-     */
-    private $schemaContainer;
-
-    /**
-     * @var SchemaInterface
-     */
-    private $schema;
-
-    /**
-     * @var mixed
-     */
-    private $data;
-
-    /**
-     * @var string
-     */
-    private $index;
-
-    /**
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @var array|null
-     */
-    private $links = null;
-
-    /**
-     * @var array|null
-     */
-    private $relationshipsCache = null;
-
-    /**
-     * @param mixed $data
-     */
     public function __construct(
         EditableContextInterface $context,
         PositionInterface $position,
         FactoryInterface $factory,
         SchemaContainerInterface $container,
-        $data
+        mixed $data,
     ) {
         \assert($position->getLevel() >= ParserInterface::ROOT_LEVEL);
 
@@ -135,7 +93,7 @@ class IdentifierAndResource implements ResourceInterface
         return $this->schema->hasIdentifierMeta($this->data);
     }
 
-    public function getIdentifierMeta()
+    public function getIdentifierMeta(): mixed
     {
         return $this->schema->getIdentifierMeta($this->data);
     }
@@ -152,7 +110,7 @@ class IdentifierAndResource implements ResourceInterface
      */
     public function getRelationships(): iterable
     {
-        if ($this->relationshipsCache !== null) {
+        if (\count($this->relationshipsCache) > 0) {
             yield from $this->relationshipsCache;
 
             return;
@@ -240,7 +198,7 @@ class IdentifierAndResource implements ResourceInterface
      */
     private function cacheLinks(): void
     {
-        if ($this->links === null) {
+        if (\count($this->links) === 0) {
             $this->links = [];
             foreach ($this->schema->getLinks($this->data) as $name => $link) {
                 \assert(\is_string($name) === true && empty($name) === false);

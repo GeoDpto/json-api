@@ -75,28 +75,13 @@ class Factory implements FactoryInterface
         int $level,
         string $path,
         ?string $parentType,
-        ?string $parentRelationship
+        ?string $parentRelationship,
     ): PositionInterface {
         return new class($level, $path, $parentType, $parentRelationship) implements PositionInterface {
-            /**
-             * @var int
-             */
-            private $level;
-
-            /**
-             * @var string
-             */
-            private $path;
-
-            /**
-             * @var null|string
-             */
-            private $parentType;
-
-            /**
-             * @var null|string
-             */
-            private $parentRelationship;
+            private int $level;
+            private string $path;
+            private ?string $parentType;
+            private ?string $parentRelationship;
 
             public function __construct(int $level, string $path, ?string $parentType, ?string $parentRelationship)
             {
@@ -154,29 +139,22 @@ class Factory implements FactoryInterface
         EditableContextInterface $context,
         PositionInterface $position,
         SchemaContainerInterface $container,
-        $data
+        mixed $data,
     ): ResourceInterface {
         return new IdentifierAndResource($context, $position, $this, $container, $data);
     }
 
     public function createParsedIdentifier(
         PositionInterface $position,
-        SchemaIdentifierInterface $identifier
+        SchemaIdentifierInterface $identifier,
     ): ParserIdentifierInterface {
         return new class($position, $identifier) implements ParserIdentifierInterface {
-            /**
-             * @var PositionInterface
-             */
-            private $position;
-
-            /**
-             * @var SchemaIdentifierInterface
-             */
-            private $identifier;
+            private PositionInterface $position;
+            private SchemaIdentifierInterface $identifier;
 
             public function __construct(
                 PositionInterface $position,
-                SchemaIdentifierInterface $identifier
+                SchemaIdentifierInterface $identifier,
             ) {
                 $this->position   = $position;
                 $this->identifier = $identifier;
@@ -200,7 +178,7 @@ class Factory implements FactoryInterface
                 return $this->identifier->hasIdentifierMeta();
             }
 
-            public function getIdentifierMeta()
+            public function getIdentifierMeta(): mixed
             {
                 return $this->identifier->getIdentifierMeta();
             }
@@ -228,53 +206,19 @@ class Factory implements FactoryInterface
         bool $hasLinks,
         ?iterable $links,
         bool $hasMeta,
-        $meta
+        mixed $meta,
     ): RelationshipInterface {
         return
             new class($position, $hasData, $data, $hasLinks, $links, $hasMeta, $meta) implements RelationshipInterface {
-                /**
-                 * @var PositionInterface
-                 */
-                private $position;
+                private PositionInterface $position;
+                private bool $hasData;
+                private ?RelationshipDataInterface $data;
+                private bool $hasLinks;
+                private ?iterable $links;
+                private bool $hasMeta;
+                private mixed $meta;
+                private bool $metaIsCallable;
 
-                /**
-                 * @var bool
-                 */
-                private $hasData;
-
-                /**
-                 * @var ?RelationshipDataInterface
-                 */
-                private $data;
-
-                /**
-                 * @var bool
-                 */
-                private $hasLinks;
-
-                /**
-                 * @var ?iterable
-                 */
-                private $links;
-
-                /**
-                 * @var bool
-                 */
-                private $hasMeta;
-
-                /**
-                 * @var mixed
-                 */
-                private $meta;
-
-                /**
-                 * @var bool
-                 */
-                private $metaIsCallable;
-
-                /**
-                 * @param mixed $meta
-                 */
                 public function __construct(
                     PositionInterface $position,
                     bool $hasData,
@@ -282,7 +226,7 @@ class Factory implements FactoryInterface
                     bool $hasLinks,
                     ?iterable $links,
                     bool $hasMeta,
-                    $meta
+                    mixed $meta,
                 ) {
                     \assert($position->getLevel() > ParserInterface::ROOT_LEVEL);
                     \assert(empty($position->getPath()) === false);
@@ -351,7 +295,7 @@ class Factory implements FactoryInterface
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
         PositionInterface $position,
-        $resource
+        object $resource,
     ): RelationshipDataInterface {
         return new RelationshipDataIsResource($this, $schemaContainer, $context, $position, $resource);
     }
@@ -360,7 +304,7 @@ class Factory implements FactoryInterface
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
         PositionInterface $position,
-        SchemaIdentifierInterface $identifier
+        SchemaIdentifierInterface $identifier,
     ): RelationshipDataInterface {
         return new RelationshipDataIsIdentifier($this, $schemaContainer, $context, $position, $identifier);
     }
@@ -369,7 +313,7 @@ class Factory implements FactoryInterface
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
         PositionInterface $position,
-        iterable $resources
+        iterable $resources,
     ): RelationshipDataInterface {
         return new RelationshipDataIsCollection($this, $schemaContainer, $context, $position, $resources);
     }
@@ -389,7 +333,7 @@ class Factory implements FactoryInterface
         string $type,
         string $subType,
         array $parameters = null,
-        float $quality = 1.0
+        float $quality = 1.0,
     ): AcceptMediaTypeInterface {
         return new AcceptMediaType($position, $type, $subType, $parameters, $quality);
     }
@@ -400,20 +344,9 @@ class Factory implements FactoryInterface
     public function createParserContext(array $fieldSets, array $includePaths): EditableContextInterface
     {
         return new class($fieldSets, $includePaths) implements EditableContextInterface {
-            /**
-             * @var array
-             */
-            private $fieldSets;
-
-            /**
-             * @var array
-             */
-            private $includePaths;
-
-            /**
-             * @var null|PositionInterface
-             */
-            private $position = null;
+            private array $fieldSets;
+            private array $includePaths;
+            private ?PositionInterface $position = null;
 
             public function __construct(array $fieldSets, array $includePaths)
             {

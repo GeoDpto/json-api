@@ -27,32 +27,15 @@ use Neomerx\JsonApi\Contract\Schema\IdentifierInterface;
  */
 class Identifier implements IdentifierInterface
 {
-    /**
-     * @var string
-     */
-    private $index;
+    private String $index;
+    private string $type;
+    private bool $hasMeta;
+    private mixed $meta;
 
     /**
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @var bool
-     */
-    private $hasMeta;
-
-    /**
-     * @var mixed
-     */
-    private $meta;
-
-    /**
-     * @param mixed $meta
-     *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    public function __construct(string $index, string $type, bool $hasMeta = false, $meta = null)
+    public function __construct(string $index, string $type, bool $hasMeta = false, mixed $meta = null)
     {
         $this->setId($index);
         $this->setType($type);
@@ -90,15 +73,12 @@ class Identifier implements IdentifierInterface
         return $this->hasMeta;
     }
 
-    public function getIdentifierMeta()
+    public function getIdentifierMeta(): mixed
     {
         return $this->meta;
     }
 
-    /**
-     * @param mixed $meta
-     */
-    public function setIdentifierMeta($meta): self
+    public function setIdentifierMeta(mixed $meta): self
     {
         $this->meta    = $meta;
         $this->hasMeta = true;

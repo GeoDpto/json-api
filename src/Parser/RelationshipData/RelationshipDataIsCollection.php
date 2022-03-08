@@ -36,25 +36,17 @@ use function Neomerx\JsonApi\I18n\format as _;
  */
 class RelationshipDataIsCollection extends BaseRelationshipData implements RelationshipDataInterface
 {
-    /** @var string */
     public const MSG_INVALID_OPERATION = 'Invalid operation.';
 
-    /**
-     * @var iterable
-     */
-    private $resources;
-
-    /**
-     * @var iterable
-     */
-    private $parsedResources = null;
+    private iterable $resources;
+    private ?iterable $parsedResources = null;
 
     public function __construct(
         FactoryInterface $factory,
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
         PositionInterface $position,
-        iterable $resources
+        iterable $resources,
     ) {
         parent::__construct($factory, $schemaContainer, $context, $position);
 

@@ -69,24 +69,20 @@ interface FactoryInterface
 
     /**
      * Create parsed resource over raw resource data.
-     *
-     * @param mixed $data
-     *
      */
     public function createParsedResource(
         EditableContextInterface $context,
         PositionInterface $position,
         SchemaContainerInterface $container,
-        $data
+        mixed $data,
     ): ResourceInterface;
 
     /**
      * Create parsed identifier over raw resource identifier.
-     *
      */
     public function createParsedIdentifier(
         PositionInterface $position,
-        SchemaIdentifierInterface $identifier
+        SchemaIdentifierInterface $identifier,
     ): ParserIdentifierInterface;
 
     /**
@@ -96,15 +92,11 @@ interface FactoryInterface
      * @param string $value    Either full URL or sub-URL.
      * @param bool   $hasMeta  If links has meta information.
      * @param null   $meta     Value for meta.
-     *
      */
-    public function createLink(bool $isSubUrl, string $value, bool $hasMeta, $meta = null): LinkInterface;
+    public function createLink(bool $isSubUrl, string $value, bool $hasMeta, mixed $meta = null): LinkInterface;
 
     /**
      * Create parsed relationship.
-     *
-     * @param mixed $meta
-     *
      */
     public function createRelationship(
         PositionInterface $position,
@@ -113,20 +105,17 @@ interface FactoryInterface
         bool $hasLinks,
         ?iterable $links,
         bool $hasMeta,
-        $meta
+        mixed $meta,
     ): RelationshipInterface;
 
     /**
      * Create relationship that represents resource.
-     *
-     * @param mixed $resource
-     *
      */
     public function createRelationshipDataIsResource(
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
         PositionInterface $position,
-        $resource
+        object $resource,
     ): RelationshipDataInterface;
 
     /**
@@ -136,7 +125,7 @@ interface FactoryInterface
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
         PositionInterface $position,
-        SchemaIdentifierInterface $identifier
+        SchemaIdentifierInterface $identifier,
     ): RelationshipDataInterface;
 
     /**
@@ -146,7 +135,7 @@ interface FactoryInterface
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
         PositionInterface $position,
-        iterable $resources
+        iterable $resources,
     ): RelationshipDataInterface;
 
     /**

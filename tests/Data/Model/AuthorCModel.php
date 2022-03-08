@@ -27,24 +27,13 @@ use IteratorAggregate;
  */
 class AuthorCModel implements ArrayAccess, IteratorAggregate
 {
-    const ATTRIBUTE_ID = 'author_id';
-    const ATTRIBUTE_FIRST_NAME = 'first_name';
-    const ATTRIBUTE_LAST_NAME = 'last_name';
-    const LINK_COMMENTS = 'comments';
+    public const ATTRIBUTE_ID = 'author_id';
+    public const ATTRIBUTE_FIRST_NAME = 'first_name';
+    public const ATTRIBUTE_LAST_NAME = 'last_name';
+    public const LINK_COMMENTS = 'comments';
 
-    /**
-     * Resource properties.
-     *
-     * @var array
-     */
-    private $properties = [];
+    private array $properties = [];
 
-    /**
-     * @param int        $identity
-     * @param string     $firstName
-     * @param string     $lastName
-     * @param array|null $comments
-     */
     public function __construct(int $identity, string $firstName, string $lastName, array $comments = null)
     {
         $this[self::ATTRIBUTE_ID]         = $identity;
@@ -56,42 +45,27 @@ class AuthorCModel implements ArrayAccess, IteratorAggregate
         }
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->properties);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return array_key_exists($offset, $this->properties);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->properties[$offset];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->properties[$offset] = $value;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->properties[$offset]);
     }

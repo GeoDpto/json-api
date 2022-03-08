@@ -37,7 +37,6 @@ interface FieldSetFilterInterface
      * Get resource's filtered relationships.
      *
      * @see RelationshipInterface
-     *
      */
     public function getRelationships(ResourceInterface $resource): iterable;
 
@@ -47,8 +46,6 @@ interface FieldSetFilterInterface
      * returned along with the leaf nodes.
      *
      * This method answers if specific relationship passes field set filters and should be in output.
-     *
-     *
      */
     public function shouldOutputRelationship(PositionInterface $position): bool;
 }

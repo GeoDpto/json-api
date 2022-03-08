@@ -25,19 +25,12 @@ namespace Neomerx\JsonApi\Contract\Schema;
  */
 interface BaseLinkInterface
 {
-    /** Reserved keyword */
     public const SELF = DocumentInterface::KEYWORD_SELF;
-    /** Reserved keyword */
     public const RELATED = DocumentInterface::KEYWORD_RELATED;
-    /** Reserved keyword */
     public const FIRST = DocumentInterface::KEYWORD_FIRST;
-    /** Reserved keyword */
     public const LAST = DocumentInterface::KEYWORD_LAST;
-    /** Reserved keyword */
     public const NEXT = DocumentInterface::KEYWORD_NEXT;
-    /** Reserved keyword */
     public const PREV = DocumentInterface::KEYWORD_PREV;
-    /** Reserved keyword */
     public const ABOUT = 'about';
 
     /**

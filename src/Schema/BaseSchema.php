@@ -31,15 +31,8 @@ use Neomerx\JsonApi\Exception\LogicException;
  */
 abstract class BaseSchema implements SchemaInterface
 {
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
-
-    /**
-     * @var null|string
-     */
-    private $subUrl = null;
+    private FactoryInterface $factory;
+    private ?string $subUrl = null;
 
     public function __construct(FactoryInterface $factory)
     {
@@ -51,16 +44,14 @@ abstract class BaseSchema implements SchemaInterface
         return $this->factory->createLink(true, $this->getSelfSubUrl($resource), false);
     }
 
-    public function getLinks($resource): iterable
+    public function getLinks(object $resource): iterable
     {
-        $links = [
+        return [
             LinkInterface::SELF => $this->getSelfLink($resource),
         ];
-
-        return $links;
     }
 
-    public function getRelationshipSelfLink($resource, string $name): LinkInterface
+    public function getRelationshipSelfLink(object $resource, string $name): LinkInterface
     {
         // Feel free to override this method to change default URL or add meta
 
@@ -69,7 +60,7 @@ abstract class BaseSchema implements SchemaInterface
         return $this->factory->createLink(true, $url, false);
     }
 
-    public function getRelationshipRelatedLink($resource, string $name): LinkInterface
+    public function getRelationshipRelatedLink(object $resource, string $name): LinkInterface
     {
         // Feel free to override this method to change default URL or add meta
 
@@ -78,29 +69,23 @@ abstract class BaseSchema implements SchemaInterface
         return $this->factory->createLink(true, $url, false);
     }
 
-    public function hasIdentifierMeta($resource): bool
+    public function hasIdentifierMeta(object $resource): bool
     {
         return false;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIdentifierMeta($resource)
+    public function getIdentifierMeta(object $resource): mixed
     {
         // default schema does not provide any meta
         throw new LogicException();
     }
 
-    public function hasResourceMeta($resource): bool
+    public function hasResourceMeta(object $resource): bool
     {
         return false;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getResourceMeta($resource)
+    public function getResourceMeta(object $resource): mixed
     {
         // default schema does not provide any meta
         throw new LogicException();
@@ -130,10 +115,7 @@ abstract class BaseSchema implements SchemaInterface
         return $this->subUrl;
     }
 
-    /**
-     * @param mixed $resource
-     */
-    protected function getSelfSubUrl($resource): string
+    protected function getSelfSubUrl(object $resource): string
     {
         return $this->getResourcesSubUrl() . '/' . $this->getId($resource);
     }

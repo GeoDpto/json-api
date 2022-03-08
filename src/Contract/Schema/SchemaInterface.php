@@ -45,94 +45,63 @@ interface SchemaInterface
     /**
      * Get resource identity. Newly created objects without ID may return `null` to exclude it from encoder output.
      *
-     * @param object $resource
-     *
      */
-    public function getId($resource): ?string;
+    public function getId(object $resource): ?string;
 
     /**
      * Get resource attributes.
      *
-     * @param mixed $resource
-     *
      */
-    public function getAttributes($resource, ContextInterface $context): iterable;
+    public function getAttributes(object $resource, ContextInterface $context): array;
 
     /**
      * Get resource relationship descriptions.
      *
-     * @param mixed $resource
-     *
      */
-    public function getRelationships($resource, ContextInterface $context): iterable;
+    public function getRelationships(object $resource, ContextInterface $context): array;
 
     /**
      * Get resource sub URL.
-     *
-     * @param mixed $resource
-     *
      */
-    public function getSelfLink($resource): LinkInterface;
+    public function getSelfLink(object $resource): LinkInterface;
 
     /**
      * Get resource links.
      *
-     * @param mixed $resource
-     *
      * @see LinkInterface
-     *
      */
-    public function getLinks($resource): iterable;
+    public function getLinks(object $resource): iterable;
 
     /**
      * Get 'self' URL link to resource relationship.
-     *
-     * @param mixed $resource
-     *
      */
-    public function getRelationshipSelfLink($resource, string $name): LinkInterface;
+    public function getRelationshipSelfLink(object $resource, string $name): LinkInterface;
 
     /**
      * Get 'related' URL link to resource relationship.
-     *
-     * @param mixed $resource
-     *
      */
-    public function getRelationshipRelatedLink($resource, string $name): LinkInterface;
+    public function getRelationshipRelatedLink(object $resource, string $name): LinkInterface;
 
     /**
      * If resource has meta when it is considered as a resource identifier (e.g. in a relationship).
      *
-     * @param mixed $resource
-     *
      */
-    public function hasIdentifierMeta($resource): bool;
+    public function hasIdentifierMeta(object $resource): bool;
 
     /**
      * Get resource meta when it is considered as a resource identifier (e.g. in a relationship).
-     *
-     * @param mixed $resource
-     *
-     * @return mixed
      */
-    public function getIdentifierMeta($resource);
+    public function getIdentifierMeta(object $resource): mixed;
 
     /**
      * If resource has meta when it is considered as a resource (e.g. in a main data or included sections).
-     *
-     * @param mixed $resource
-     *
      */
-    public function hasResourceMeta($resource): bool;
+    public function hasResourceMeta(object $resource): bool;
 
     /**
      * Get resource meta when it is considered as a resource (e.g. in a main data or included sections).
-     *
-     * @param mixed $resource
-     *
-     * @return mixed
      */
-    public function getResourceMeta($resource);
+    public function getResourceMeta(object $resource): mixed;
 
     /**
      * If `self` links should be added in relationships by default.

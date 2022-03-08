@@ -31,7 +31,6 @@ use function Neomerx\JsonApi\I18n\format as _;
  */
 class RelationshipDataIsNull implements RelationshipDataInterface
 {
-    /** @var string */
     public const MSG_INVALID_OPERATION = 'Invalid operation.';
 
     public function isCollection(): bool

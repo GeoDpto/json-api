@@ -29,14 +29,8 @@ use Neomerx\JsonApi\Contract\Schema\PositionInterface;
  */
 class FieldSetFilter implements FieldSetFilterInterface
 {
-    /**
-     * @var array
-     */
-    private $fieldSets;
+    private array $fieldSets;
 
-    /**
-     * @param array|null $fieldSets
-     */
     public function __construct(array $fieldSets)
     {
         $this->fieldSets = [];

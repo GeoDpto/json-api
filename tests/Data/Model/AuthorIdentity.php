@@ -25,9 +25,6 @@ use Neomerx\JsonApi\Schema\Identifier;
  */
 class AuthorIdentity extends Identifier
 {
-    /**
-     * @param string $index
-     */
     public function __construct(string $index)
     {
         parent::__construct($index, 'people');

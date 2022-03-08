@@ -31,66 +31,24 @@ use Neomerx\JsonApi\Contract\Schema\LinkInterface;
  */
 class Error implements ErrorInterface
 {
-    /**
-     * @var int|null|string
-     */
-    private $index;
+    private ?string $index;
+    private ?iterable $links = null;
+    private ?iterable $typeLinks = null;
+    private ?string $status = null;
+    private ?string $code = null;
+    private ?string $title = null;
+    private ?string $detail = null;
+    private array $source = [];
+    private bool $hasMeta;
+    private mixed $meta;
 
     /**
-     * @var iterable|null
-     */
-    private $links;
-
-    /**
-     * @var iterable|null
-     */
-    private $typeLinks;
-
-    /**
-     * @var null|string
-     */
-    private $status;
-
-    /**
-     * @var null|string
-     */
-    private $code;
-
-    /**
-     * @var null|string
-     */
-    private $title;
-
-    /**
-     * @var null|string
-     */
-    private $detail;
-
-    /**
-     * @var array|null
-     */
-    private $source;
-
-    /**
-     * @var bool
-     */
-    private $hasMeta;
-
-    /**
-     * @var mixed
-     */
-    private $meta;
-
-    /**
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      * @SuppressWarnings(PHPMD.IfStatementAssignment)
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        $idx = null,
+        ?string $idx = null,
         LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $status = null,
@@ -99,7 +57,7 @@ class Error implements ErrorInterface
         string $detail = null,
         array $source = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null,
     ) {
         $this
             ->setId($idx)
@@ -109,25 +67,20 @@ class Error implements ErrorInterface
             ->setCode($code)
             ->setTitle($title)
             ->setDetail($detail)
-            ->setSource($source);
+            ->setSource($source ?? []);
 
         if (($this->hasMeta = $hasMeta) === true) {
             $this->setMeta($meta);
         }
     }
 
-    public function getId()
+    public function getId(): ?string
     {
         return $this->index;
     }
 
-    /**
-     * @param int|null|string $index
-     */
-    public function setId($index): self
+    public function setId(?string $index): self
     {
-        \assert($index === null || \is_int($index) === true || \is_string($index) === true);
-
         $this->index = $index;
 
         return $this;
@@ -229,15 +182,12 @@ class Error implements ErrorInterface
         return $this->hasMeta;
     }
 
-    public function getMeta()
+    public function getMeta(): mixed
     {
         return $this->meta;
     }
 
-    /**
-     * @param mixed|null $meta
-     */
-    public function setMeta($meta): self
+    public function setMeta(mixed $meta): self
     {
         $this->hasMeta = true;
         $this->meta    = $meta;

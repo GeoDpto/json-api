@@ -26,9 +26,6 @@ use Neomerx\JsonApi\Encoder\Encoder;
  */
 class CustomEncoder extends Encoder
 {
-    /**
-     * @return FactoryInterface
-     */
     protected static function createFactory(): FactoryInterface
     {
         return new CustomFactory();

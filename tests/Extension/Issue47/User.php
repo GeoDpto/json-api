@@ -23,28 +23,10 @@ namespace Neomerx\Tests\JsonApi\Extension\Issue47;
  */
 class User
 {
-    /**
-     * @var string
-     */
-    public $identity;
+    public string $identity;
+    public string $name;
+    public array $contactDetails;
 
-    /**
-     * @var string
-     */
-    public $name;
-
-    /**
-     * @var array
-     */
-    public $contactDetails;
-
-    /**
-     * User constructor.
-     *
-     * @param string $identity
-     * @param string $name
-     * @param array  $contactDetails
-     */
     public function __construct(string $identity, string $name, array $contactDetails)
     {
         $this->identity       = $identity;

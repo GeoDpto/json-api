@@ -31,80 +31,23 @@ use Traversable;
  */
 trait EncoderPropertiesTrait
 {
-    /**
-     * @var SchemaContainerInterface
-     */
-    private $container;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
-
-    /**
-     * @var string
-     */
-    private $urlPrefix;
-
-    /**
-     * @var array
-     */
-    private $includePaths;
-
-    /**
-     * @var array
-     */
-    private $fieldSets;
-
-    /**
-     * @var int
-     */
-    private $encodeOptions;
-
-    /**
-     * @var int
-     */
-    private $encodeDepth;
-
-    /**
-     * @var iterable
-     */
-    private $links;
-
-    /**
-     * @var iterable
-     */
-    private $profile;
-
-    /**
-     * @var bool
-     */
-    private $hasMeta;
-
-    /**
-     * @var mixed
-     */
-    private $meta;
-
-    /**
-     * @var null|string
-     */
-    private $jsonApiVersion;
-
-    /**
-     * @var mixed
-     */
-    private $jsonApiMeta;
-
-    /**
-     * @var bool
-     */
-    private $hasJsonApiMeta;
+    private SchemaContainerInterface $container;
+    private FactoryInterface $factory;
+    private string $urlPrefix;
+    private array $includePaths;
+    private array $fieldSets;
+    private int $encodeOptions;
+    private int $encodeDepth;
+    private ?iterable $links = null;
+    private ?iterable $profile = null;
+    private bool $hasMeta;
+    private mixed $meta;
+    private ?string $jsonApiVersion = null;
+    private mixed $jsonApiMeta;
+    private bool $hasJsonApiMeta;
 
     /**
      * Reset to initial state.
-     *
-     * @return EncoderInterface|self
      */
     public function reset(
         string $urlPrefix = Encoder::DEFAULT_URL_PREFIX,
@@ -112,7 +55,7 @@ trait EncoderPropertiesTrait
         array $fieldSets = Encoder::DEFAULT_FIELD_SET_FILTERS,
         int $encodeOptions = Encoder::DEFAULT_JSON_ENCODE_OPTIONS,
         int $encodeDepth = Encoder::DEFAULT_JSON_ENCODE_DEPTH
-    ): EncoderInterface {
+    ): static {
         $this->links          = null;
         $this->profile        = null;
         $this->hasMeta        = false;
@@ -155,10 +98,7 @@ trait EncoderPropertiesTrait
         return $this;
     }
 
-    /**
-     * @return EncoderInterface|self
-     */
-    public function withUrlPrefix(string $prefix): EncoderInterface
+    public function withUrlPrefix(string $prefix): static
     {
         $this->urlPrefix = $prefix;
 
@@ -170,10 +110,7 @@ trait EncoderPropertiesTrait
         return $this->urlPrefix;
     }
 
-    /**
-     * @return EncoderInterface|self
-     */
-    public function withIncludedPaths(iterable $paths): EncoderInterface
+    public function withIncludedPaths(iterable $paths): static
     {
         $paths = $this->iterableToArray($paths);
 
@@ -201,10 +138,7 @@ trait EncoderPropertiesTrait
         return $this->includePaths;
     }
 
-    /**
-     * @return EncoderInterface|self
-     */
-    public function withFieldSets(array $fieldSets): EncoderInterface
+    public function withFieldSets(array $fieldSets): static
     {
         $this->fieldSets = $fieldSets;
 
@@ -216,10 +150,7 @@ trait EncoderPropertiesTrait
         return $this->fieldSets;
     }
 
-    /**
-     * @return EncoderInterface|self
-     */
-    public function withEncodeOptions(int $options): EncoderInterface
+    public function withEncodeOptions(int $options): static
     {
         $this->encodeOptions = $options;
 
@@ -231,10 +162,7 @@ trait EncoderPropertiesTrait
         return $this->encodeOptions;
     }
 
-    /**
-     * @return EncoderInterface|self
-     */
-    public function withEncodeDepth(int $depth): EncoderInterface
+    public function withEncodeDepth(int $depth): static
     {
         \assert($depth > 0);
 
@@ -248,10 +176,7 @@ trait EncoderPropertiesTrait
         return $this->encodeDepth;
     }
 
-    /**
-     * @return EncoderInterface|self
-     */
-    public function withLinks(iterable $links): EncoderInterface
+    public function withLinks(iterable $links): static
     {
         $this->links = $this->hasLinks() === false ?
             $links :
@@ -273,10 +198,7 @@ trait EncoderPropertiesTrait
         return $this->links;
     }
 
-    /**
-     * @return EncoderInterface|self
-     */
-    public function withProfile(iterable $links): EncoderInterface
+    public function withProfile(iterable $links): static
     {
         $this->profile = $links;
 
@@ -293,12 +215,7 @@ trait EncoderPropertiesTrait
         return $this->profile;
     }
 
-    /**
-     * @param mixed $meta
-     *
-     * @return EncoderInterface|self
-     */
-    public function withMeta($meta): EncoderInterface
+    public function withMeta(mixed $meta): static
     {
         $this->meta    = $meta;
         $this->hasMeta = true;
@@ -311,18 +228,12 @@ trait EncoderPropertiesTrait
         return $this->hasMeta;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMeta()
+    public function getMeta(): mixed
     {
         return $this->meta;
     }
 
-    /**
-     * @return EncoderInterface|self
-     */
-    public function withJsonApiVersion(string $version): EncoderInterface
+    public function withJsonApiVersion(string $version): static
     {
         $this->jsonApiVersion = $version;
 
@@ -339,12 +250,7 @@ trait EncoderPropertiesTrait
         return $this->jsonApiVersion;
     }
 
-    /**
-     * @param mixed $meta
-     *
-     * @return EncoderInterface|self
-     */
-    public function withJsonApiMeta($meta): EncoderInterface
+    public function withJsonApiMeta(mixed $meta): static
     {
         $this->jsonApiMeta    = $meta;
         $this->hasJsonApiMeta = true;
@@ -357,20 +263,12 @@ trait EncoderPropertiesTrait
         return $this->hasJsonApiMeta;
     }
 
-    /**
-     * @return mixed
-     */
-    protected function getJsonApiMeta()
+    protected function getJsonApiMeta(): mixed
     {
         return $this->jsonApiMeta;
     }
 
-    /**
-     * @param mixed $resource
-     *
-     * @return EncoderInterface|self
-     */
-    public function withRelationshipSelfLink($resource, string $relationshipName): EncoderInterface
+    public function withRelationshipSelfLink(object $resource, string $relationshipName): static
     {
         $link = $this
             ->getSchemaContainer()->getSchema($resource)
@@ -381,12 +279,7 @@ trait EncoderPropertiesTrait
         ]);
     }
 
-    /**
-     * @param mixed $resource
-     *
-     * @return EncoderInterface|self
-     */
-    public function withRelationshipRelatedLink($resource, string $relationshipName): EncoderInterface
+    public function withRelationshipRelatedLink(object $resource, string $relationshipName): static
     {
         $link = $this
             ->getSchemaContainer()->getSchema($resource)
@@ -397,9 +290,8 @@ trait EncoderPropertiesTrait
         ]);
     }
 
-    private function iterableToArray(iterable $value): array
+    private function iterableToArray(array|Traversable $value): array
     {
-        /** @var array|Traversable $value */
         return \is_array($value) === true ? $value : \iterator_to_array($value);
     }
 }

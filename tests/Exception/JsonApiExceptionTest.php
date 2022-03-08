@@ -28,19 +28,9 @@ use Neomerx\Tests\JsonApi\BaseTestCase;
  */
 class JsonApiExceptionTest extends BaseTestCase
 {
-    /**
-     * @var ErrorCollection
-     */
-    private $collection;
+    private ErrorCollection $collection;
+    private Error $error;
 
-    /**
-     * @var Error
-     */
-    private $error;
-
-    /**
-     * @inheritdoc
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -49,9 +39,6 @@ class JsonApiExceptionTest extends BaseTestCase
         $this->error      = new Error('some-id', null, null, '404', 'some-code', 'some title', 'some details');
     }
 
-    /**
-     * @inheritdoc
-     */
     public function testCreateExceptionFromError(): void
     {
         $exception = new JsonApiException($this->error, 432);
@@ -60,9 +47,7 @@ class JsonApiExceptionTest extends BaseTestCase
         $this->assertEquals([$this->error], $exception->getErrors()->getArrayCopy());
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function testCreateExceptionFromErrorArray(): void
     {
         $exception = new JsonApiException([$this->error]);
@@ -71,9 +56,7 @@ class JsonApiExceptionTest extends BaseTestCase
         $this->assertEquals([$this->error], $exception->getErrors()->getArrayCopy());
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function testCreateExceptionFromErrorCollection(): void
     {
         $this->collection->add($this->error);

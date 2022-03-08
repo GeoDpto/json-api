@@ -31,9 +31,6 @@ use Neomerx\Tests\JsonApi\BaseTestCase;
  */
 class EncodeErrorsTest extends BaseTestCase
 {
-    /**
-     * Test encode error.
-     */
     public function testEncodeError(): void
     {
         $error   = $this->getError();

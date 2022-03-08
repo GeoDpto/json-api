@@ -31,8 +31,5 @@ interface IdentifierInterface
 
     public function hasIdentifierMeta(): bool;
 
-    /**
-     * @return mixed
-     */
-    public function getIdentifierMeta();
+    public function getIdentifierMeta(): mixed;
 }

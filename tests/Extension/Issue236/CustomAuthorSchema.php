@@ -26,17 +26,13 @@ use Neomerx\Tests\JsonApi\Data\Model\Author;
  */
 final class CustomAuthorSchema extends BaseCustomSchema
 {
-    /**
-     * @inheritdoc
-     */
+
     public function getType(): string
     {
         return 'people';
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function getId($resource): ?string
     {
         \assert($resource instanceof Author);
@@ -44,10 +40,8 @@ final class CustomAuthorSchema extends BaseCustomSchema
         return (string)$resource->{Author::ATTRIBUTE_ID};
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAttributes($resource, ContextInterface $context): iterable
+
+    public function getAttributes(object $resource, ContextInterface $context): array
     {
         \assert($resource instanceof Author);
 
@@ -57,9 +51,7 @@ final class CustomAuthorSchema extends BaseCustomSchema
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function getNonHorrificRelationships($resource, string $currentPath): iterable
     {
         \assert($resource instanceof Author);

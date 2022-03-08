@@ -26,41 +26,33 @@ use Neomerx\JsonApi\Schema\BaseSchema;
  */
 class UserBaseSchema extends BaseSchema
 {
-    /**
-     * @inheritdoc
-     */
+
     public function getType(): string
     {
         return 'users';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getId($user): ?string
-    {
-        assert($user instanceof User);
 
-        return $user->identity;
+    public function getId(object $resource): ?string
+    {
+        assert($resource instanceof User);
+
+        return $resource->identity;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAttributes($user, ContextInterface $context): iterable
+
+    public function getAttributes(object $resource, ContextInterface $context): array
     {
-        assert($user instanceof User);
+        assert($resource instanceof User);
 
         return [
-            'username' => $user->name,
-            'private'  => $user->contactDetails,
+            'username' => $resource->name,
+            'private'  => $resource->contactDetails,
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRelationships($resource, ContextInterface $context): iterable
+
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
         return [];
     }

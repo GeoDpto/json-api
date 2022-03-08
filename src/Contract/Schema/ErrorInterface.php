@@ -25,28 +25,18 @@ namespace Neomerx\JsonApi\Contract\Schema;
  */
 interface ErrorInterface
 {
-    /**
-     * Key for 'Source' field.
-     */
     public const SOURCE_POINTER = 'pointer';
-
-    /**
-     * Key for 'Source' field.
-     */
     public const SOURCE_PARAMETER = 'parameter';
 
     /**
      * Get a unique identifier for this particular occurrence of the problem.
-     *
-     * @return int|null|string
      */
-    public function getId();
+    public function getId(): ?string;
 
     /**
      * Get links that may lead to further details about the problem.
      *
      * @see LinkInterface
-     *
      */
     public function getLinks(): ?iterable;
 
@@ -99,8 +89,6 @@ interface ErrorInterface
 
     /**
      * Get error meta information.
-     *
-     * @return mixed
      */
-    public function getMeta();
+    public function getMeta(): mixed;
 }

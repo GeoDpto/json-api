@@ -25,66 +25,34 @@ namespace Neomerx\JsonApi\Contract\Schema;
  */
 interface DocumentInterface
 {
-    /** Reserved keyword */
     public const KEYWORD_LINKS = 'links';
-    /** Reserved keyword */
     public const KEYWORD_HREF = 'href';
-    /** Reserved keyword */
     public const KEYWORD_RELATIONSHIPS = 'relationships';
-    /** Reserved keyword */
     public const KEYWORD_SELF = 'self';
-    /** Reserved keyword */
     public const KEYWORD_FIRST = 'first';
-    /** Reserved keyword */
     public const KEYWORD_LAST = 'last';
-    /** Reserved keyword */
     public const KEYWORD_NEXT = 'next';
-    /** Reserved keyword */
     public const KEYWORD_PREV = 'prev';
-    /** Reserved keyword */
     public const KEYWORD_RELATED = 'related';
-    /** Reserved keyword */
     public const KEYWORD_TYPE = 'type';
-    /** Reserved keyword */
     public const KEYWORD_ID = 'id';
-    /** Reserved keyword */
     public const KEYWORD_ATTRIBUTES = 'attributes';
-    /** Reserved keyword */
     public const KEYWORD_META = 'meta';
-    /** Reserved keyword */
     public const KEYWORD_ALIASES = 'aliases';
-    /** Reserved keyword */
     public const KEYWORD_PROFILE = 'profile';
-    /** Reserved keyword */
     public const KEYWORD_DATA = 'data';
-    /** Reserved keyword */
     public const KEYWORD_INCLUDED = 'included';
-    /** Reserved keyword */
     public const KEYWORD_JSON_API = 'jsonapi';
-    /** Reserved keyword */
     public const KEYWORD_VERSION = 'version';
-
-    /** Reserved keyword */
     public const KEYWORD_ERRORS = 'errors';
-    /** Reserved keyword */
     public const KEYWORD_ERRORS_ID = 'id';
-    /** Reserved keyword */
     public const KEYWORD_ERRORS_TYPE = 'type';
-    /** Reserved keyword */
     public const KEYWORD_ERRORS_STATUS = 'status';
-    /** Reserved keyword */
     public const KEYWORD_ERRORS_CODE = 'code';
-    /** Reserved keyword */
     public const KEYWORD_ERRORS_TITLE = 'title';
-    /** Reserved keyword */
     public const KEYWORD_ERRORS_DETAIL = 'detail';
-    /** Reserved keyword */
     public const KEYWORD_ERRORS_META = 'meta';
-    /** Reserved keyword */
     public const KEYWORD_ERRORS_SOURCE = 'source';
-    /** Reserved keyword */
     public const KEYWORD_ERRORS_ABOUT = 'about';
-
-    /** Include path separator */
     public const PATH_SEPARATOR = '.';
 }

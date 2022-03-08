@@ -27,83 +27,44 @@ use Neomerx\JsonApi\Contract\Schema\ErrorInterface;
  */
 interface ResponsesInterface
 {
-    /**
-     * HTTP code constant.
-     */
     public const HTTP_OK = 200;
-
-    /**
-     * HTTP code constant.
-     */
     public const HTTP_CREATED = 201;
-
-    /**
-     * HTTP code constant.
-     */
     public const HTTP_BAD_REQUEST = 400;
 
     /**
      * Get response with regular JSON API Document in body.
      *
-     * @param array|object $data       Resource or resources to encode.
-     * @param int          $statusCode HTTP status code.
-     * @param array        $headers    Additional headers.
-     *
-     * @return mixed
+     * @param array<object>|object $data Resource or resources to encode.
      */
-    public function getContentResponse($data, int $statusCode = self::HTTP_OK, array $headers = []);
+    public function getContentResponse(array|object $data, int $statusCode = self::HTTP_OK, array $headers = []): mixed;
 
     /**
      * Get response for newly created resource with HTTP code 201 (adds 'location' header).
-     *
-     * @param object $resource Newly created resource to encode.
-     * @param string $url      URL of the resource.
-     * @param array  $headers  Additional headers.
-     *
-     * @return mixed
      */
-    public function getCreatedResponse($resource, string $url, array $headers = []);
+    public function getCreatedResponse(object $resource, string $url, array $headers = []): mixed;
 
     /**
      * Get response with HTTP code only.
-     *
-     * @param int   $statusCode HTTP status code.
-     * @param array $headers    Additional headers.
-     *
-     * @return mixed
      */
-    public function getCodeResponse(int $statusCode, array $headers = []);
+    public function getCodeResponse(int $statusCode, array $headers = []): mixed;
 
     /**
      * Get response with meta information only.
-     *
-     * @param array|object $meta       Meta information.
-     * @param int          $statusCode HTTP status code.
-     * @param array        $headers    Additional headers.
-     *
-     * @return mixed
      */
-    public function getMetaResponse($meta, int $statusCode = self::HTTP_OK, array $headers = []);
+    public function getMetaResponse(array|object $meta, int $statusCode = self::HTTP_OK, array $headers = []): mixed;
 
     /**
      * Get response with only resource identifiers.
-     *
-     * @param array|object $data       Resource or resources to encode.
-     * @param int          $statusCode HTTP status code.
-     * @param array        $headers    Additional headers.
-     *
-     * @return mixed
      */
-    public function getIdentifiersResponse($data, int $statusCode = self::HTTP_OK, array $headers = []);
+    public function getIdentifiersResponse(
+        array|object $data,
+        int $statusCode = self::HTTP_OK,
+        array $headers = []
+    ): mixed;
 
-    /**
-     * Get response with JSON API Error in body.
-     *
-     * @param ErrorInterface|iterable $errors     Error or errors to encode.
-     * @param int                     $statusCode HTTP status code.
-     * @param array                   $headers    Additional headers.
-     *
-     * @return mixed
-     */
-    public function getErrorResponse($errors, int $statusCode = self::HTTP_BAD_REQUEST, array $headers = []);
+    public function getErrorResponse(
+        ErrorInterface|iterable $errors,
+        int $statusCode = self::HTTP_BAD_REQUEST,
+        array $headers = []
+    ): string|object;
 }

@@ -30,14 +30,10 @@ use Neomerx\JsonApi\Exception\InvalidArgumentException;
 class AcceptMediaType extends MediaType implements AcceptMediaTypeInterface
 {
     /**
-     * @var float [0..1]
+     * value [0..1]
      */
-    private $quality;
-
-    /**
-     * @var int
-     */
-    private $position;
+    private float $quality;
+    private int $position;
 
     /**
      * @param array<string,string>|null $parameters
@@ -46,7 +42,7 @@ class AcceptMediaType extends MediaType implements AcceptMediaTypeInterface
         int $position,
         string $type,
         string $subType,
-        array $parameters = null,
+        ?array $parameters = null,
         float $quality = 1.0
     ) {
         parent::__construct($type, $subType, $parameters);

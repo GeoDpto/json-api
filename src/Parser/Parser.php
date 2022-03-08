@@ -43,43 +43,20 @@ use function Neomerx\JsonApi\I18n\format as _;
  */
 class Parser implements ParserInterface
 {
-    /** @var string */
     public const MSG_NO_SCHEMA_FOUND = 'No Schema found for top-level resource `%s`.';
-
     public const MSG_NO_DATA_IN_RELATIONSHIP =
         'For resource of type `%s` with ID `%s` relationship `%s` cannot be parsed because it has no data. Skipping.';
-
     public const MSG_CAN_NOT_PARSE_RELATIONSHIP =
         'For resource of type `%s` with ID `%s` relationship `%s` cannot be parsed because it either ' .
         'has `null` or identifier as data. Skipping.';
-
     public const MSG_PATHS_HAVE_NOT_BEEN_NORMALIZED_YET =
         'Paths have not been normalized yet. Have you called `parse` method already?';
 
-    /**
-     * @var SchemaContainerInterface
-     */
-    private $schemaContainer;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
-
-    /**
-     * @var array
-     */
-    private $paths;
-
-    /**
-     * @var array
-     */
-    private $resourcesTracker;
-
-    /**
-     * @var EditableContextInterface
-     */
-    private $context;
+    private SchemaContainerInterface $schemaContainer;
+    private FactoryInterface $factory;
+    private array $paths;
+    private array $resourcesTracker;
+    private EditableContextInterface $context;
 
     public function __construct(
         FactoryInterface $factory,
@@ -94,8 +71,9 @@ class Parser implements ParserInterface
 
     /**
      * @SuppressWarnings(PHPMD.ElseExpression)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function parse($data, array $paths = []): iterable
+    public function parse(mixed $data, array $paths = []): iterable
     {
         \assert(\is_array($data) === true || \is_object($data) === true || $data === null);
 
@@ -108,13 +86,13 @@ class Parser implements ParserInterface
             null
         );
 
-        if ($this->schemaContainer->hasSchema($data) === true) {
+        if (\is_object($data) && $this->schemaContainer->hasSchema($data)) {
             yield $this->createDocumentDataIsResource($rootPosition);
             yield from $this->parseAsResource($rootPosition, $data);
         } elseif ($data instanceof SchemaIdentifierInterface) {
             yield $this->createDocumentDataIsIdentifier($rootPosition);
             yield $this->parseAsIdentifier($rootPosition, $data);
-        } elseif (\is_array($data) === true) {
+        } elseif (\is_array($data)) {
             yield $this->createDocumentDataIsCollection($rootPosition);
             yield from $this->parseAsResourcesOrIdentifiers($rootPosition, $data);
         } elseif ($data instanceof Traversable) {
@@ -124,7 +102,7 @@ class Parser implements ParserInterface
         } elseif ($data === null) {
             yield $this->createDocumentDataIsNull($rootPosition);
         } else {
-            throw new InvalidArgumentException(_(static::MSG_NO_SCHEMA_FOUND, \get_class($data)));
+            throw new InvalidArgumentException(_(static::MSG_NO_SCHEMA_FOUND));
         }
     }
 
@@ -137,7 +115,7 @@ class Parser implements ParserInterface
         iterable $dataOrIds
     ): iterable {
         foreach ($dataOrIds as $dataOrId) {
-            if ($this->schemaContainer->hasSchema($dataOrId) === true) {
+            if ($this->schemaContainer->hasSchema($dataOrId)) {
                 yield from $this->parseAsResource($position, $dataOrId);
 
                 continue;
@@ -155,8 +133,6 @@ class Parser implements ParserInterface
 
     protected function getNormalizedPaths(): array
     {
-        \assert($this->paths !== null, _(static::MSG_PATHS_HAVE_NOT_BEEN_NORMALIZED_YET));
-
         return $this->paths;
     }
 
@@ -165,14 +141,9 @@ class Parser implements ParserInterface
         return isset($this->paths[$path]);
     }
 
-    /**
-     * @param mixed $data
-     *
-     * @see ResourceInterface
-     */
     private function parseAsResource(
         PositionInterface $position,
-        $data
+        mixed $data,
     ): iterable {
         \assert($this->schemaContainer->hasSchema($data) === true);
 
@@ -238,63 +209,39 @@ class Parser implements ParserInterface
 
     private function parseAsIdentifier(
         PositionInterface $position,
-        SchemaIdentifierInterface $identifier
+        SchemaIdentifierInterface $identifier,
     ): IdentifierInterface {
         return new class($position, $identifier) implements IdentifierInterface {
-            /**
-             * @var PositionInterface
-             */
-            private $position;
+            private PositionInterface $position;
+            private SchemaIdentifierInterface $identifier;
 
-            /**
-             * @var SchemaIdentifierInterface
-             */
-            private $identifier;
-
-            /**
-             */
             public function __construct(PositionInterface $position, SchemaIdentifierInterface $identifier)
             {
                 $this->position   = $position;
                 $this->identifier = $identifier;
             }
 
-            /**
-             *
-             */
             public function getPosition(): PositionInterface
             {
                 return $this->position;
             }
 
-            /**
-             *
-             */
             public function getId(): ?string
             {
                 return $this->identifier->getId();
             }
 
-            /**
-             *
-             */
             public function getType(): string
             {
                 return $this->identifier->getType();
             }
 
-            /**
-             *
-             */
             public function hasIdentifierMeta(): bool
             {
                 return $this->identifier->hasIdentifierMeta();
             }
 
-            /**
-             *
-             */
-            public function getIdentifierMeta()
+            public function getIdentifierMeta(): mixed
             {
                 return $this->identifier->getIdentifierMeta();
             }
@@ -327,22 +274,10 @@ class Parser implements ParserInterface
         bool $isNull
     ): DocumentDataInterface {
         return new class($position, $isCollection, $isNull) implements DocumentDataInterface {
-            /**
-             * @var PositionInterface
-             */
-            private $position;
-            /**
-             * @var bool
-             */
-            private $isCollection;
+            private PositionInterface $position;
+            private bool $isCollection;
+            private bool $isNull;
 
-            /**
-             * @var bool
-             */
-            private $isNull;
-
-            /**
-             */
             public function __construct(
                 PositionInterface $position,
                 bool $isCollection,
@@ -353,25 +288,16 @@ class Parser implements ParserInterface
                 $this->isNull       = $isNull;
             }
 
-            /**
-             *
-             */
             public function getPosition(): PositionInterface
             {
                 return $this->position;
             }
 
-            /**
-             *
-             */
             public function isCollection(): bool
             {
                 return $this->isCollection;
             }
 
-            /**
-             *
-             */
             public function isNull(): bool
             {
                 return $this->isNull;
