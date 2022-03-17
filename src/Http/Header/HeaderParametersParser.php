@@ -30,10 +30,7 @@ use Neomerx\JsonApi\Exception\InvalidArgumentException;
  */
 class HeaderParametersParser implements HeaderParametersParserInterface
 {
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
+    private FactoryInterface $factory;
 
     public function __construct(FactoryInterface $factory)
     {

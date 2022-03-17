@@ -25,13 +25,7 @@ namespace Neomerx\JsonApi\Contract\Parser;
  */
 interface DocumentDataInterface extends ParsedResultInterface
 {
-    /**
-     * If data is a collection.
-     */
     public function isCollection(): bool;
 
-    /**
-     * If data is null.
-     */
     public function isNull(): bool;
 }

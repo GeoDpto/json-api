@@ -26,13 +26,5 @@ use Neomerx\JsonApi\Contract\Schema\SchemaContainerInterface;
  */
 interface CustomContainerInterface extends SchemaContainerInterface
 {
-    /**
-     * Register provider for resource type.
-     *
-     * @param string         $type
-     * @param string|Closure $schema
-     *
-     * @return void
-     */
-    public function register(string $type, $schema): void;
+    public function register(string $type, object|string $schema): void;
 }

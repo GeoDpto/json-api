@@ -26,10 +26,7 @@ use Neomerx\JsonApi\Encoder\Encoder;
  */
 class CustomEncoder extends Encoder implements CustomEncoderInterface
 {
-    /**
-     * @inheritdoc
-     */
-    public function addSchema(string $type, $schema): CustomEncoderInterface
+    public function addSchema(string $type, string|\Closure $schema): self
     {
         /** @var CustomContainerInterface $container */
         $container = $this->getSchemaContainer();
@@ -38,9 +35,6 @@ class CustomEncoder extends Encoder implements CustomEncoderInterface
         return $this;
     }
 
-    /**
-     * @return FactoryInterface
-     */
     protected static function createFactory(): FactoryInterface
     {
         return new CustomFactory();

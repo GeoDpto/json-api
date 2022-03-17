@@ -27,9 +27,6 @@ use Neomerx\JsonApi\Factory\Factory;
  */
 class CustomFactory extends Factory
 {
-    /**
-     * @inheritdoc
-     */
     public function createEncoder(SchemaContainerInterface $container): EncoderInterface
     {
         return new CustomEncoder($this, $container);

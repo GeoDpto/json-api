@@ -29,9 +29,7 @@ use Neomerx\JsonApi\Factory\Factory;
  */
 final class CustomFactory extends Factory
 {
-    /**
-     * @inheritdoc
-     */
+
     public function createParsedResource(
         EditableContextInterface $context,
         PositionInterface $position,

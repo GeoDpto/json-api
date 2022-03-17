@@ -25,18 +25,11 @@ use stdClass;
  */
 class Site extends stdClass
 {
-    const ATTRIBUTE_ID = 'site_id';
-    const ATTRIBUTE_NAME = 'name';
-    const LINK_POSTS = 'posts';
+    public const ATTRIBUTE_ID = 'site_id';
+    public const ATTRIBUTE_NAME = 'name';
+    public const LINK_POSTS = 'posts';
 
-    /**
-     * @param int        $identity
-     * @param string     $name
-     * @param array|null $posts
-     *
-     * @return Site
-     */
-    public static function instance(int $identity, string $name, array $posts = null)
+    public static function instance(int $identity, string $name, array $posts = null): self
     {
         $site = new self();
 

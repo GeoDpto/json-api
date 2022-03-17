@@ -25,18 +25,11 @@ use stdClass;
  */
 class Comment extends stdClass
 {
-    const ATTRIBUTE_ID = 'comment_id';
-    const ATTRIBUTE_BODY = 'body';
-    const LINK_AUTHOR = 'author';
+    public const ATTRIBUTE_ID = 'comment_id';
+    public const ATTRIBUTE_BODY = 'body';
+    public const LINK_AUTHOR = 'author';
 
-    /**
-     * @param int    $identity
-     * @param string $body
-     * @param Author $author
-     *
-     * @return Comment
-     */
-    public static function instance(int $identity, string $body, Author $author = null)
+    public static function instance(int $identity, string $body, Author $author = null): self
     {
         $comment = new self();
 

@@ -25,9 +25,6 @@ use Neomerx\JsonApi\Schema\Identifier;
  */
 class CommentIdentity extends Identifier
 {
-    /**
-     * @param string $index
-     */
     public function __construct(string $index)
     {
         parent::__construct($index, 'comments');

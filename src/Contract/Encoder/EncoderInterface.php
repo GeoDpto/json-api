@@ -95,11 +95,8 @@ interface EncoderInterface
 
     /**
      * Add meta information that will be encoded with data. If 'null' meta will not appear in a document.
-     *
-     * @param mixed|null $meta
-     *
      */
-    public function withMeta($meta): self;
+    public function withMeta(mixed $meta): self;
 
     /**
      * If called JSON API version information will be added to a document.
@@ -111,31 +108,23 @@ interface EncoderInterface
     /**
      * If called JSON API version meta will be added to a document.
      *
-     * @param mixed $meta
-     *
      * @see http://jsonapi.org/format/#document-jsonapi-object
      */
-    public function withJsonApiMeta($meta): self;
+    public function withJsonApiMeta(mixed $meta): self;
 
     /**
      * Add 'self' Link to top-level document's 'links' section for relationship specified.
      *
-     * @param object $resource
-     *
      * @see http://jsonapi.org/format/#fetching-relationships
-     *
      */
-    public function withRelationshipSelfLink($resource, string $relationshipName): self;
+    public function withRelationshipSelfLink(object $resource, string $relationshipName): self;
 
     /**
      * Add 'related' Link to top-level document's 'links' section for relationship specified.
      *
-     * @param object $resource
-     *
      * @see http://jsonapi.org/format/#fetching-relationships
-     *
      */
-    public function withRelationshipRelatedLink($resource, string $relationshipName): self;
+    public function withRelationshipRelatedLink(object $resource, string $relationshipName): self;
 
     /**
      * Reset encoder settings to defaults.
@@ -144,19 +133,13 @@ interface EncoderInterface
 
     /**
      * Encode input as JSON API string.
-     *
-     * @param iterable|null|object $data Data to encode.
-     *
      */
-    public function encodeData($data): string;
+    public function encodeData(iterable|object|null $data): string;
 
     /**
      * Encode input as JSON API string with a list of resource identifiers.
-     *
-     * @param iterable|null|object $data Data to encode.
-     *
      */
-    public function encodeIdentifiers($data): string;
+    public function encodeIdentifiers(iterable|null|object $data): string;
 
     /**
      * Encode error as JSON API string.
@@ -167,15 +150,11 @@ interface EncoderInterface
      * Encode errors as JSON API string.
      *
      * @see ErrorInterface
-     *
      */
     public function encodeErrors(iterable $errors): string;
 
     /**
      * Encode input meta as JSON API string.
-     *
-     * @param mixed $meta Meta information.
-     *
      */
-    public function encodeMeta($meta): string;
+    public function encodeMeta(mixed $meta): string;
 }

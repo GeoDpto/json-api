@@ -27,18 +27,12 @@ use function assert;
  */
 class CommentSchema extends DevSchema
 {
-    /**
-     * @inheritdoc
-     */
     public function getType(): string
     {
         return 'comments';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getId($resource): ?string
+    public function getId(object $resource): ?string
     {
         assert($resource instanceof Comment);
 
@@ -47,10 +41,7 @@ class CommentSchema extends DevSchema
         return $index === null ? $index : (string)$index;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAttributes($resource, ContextInterface $context): iterable
+    public function getAttributes(object $resource, ContextInterface $context): array
     {
         assert($resource instanceof Comment);
 
@@ -59,10 +50,7 @@ class CommentSchema extends DevSchema
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRelationships($resource, ContextInterface $context): iterable
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
         assert($resource instanceof Comment);
 

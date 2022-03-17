@@ -30,20 +30,9 @@ use Neomerx\JsonApi\Contract\Schema\LinkInterface;
  */
 abstract class BaseWriter implements BaseWriterInterface
 {
-    /**
-     * @var array
-     */
-    protected $data;
-
-    /**
-     * @var string
-     */
-    private $urlPrefix;
-
-    /**
-     * @var bool
-     */
-    private $isDataAnArray;
+    protected array $data;
+    private string $urlPrefix;
+    private bool $isDataAnArray;
 
     public function __construct()
     {

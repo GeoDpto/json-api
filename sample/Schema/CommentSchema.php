@@ -29,28 +29,22 @@ use Neomerx\Samples\JsonApi\Model\Comment;
  */
 class CommentSchema extends BaseSchema
 {
-    /**
-     * @inheritdoc
-     */
+
     public function getType(): string
     {
         return 'comments';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getId($comment): ?string
+
+    public function getId(object $comment): ?string
     {
         assert($comment instanceof Comment);
 
         return (string)$comment->commentId;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAttributes($comment, ContextInterface $context): iterable
+
+    public function getAttributes(object $comment, ContextInterface $context): array
     {
         assert($comment instanceof Comment);
 
@@ -59,16 +53,14 @@ class CommentSchema extends BaseSchema
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRelationships($comment, ContextInterface $context): iterable
+
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
-        assert($comment instanceof Comment);
+        assert($resource instanceof Comment);
 
         return [
             'author' => [
-                self::RELATIONSHIP_DATA          => $comment->author,
+                self::RELATIONSHIP_DATA          => $resource->author,
                 self::RELATIONSHIP_LINKS_SELF    => false,
                 self::RELATIONSHIP_LINKS_RELATED => false,
             ],

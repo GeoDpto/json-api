@@ -35,29 +35,15 @@ use Neomerx\Tests\JsonApi\Data\Schema\SiteSchema;
  */
 class EncodeSparseAndFieldSetsTest extends BaseTestCase
 {
-    /**
-     * @var Author
-     */
-    private $author;
+    private Author $author;
 
     /**
      * @var Comment[]
      */
-    private $comments;
+    private array $comments;
+    private Post $post;
+    private Site $site;
 
-    /**
-     * @var Post
-     */
-    private $post;
-
-    /**
-     * @var Site
-     */
-    private $site;
-
-    /**
-     * Set up.
-     */
     protected function setUp(): void
     {
         parent::setUp();

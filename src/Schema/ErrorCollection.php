@@ -37,12 +37,9 @@ use Serializable;
  */
 class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, Countable
 {
-    /**
-     * @var array
-     */
-    private $items = [];
+    private array $items = [];
 
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->items);
     }
@@ -57,27 +54,27 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         return \serialize($this->items);
     }
 
-    public function unserialize($data): void
+    public function unserialize(string $data): void
     {
         $this->items = \unserialize($data);
     }
 
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->items[$offset]);
     }
 
-    public function offsetGet($offset): ErrorInterface
+    public function offsetGet(mixed  $offset): ErrorInterface
     {
         return $this->items[$offset];
     }
 
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $offset === null ? $this->add($value) : $this->items[$offset] = $value;
     }
 
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->items[$offset]);
     }
@@ -97,20 +94,16 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         return $this;
     }
 
-    /**
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     */
     public function addDataError(
         string $title,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
         LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null,
     ): self {
         $pointer = $this->getPathToData();
 
@@ -128,20 +121,16 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         );
     }
 
-    /**
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     */
     public function addDataTypeError(
         string $title,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
         LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null
     ): self {
         $pointer = $this->getPathToType();
 
@@ -159,20 +148,16 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         );
     }
 
-    /**
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     */
     public function addDataIdError(
         string $title,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
         LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null
     ): self {
         $pointer = $this->getPathToId();
 
@@ -190,20 +175,16 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         );
     }
 
-    /**
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     */
     public function addAttributesError(
         string $title,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
         LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null
     ): self {
         $pointer = $this->getPathToAttributes();
 
@@ -222,23 +203,19 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string          $name
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function addDataAttributeError(
-        $name,
+        string $name,
         string $title,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
-        LinkInterface $aboutLink = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
+        ?LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null,
     ): self {
         $pointer = $this->getPathToAttribute($name);
 
@@ -256,20 +233,16 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         );
     }
 
-    /**
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     */
     public function addRelationshipsError(
         string $title,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
-        LinkInterface $aboutLink = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
+        ?LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        $meta = null,
     ): self {
         $pointer = $this->getPathToRelationships();
 
@@ -288,23 +261,19 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string          $name
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function addRelationshipError(
-        $name,
+        string $name,
         string $title,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
-        LinkInterface $aboutLink = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
+        ?LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null
     ): self {
         $pointer = $this->getPathToRelationship($name);
 
@@ -323,23 +292,19 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string          $name
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function addRelationshipTypeError(
-        $name,
+        string $name,
         string $title,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
-        LinkInterface $aboutLink = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
+        ?LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null,
     ): self {
         $pointer = $this->getPathToRelationshipType($name);
 
@@ -358,23 +323,19 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param string          $name
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function addRelationshipIdError(
-        $name,
+        string $name,
         string $title,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
-        LinkInterface $aboutLink = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
+        ?LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null,
     ): self {
         $pointer = $this->getPathToRelationshipId($name);
 
@@ -393,9 +354,6 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /**
-     * @param int|null|string $idx
-     * @param mixed           $meta
-     *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function addQueryParameterError(
@@ -403,12 +361,12 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         string $title,
         string $detail = null,
         string $status = null,
-        $idx = null,
-        LinkInterface $aboutLink = null,
+        ?string $idx = null,
+        ?LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
-        string $code = null,
+        ?string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null,
     ): self {
         $source = [ErrorInterface::SOURCE_PARAMETER => $name];
         $error  = new Error($idx, $aboutLink, $typeLinks, $status, $code, $title, $detail, $source, $hasMeta, $meta);
@@ -419,22 +377,19 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     }
 
     /** @noinspection PhpTooManyParametersInspection
-     * @param null  $idx
-     * @param mixed $meta
-     *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     protected function addResourceError(
         string $title,
         string $pointer,
-        string $detail = null,
-        string $status = null,
-        $idx = null,
-        LinkInterface $aboutLink = null,
+        ?string $detail = null,
+        ?string $status = null,
+        ?string $idx = null,
+        ?LinkInterface $aboutLink = null,
         ?iterable $typeLinks = null,
         string $code = null,
         bool $hasMeta = false,
-        $meta = null
+        mixed $meta = null,
     ): self {
         $source = [ErrorInterface::SOURCE_POINTER => $pointer];
         $error  = new Error($idx, $aboutLink, $typeLinks, $status, $code, $title, $detail, $source, $hasMeta, $meta);

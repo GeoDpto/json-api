@@ -34,31 +34,16 @@ use Neomerx\JsonApi\Contract\Schema\SchemaContainerInterface;
  */
 abstract class BaseRelationshipData implements RelationshipDataInterface
 {
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
-
-    /**
-     * @var SchemaContainerInterface
-     */
-    private $schemaContainer;
-
-    /**
-     * @var EditableContextInterface
-     */
-    private $context;
-
-    /**
-     * @var PositionInterface
-     */
-    private $position;
+    private FactoryInterface $factory;
+    private SchemaContainerInterface $schemaContainer;
+    private EditableContextInterface $context;
+    private PositionInterface $position;
 
     public function __construct(
         FactoryInterface $factory,
         SchemaContainerInterface $schemaContainer,
         EditableContextInterface $context,
-        PositionInterface $position
+        PositionInterface $position,
     ) {
         $this->factory         = $factory;
         $this->schemaContainer = $schemaContainer;
@@ -66,21 +51,18 @@ abstract class BaseRelationshipData implements RelationshipDataInterface
         $this->position        = $position;
     }
 
-    /**
-     * @param mixed $resource
-     */
-    protected function createParsedResource($resource): ResourceInterface
+    protected function createParsedResource(object $resource): ResourceInterface
     {
         \assert(
             $this->schemaContainer->hasSchema($resource),
-            'No Schema found for resource `' . \get_class($resource) . '`.'
+            'No Schema found for resource `' . $resource::class . '`.'
         );
 
         return $this->factory->createParsedResource(
             $this->context,
             $this->position,
             $this->schemaContainer,
-            $resource
+            $resource,
         );
     }
 

@@ -37,25 +37,16 @@ class SchemaContainer implements SchemaContainerInterface
     ' callable or SchemaInterface instance.';
     public const MSG_TYPE_REUSE_FORBIDDEN = 'Type should not be used more than once to register a schema (`%s`).';
 
-    /**
-     * @var array
-     */
-    private $providerMapping = [];
+    private array $providerMapping = [];
 
     /**
      * @var SchemaInterface[]
      */
     private $createdProviders = [];
 
-    /**
-     * @var array
-     */
-    private $resType2JsonType = [];
+    private array $resType2JsonType = [];
 
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
+    private FactoryInterface $factory;
 
     public function __construct(FactoryInterface $factory, iterable $schemas)
     {
@@ -66,13 +57,11 @@ class SchemaContainer implements SchemaContainerInterface
     /**
      * Register provider for resource type.
      *
-     * @param Closure|string $schema
-     *
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.ElseExpression)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function register(string $type, $schema): void
+    public function register(string $type, object|string $schema): void
     {
         if (empty($type) === true || \class_exists($type) === false) {
             throw new InvalidArgumentException(_(static::MSG_INVALID_MODEL_TYPE));
@@ -97,7 +86,7 @@ class SchemaContainer implements SchemaContainerInterface
         }
 
         if ($schema instanceof SchemaInterface) {
-            $this->setProviderMapping($type, \get_class($schema));
+            $this->setProviderMapping($type, $schema::class);
             $this->setResourceToJsonTypeMapping($schema->getType(), $type);
             $this->setCreatedProvider($type, $schema);
         } else {
@@ -115,19 +104,16 @@ class SchemaContainer implements SchemaContainerInterface
         }
     }
 
-    public function getSchema($resource): SchemaInterface
+    public function getSchema(object $resourceObject): SchemaInterface
     {
-        \assert($this->hasSchema($resource));
+        \assert($this->hasSchema($resourceObject));
 
-        $resourceType = $this->getResourceType($resource);
-
-        return $this->getSchemaByType($resourceType);
+        return $this->getSchemaByType($this->getResourceType($resourceObject));
     }
 
-    public function hasSchema($resourceObject): bool
+    public function hasSchema(object $resourceObject): bool
     {
-        return \is_object($resourceObject) === true &&
-            $this->hasProviderMapping($this->getResourceType($resourceObject)) === true;
+        return $this->hasProviderMapping($this->getResourceType($resourceObject));
     }
 
     /**
@@ -161,18 +147,12 @@ class SchemaContainer implements SchemaContainerInterface
         return isset($this->providerMapping[$type]);
     }
 
-    /**
-     * @return mixed
-     */
-    protected function getProviderMapping(string $type)
+    protected function getProviderMapping(string $type): mixed
     {
         return $this->providerMapping[$type];
     }
 
-    /**
-     * @param Closure|string $schema
-     */
-    protected function setProviderMapping(string $type, $schema): void
+    protected function setProviderMapping(string $type, Closure|string $schema): void
     {
         $this->providerMapping[$type] = $schema;
     }
@@ -197,17 +177,9 @@ class SchemaContainer implements SchemaContainerInterface
         $this->resType2JsonType[$resourceType] = $jsonType;
     }
 
-    /**
-     * @param object $resource
-     */
-    protected function getResourceType($resource): string
+    protected function getResourceType(object $resource): string
     {
-        \assert(
-            \is_object($resource) === true,
-            'Unable to get a type of the resource as it is not an object.'
-        );
-
-        return \get_class($resource);
+        return $resource::class;
     }
 
     protected function createSchemaFromCallable(callable $callable): SchemaInterface

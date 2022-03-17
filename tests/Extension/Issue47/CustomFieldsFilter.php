@@ -26,9 +26,6 @@ use Traversable;
  */
 class CustomFieldsFilter extends FieldSetFilter
 {
-    /**
-     * @inheritdoc
-     */
     protected function filterFields(string $type, iterable $fields): iterable
     {
         if ($this->hasFilter($type) === true) {
@@ -41,11 +38,6 @@ class CustomFieldsFilter extends FieldSetFilter
         yield from $fields;
     }
 
-    /**
-     * @param iterable $iterable
-     *
-     * @return array
-     */
     private function iterableToArray(iterable $iterable): array
     {
         if (is_array($iterable) === true) {
@@ -56,13 +48,6 @@ class CustomFieldsFilter extends FieldSetFilter
         }
     }
 
-    /**
-     * @param array  $array
-     * @param array  $filters
-     * @param string $parentPath
-     *
-     * @return void
-     */
     private function deepArrayFilter(array &$array, array $filters, string $parentPath): void
     {
         foreach ($array as $key => &$value) {

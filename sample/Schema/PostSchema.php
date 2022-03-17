@@ -29,52 +29,44 @@ use Neomerx\Samples\JsonApi\Model\Post;
  */
 class PostSchema extends BaseSchema
 {
-    /**
-     * @inheritdoc
-     */
+
     public function getType(): string
     {
         return 'posts';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getId($post): ?string
-    {
-        assert($post instanceof Post);
 
-        return (string)$post->postId;
+    public function getId(object $resource): ?string
+    {
+        assert($resource instanceof Post);
+
+        return (string) $resource->postId;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAttributes($post, ContextInterface $context): iterable
+
+    public function getAttributes(object $resource, ContextInterface $context): array
     {
-        assert($post instanceof Post);
+        assert($resource instanceof Post);
 
         return [
-            'title' => $post->title,
-            'body'  => $post->body,
+            'title' => $resource->title,
+            'body'  => $resource->body,
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRelationships($post, ContextInterface $context): iterable
+
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
-        assert($post instanceof Post);
+        assert($resource instanceof Post);
 
         return [
             'author'   => [
-                self::RELATIONSHIP_DATA          => $post->author,
+                self::RELATIONSHIP_DATA          => $resource->author,
                 self::RELATIONSHIP_LINKS_SELF    => false,
                 self::RELATIONSHIP_LINKS_RELATED => false,
             ],
             'comments' => [
-                self::RELATIONSHIP_DATA          => $post->comments,
+                self::RELATIONSHIP_DATA          => $resource->comments,
                 self::RELATIONSHIP_LINKS_SELF    => false,
                 self::RELATIONSHIP_LINKS_RELATED => false,
             ],

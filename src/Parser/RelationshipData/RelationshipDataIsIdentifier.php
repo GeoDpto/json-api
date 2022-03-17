@@ -36,18 +36,10 @@ use function Neomerx\JsonApi\I18n\format as _;
  */
 class RelationshipDataIsIdentifier extends BaseRelationshipData implements RelationshipDataInterface
 {
-    /** @var string */
     public const MSG_INVALID_OPERATION = 'Invalid operation.';
 
-    /**
-     * @var mixed
-     */
-    private $identifier;
-
-    /**
-     * @var null|ParserIdentifierInterface
-     */
-    private $parsedIdentifier = null;
+    private SchemaIdentifierInterface $identifier;
+    private ?ParserIdentifierInterface $parsedIdentifier = null;
 
     public function __construct(
         FactoryInterface $factory,

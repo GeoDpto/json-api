@@ -35,29 +35,16 @@ use Neomerx\Tests\JsonApi\Data\Schema\SiteSchema;
  */
 class EncodeIncludedObjectsTest extends BaseTestCase
 {
-    /**
-     * @var Author
-     */
-    private $author;
+    private Author $author;
 
     /**
      * @var Comment[]
      */
-    private $comments;
+    private array $comments;
 
-    /**
-     * @var Post
-     */
-    private $post;
+    private Post $post;
+    private Site $site;
 
-    /**
-     * @var Site
-     */
-    private $site;
-
-    /**
-     * Set up.
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -1068,9 +1055,6 @@ EOL;
         self::assertJson($json);
     }
 
-    /**
-     * @return iterable
-     */
     private function generateIncludeList(): iterable
     {
         foreach (['author'] as $item) {

@@ -51,10 +51,8 @@ abstract class BaseCustomSchema extends BaseSchema
         $this->setSchemaFields($fields);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRelationships($resource, ContextInterface $context): iterable
+
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
         throw new \LogicException('Use `getNonHorrificRelationships` instead.');
     }

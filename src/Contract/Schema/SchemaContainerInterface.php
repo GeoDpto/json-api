@@ -27,17 +27,11 @@ interface SchemaContainerInterface
 {
     /**
      * Get schema provider for resource object.
-     *
-     * @param object $resourceObject
-     *
      */
-    public function getSchema($resourceObject): SchemaInterface;
+    public function getSchema(object $resourceObject): SchemaInterface;
 
     /**
      * If container has a Schema for a given input.
-     *
-     * @param mixed $resourceObject
-     *
      */
-    public function hasSchema($resourceObject): bool;
+    public function hasSchema(object $resourceObject): bool;
 }

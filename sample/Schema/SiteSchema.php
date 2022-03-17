@@ -30,56 +30,44 @@ use Neomerx\Samples\JsonApi\Model\Site;
  */
 class SiteSchema extends BaseSchema
 {
-    /**
-     * @var bool
-     */
-    public static $isShowCustomLinks = true;
+    public static bool $isShowCustomLinks = true;
 
-    /**
-     * @inheritdoc
-     */
     public function getType(): string
     {
         return 'sites';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getId($site): ?string
-    {
-        assert($site instanceof Site);
 
-        return (string)$site->siteId;
+    public function getId(object $resource): ?string
+    {
+        assert($resource instanceof Site);
+
+        return (string)$resource->siteId;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAttributes($site, ContextInterface $context): iterable
+
+    public function getAttributes(object $resource, ContextInterface $context): array
     {
-        assert($site instanceof Site);
+        assert($resource instanceof Site);
 
         return [
-            'name' => $site->name,
+            'name' => $resource->name,
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRelationships($site, ContextInterface $context): iterable
+
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
-        assert($site instanceof Site);
+        assert($resource instanceof Site);
 
         $links = static::$isShowCustomLinks === false ? [] : [
-            'some-sublink'  => new Link(true, $this->getSelfSubUrl($site) . '/resource-sublink', false),
+            'some-sublink'  => new Link(true, $this->getSelfSubUrl($resource) . '/resource-sublink', false),
             'external-link' => new Link(false,'www.example.com', false),
         ];
 
         return [
             'posts' => [
-                self::RELATIONSHIP_DATA          => $site->posts,
+                self::RELATIONSHIP_DATA          => $resource->posts,
                 self::RELATIONSHIP_LINKS         => $links,
                 self::RELATIONSHIP_LINKS_SELF    => true,
                 self::RELATIONSHIP_LINKS_RELATED => false,

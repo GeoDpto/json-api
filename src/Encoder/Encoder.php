@@ -63,7 +63,7 @@ class Encoder implements EncoderInterface
 
     public function __construct(
         FactoryInterface $factory,
-        SchemaContainerInterface $container
+        SchemaContainerInterface $container,
     ) {
         $this->setFactory($factory)->setContainer($container)->reset();
     }
@@ -72,60 +72,38 @@ class Encoder implements EncoderInterface
      * Create encoder instance.
      *
      * @param array $schemas Schema providers.
-     *
      */
     public static function instance(array $schemas = []): EncoderInterface
     {
         $factory   = static::createFactory();
         $container = $factory->createSchemaContainer($schemas);
-        $encoder   = $factory->createEncoder($container);
 
-        return $encoder;
+        return $factory->createEncoder($container);
     }
 
-    public function encodeData($data): string
+    public function encodeData(iterable|null|object $data): string
     {
-        // encode to json
-        $array  = $this->encodeDataToArray($data);
-        $result = $this->encodeToJson($array);
-
-        return $result;
+        return $this->encodeToJson($this->encodeDataToArray($data));
     }
 
-    public function encodeIdentifiers($data): string
+    public function encodeIdentifiers(iterable|null|object $data): string
     {
-        // encode to json
-        $array  = $this->encodeIdentifiersToArray($data);
-        $result = $this->encodeToJson($array);
-
-        return $result;
+        return $this->encodeToJson($this->encodeIdentifiersToArray($data));
     }
 
     public function encodeError(ErrorInterface $error): string
     {
-        // encode to json
-        $array  = $this->encodeErrorToArray($error);
-        $result = $this->encodeToJson($array);
-
-        return $result;
+        return $this->encodeToJson($this->encodeErrorToArray($error));
     }
 
     public function encodeErrors(iterable $errors): string
     {
-        // encode to json
-        $array  = $this->encodeErrorsToArray($errors);
-        $result = $this->encodeToJson($array);
-
-        return $result;
+        return $this->encodeToJson($this->encodeErrorsToArray($errors));
     }
 
-    public function encodeMeta($meta): string
+    public function encodeMeta(mixed $meta): string
     {
-        // encode to json
-        $array  = $this->encodeMetaToArray($meta);
-        $result = $this->encodeToJson($array);
-
-        return $result;
+        return $this->encodeToJson($this->encodeMetaToArray($meta));
     }
 
     protected static function createFactory(): FactoryInterface
@@ -134,12 +112,10 @@ class Encoder implements EncoderInterface
     }
 
     /**
-     * @param iterable|null|object $data Data to encode.
-     *
      * @SuppressWarnings(PHPMD.ElseExpression)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    protected function encodeDataToArray($data): array
+    protected function encodeDataToArray(iterable|null|object $data): array
     {
         if (\is_array($data) === false && \is_object($data) === false && $data !== null) {
             throw new InvalidArgumentException();
@@ -180,17 +156,13 @@ class Encoder implements EncoderInterface
         // write footer
         $this->writeFooter($writer);
 
-        $array = $writer->getDocument();
-
-        return $array;
+        return $writer->getDocument();
     }
 
     /**
-     * @param iterable|null|object $data Data to encode.
-     *
      * @SuppressWarnings(PHPMD.ElseExpression)
      */
-    protected function encodeIdentifiersToArray($data): array
+    protected function encodeIdentifiersToArray(iterable|null|object $data): array
     {
         $context = $this->getFactory()->createParserContext($this->getFieldSets(), $this->getIncludePaths());
         $parser  = $this->getFactory()->createParser($this->getSchemaContainer(), $context);
@@ -246,9 +218,7 @@ class Encoder implements EncoderInterface
         // write footer
         $this->writeFooter($writer);
 
-        $array = $writer->getDocument();
-
-        return $array;
+        return $writer->getDocument();
     }
 
     protected function encodeErrorToArray(ErrorInterface $error): array
@@ -264,9 +234,7 @@ class Encoder implements EncoderInterface
         // write footer
         $this->writeFooter($writer);
 
-        $array = $writer->getDocument();
-
-        return $array;
+        return $writer->getDocument();
     }
 
     protected function encodeErrorsToArray(iterable $errors): array
@@ -286,15 +254,10 @@ class Encoder implements EncoderInterface
         $this->writeFooter($writer);
 
         // encode to json
-        $array = $writer->getDocument();
-
-        return $array;
+        return $writer->getDocument();
     }
 
-    /**
-     * @param mixed $meta
-     */
-    protected function encodeMetaToArray($meta): array
+    protected function encodeMetaToArray(mixed $meta): array
     {
         $this->withMeta($meta);
 
@@ -309,37 +272,37 @@ class Encoder implements EncoderInterface
         $this->writeFooter($writer);
 
         // encode to json
-        $array = $writer->getDocument();
-
-        return $array;
+        return $writer->getDocument();
     }
 
     protected function writeHeader(BaseWriterInterface $writer): void
     {
-        if ($this->hasMeta() === true) {
+        if ($this->hasMeta()) {
             $writer->setMeta($this->getMeta());
         }
 
-        if ($this->hasJsonApiVersion() === true) {
+        if ($this->hasJsonApiVersion()) {
             $writer->setJsonApiVersion($this->getJsonApiVersion());
         }
 
-        if ($this->hasJsonApiMeta() === true) {
+        if ($this->hasJsonApiMeta()) {
             $writer->setJsonApiMeta($this->getJsonApiMeta());
         }
 
-        if ($this->hasLinks() === true) {
+        if ($this->hasLinks()) {
             $writer->setLinks($this->getLinks());
         }
 
-        if ($this->hasProfile() === true) {
+        if ($this->hasProfile()) {
             $writer->setProfile($this->getProfile());
         }
     }
 
+    /**
+     * @SuppressWarnings(PHPMD)
+     */
     protected function writeFooter(BaseWriterInterface $writer): void
     {
-        \assert($writer !== null);
     }
 
     protected function encodeToJson(array $document): string

@@ -45,9 +45,7 @@ class HeaderParametersParserTest extends BaseTestCase
      */
     private $parser;
 
-    /**
-     * @inheritdoc
-     */
+
     protected function setUp(): void
     {
         parent::setUp();

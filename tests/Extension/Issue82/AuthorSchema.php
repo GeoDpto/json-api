@@ -26,37 +26,29 @@ use Neomerx\JsonApi\Schema\BaseSchema;
  */
 class AuthorSchema extends BaseSchema
 {
-    /**
-     * @inheritdoc
-     */
+
     public function getType(): string
     {
         return 'people';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getId($author): ?string
+
+    public function getId(object $resource): ?string
     {
-        return (string)$author->author_id;
+        return (string)$resource->author_id;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAttributes($author, ContextInterface $context): iterable
+
+    public function getAttributes(object $resource, ContextInterface $context): array
     {
         return [
-            'first-name' => $author->first_name,
-            'last-name'  => $author->last_name,
+            'first-name' => $resource->first_name,
+            'last-name'  => $resource->last_name,
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRelationships($author, ContextInterface $context): iterable
+
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
         return [
             'comments' => [

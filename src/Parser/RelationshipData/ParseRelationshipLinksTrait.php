@@ -29,13 +29,11 @@ use Neomerx\JsonApi\Contract\Schema\SchemaInterface;
 trait ParseRelationshipLinksTrait
 {
     /**
-     * @param mixed $parentData
-     *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function parseRelationshipLinks(
         SchemaInterface $parentSchema,
-        $parentData,
+        mixed $parentData,
         string $name,
         array $description
     ): array {
@@ -74,16 +72,13 @@ trait ParseRelationshipLinksTrait
         return [$hasLinks, $links];
     }
 
-    /**
-     * @param mixed $parentData
-     */
     private function parseLinks(
         SchemaInterface $parentSchema,
-        $parentData,
+        mixed $parentData,
         string $relationshipName,
         iterable $schemaLinks,
         bool $addSelfLink,
-        bool $addRelatedLink
+        bool $addRelatedLink,
     ): iterable {
         $gotSelf    = false;
         $gotRelated = false;

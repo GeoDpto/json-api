@@ -26,17 +26,13 @@ use Neomerx\Tests\JsonApi\Data\Model\Comment;
  */
 final class CustomCommentSchema extends BaseCustomSchema
 {
-    /**
-     * @inheritdoc
-     */
+
     public function getType(): string
     {
         return 'comments';
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function getId($resource): ?string
     {
         \assert($resource instanceof Comment);
@@ -44,10 +40,8 @@ final class CustomCommentSchema extends BaseCustomSchema
         return (string)$resource->{Comment::ATTRIBUTE_ID};
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAttributes($resource, ContextInterface $context): iterable
+
+    public function getAttributes(object $resource, ContextInterface $context): array
     {
         \assert($resource instanceof Comment);
 
@@ -56,9 +50,7 @@ final class CustomCommentSchema extends BaseCustomSchema
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function getNonHorrificRelationships($resource, string $currentPath): iterable
     {
         \assert($resource instanceof Comment);

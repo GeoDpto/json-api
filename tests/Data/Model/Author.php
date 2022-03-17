@@ -25,22 +25,14 @@ use stdClass;
  */
 class Author extends stdClass
 {
-    const ATTRIBUTE_ID = 'author_id';
-    const ATTRIBUTE_FIRST_NAME = 'first_name';
-    const ATTRIBUTE_LAST_NAME = 'last_name';
-    const LINK_COMMENTS = 'comments';
-    const IDENTIFIER_META = 'identifier_meta';
-    const RESOURCE_META = 'resource_meta';
+    public const ATTRIBUTE_ID = 'author_id';
+    public const ATTRIBUTE_FIRST_NAME = 'first_name';
+    public const ATTRIBUTE_LAST_NAME = 'last_name';
+    public const LINK_COMMENTS = 'comments';
+    public const IDENTIFIER_META = 'identifier_meta';
+    public const RESOURCE_META = 'resource_meta';
 
-    /**
-     * @param int        $identity
-     * @param string     $firstName
-     * @param string     $lastName
-     * @param array|null $comments
-     *
-     * @return Author
-     */
-    public static function instance(int $identity, string $firstName, string $lastName, array $comments = null)
+    public static function instance(int $identity, string $firstName, string $lastName, array $comments = null): self
     {
         $author = new self();
 
@@ -53,24 +45,14 @@ class Author extends stdClass
         return $author;
     }
 
-    /**
-     * @param mixed $meta
-     *
-     * @return self
-     */
-    public function setIdentifierMeta($meta): self
+    public function setIdentifierMeta(mixed $meta): self
     {
         $this->{static::IDENTIFIER_META} = $meta;
 
         return $this;
     }
 
-    /**
-     * @param mixed $meta
-     *
-     * @return self
-     */
-    public function setResourceMeta($meta): self
+    public function setResourceMeta(mixed $meta): self
     {
         $this->{static::RESOURCE_META} = $meta;
 

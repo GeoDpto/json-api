@@ -106,36 +106,28 @@ trait BaseQueryParserTrait
         }
     }
 
-    /**
-     * @param mixed|string $shouldBeString
-     */
     private function splitCommaSeparatedStringAndCheckNoEmpties(
         string $paramName,
-        $shouldBeString,
+        mixed $shouldBeString,
         string $errorTitle
     ): iterable {
         return $this->splitStringAndCheckNoEmpties($paramName, $shouldBeString, ',', $errorTitle);
     }
 
-    /**
-     * @param mixed|string $shouldBeString
-     */
     private function splitSpaceSeparatedStringAndCheckNoEmpties(
         string $paramName,
-        $shouldBeString,
+        mixed $shouldBeString,
         string $errorTitle
     ): iterable {
         return $this->splitStringAndCheckNoEmpties($paramName, $shouldBeString, ' ', $errorTitle);
     }
 
     /**
-     * @param mixed|string $shouldBeString
-     *
      * @SuppressWarnings(PHPMD.IfStatementAssignment)
      */
     private function splitStringAndCheckNoEmpties(
         string $paramName,
-        $shouldBeString,
+        mixed $shouldBeString,
         string $separator,
         string $errorTitle
     ): iterable {
@@ -155,9 +147,6 @@ trait BaseQueryParserTrait
 
     private function createParameterError(string $paramName, string $errorTitle): ErrorInterface
     {
-        $source = [Error::SOURCE_PARAMETER => $paramName];
-        $error  = new Error(null, null, null, null, null, $errorTitle, null, $source);
-
-        return $error;
+        return new Error(title: $errorTitle, meta: [ErrorInterface::SOURCE_PARAMETER => $paramName]);
     }
 }

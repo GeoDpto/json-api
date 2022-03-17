@@ -28,11 +28,5 @@ interface ParserInterface
     public const ROOT_LEVEL = 0;
     public const ROOT_PATH = '';
 
-    /**
-     * @param mixed $data
-     *
-     * @see ParsedResultInterface
-     *
-     */
-    public function parse($data, array $paths = []): iterable;
+    public function parse(mixed $data, array $paths = []): iterable;
 }

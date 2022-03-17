@@ -41,7 +41,7 @@ class EncoderTest extends BaseTestCase
      */
     public function testEncodeInvalidData(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        self::expectException(\TypeError::class);
 
         $encoder = Encoder::instance(
             [

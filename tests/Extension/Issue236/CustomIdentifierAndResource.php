@@ -55,9 +55,7 @@ final class CustomIdentifierAndResource extends IdentifierAndResource
      */
     private $data;
 
-    /**
-     * @inheritdoc
-     */
+
     public function __construct(
         EditableContextInterface $context,
         PositionInterface $position,
@@ -76,9 +74,7 @@ final class CustomIdentifierAndResource extends IdentifierAndResource
         \assert($this->schema instanceof BaseCustomSchema);
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function getRelationships(): iterable
     {
         $currentPath    = $this->getPosition()->getPath();

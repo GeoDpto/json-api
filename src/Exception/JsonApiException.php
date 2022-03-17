@@ -36,37 +36,39 @@ class JsonApiException extends BaseJsonApiException
     public const HTTP_CODE_UNSUPPORTED_MEDIA_TYPE = 415;
     public const DEFAULT_HTTP_CODE = self::HTTP_CODE_BAD_REQUEST;
 
-    /**
-     * @var ErrorCollection
-     */
-    private $errors;
+    private ErrorCollection $errors;
+    private int $httpCode;
 
     /**
-     * @var int
-     */
-    private $httpCode;
-
-    /**
-     * @param ErrorInterface|iterable $errors
-     *
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.ElseExpression)
      */
-    public function __construct($errors, int $httpCode = self::DEFAULT_HTTP_CODE, Exception $previous = null)
-    {
+    public function __construct(
+        ErrorCollection|ErrorInterface|array $errors,
+        int $httpCode = self::DEFAULT_HTTP_CODE,
+        Exception $previous = null,
+    ) {
         parent::__construct('JSON API error', 0, $previous);
 
-        if ($errors instanceof ErrorCollection) {
-            $this->errors = clone $errors;
-        } elseif (\is_iterable($errors) === true) {
+        if (\is_array($errors)) {
             $this->errors = new ErrorCollection();
             $this->addErrors($errors);
-        } else {
-            // should be ErrorInterface
-            $this->errors = new ErrorCollection();
-            $this->addError($errors);
+
+            $this->httpCode = $httpCode;
+
+            return;
         }
 
+        if ($errors instanceof ErrorInterface) {
+            $this->errors = new ErrorCollection();
+            $this->addError($errors);
+
+            $this->httpCode = $httpCode;
+
+            return;
+        }
+
+        $this->errors = clone $errors;
         $this->httpCode = $httpCode;
     }
 

@@ -28,20 +28,10 @@ use Neomerx\JsonApi\Contract\Schema\LinkWithAliasesInterface;
  */
 class LinkWithAliases extends Link implements LinkWithAliasesInterface
 {
-    /**
-     * @var array
-     */
-    private $aliases;
+    private array $aliases;
+    private bool $hasAliases;
 
-    /**
-     * @var bool
-     */
-    private $hasAliases;
-
-    /**
-     * @param null $meta
-     */
-    public function __construct(bool $isSubUrl, string $value, iterable $aliases, bool $hasMeta, $meta = null)
+    public function __construct(bool $isSubUrl, string $value, iterable $aliases, bool $hasMeta, mixed $meta = null)
     {
         $aliasesArray = [];
         foreach ($aliases as $name => $alias) {

@@ -34,7 +34,7 @@ class AuthorSchema extends DevSchema
         return 'people';
     }
 
-    public function getId($resource): ?string
+    public function getId(object $resource): ?string
     {
         assert($resource instanceof Author);
 
@@ -43,7 +43,7 @@ class AuthorSchema extends DevSchema
         return $index === null ? $index : (string)$index;
     }
 
-    public function getAttributes($resource, ContextInterface $context): iterable
+    public function getAttributes(object $resource, ContextInterface $context): array
     {
         assert($resource instanceof Author);
 
@@ -53,7 +53,7 @@ class AuthorSchema extends DevSchema
         ];
     }
 
-    public function getRelationships($resource, ContextInterface $context): iterable
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
         assert($resource instanceof Author);
 
@@ -81,9 +81,6 @@ class AuthorSchema extends DevSchema
         );
     }
 
-    /**
-     * @inheritdoc
-     */
     public function hasIdentifierMeta($resource): bool
     {
         assert($resource instanceof Author);
@@ -91,24 +88,21 @@ class AuthorSchema extends DevSchema
         return parent::hasIdentifierMeta($resource) || property_exists($resource, Author::IDENTIFIER_META);
     }
 
-    public function getIdentifierMeta($resource)
+    public function getIdentifierMeta(object $resource): mixed
     {
         assert($resource instanceof Author);
 
         return $resource->{Author::IDENTIFIER_META};
     }
 
-    public function hasResourceMeta($resource): bool
+    public function hasResourceMeta(object $resource): bool
     {
         assert($resource instanceof Author);
 
         return parent::hasResourceMeta($resource) || property_exists($resource, Author::RESOURCE_META);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getResourceMeta($resource)
+    public function getResourceMeta(object $resource): mixed
     {
         assert($resource instanceof Author);
 

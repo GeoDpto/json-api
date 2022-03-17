@@ -25,13 +25,8 @@ namespace Neomerx\JsonApi\Contract\Http\Header;
  */
 interface MediaTypeInterface
 {
-    /** JSON API type */
     public const JSON_API_MEDIA_TYPE = 'application/vnd.api+json';
-
-    /** JSON API type */
     public const JSON_API_TYPE = 'application';
-
-    /** JSON API type */
     public const JSON_API_SUB_TYPE = 'vnd.api+json';
 
     /**

@@ -29,15 +29,12 @@ use Neomerx\Tests\JsonApi\Data\Schema\CommentSchema as ParentSchema;
  */
 class CommentSchema extends ParentSchema
 {
-    /**
-     * @inheritdoc
-     */
-    public function getRelationships($comment, ContextInterface $context): iterable
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
-        assert($comment instanceof Comment);
+        assert($resource instanceof Comment);
 
         // emulate situation when we have only ID in relationship (e.g. user ID) and know type.
-        $author   = $comment->{Comment::LINK_AUTHOR};
+        $author   = $resource->{Comment::LINK_AUTHOR};
         $authorId = (string)$author->{Author::ATTRIBUTE_ID};
 
         $authorIdentity = new AuthorIdentity($authorId);
@@ -48,7 +45,7 @@ class CommentSchema extends ParentSchema
         }
 
         return $this->fixDescriptions(
-            $comment,
+            $resource,
             [
                 Comment::LINK_AUTHOR => [self::RELATIONSHIP_DATA => $authorIdentity],
             ]

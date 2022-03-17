@@ -25,23 +25,16 @@ namespace Neomerx\JsonApi\I18n;
  */
 class Messages
 {
-    /**
-     * @var array
-     */
-    private static $translations = [];
+    private static array $translations = [];
 
     /**
      * Try to translate the message and format it with the given parameters.
-     *
-     * @param mixed ...$parameters
-     *
      */
-    public static function compose(string $message, ...$parameters): string
+    public static function compose(string $message, mixed ...$parameters): string
     {
         $translation = static::getTranslation($message);
-        $result      = empty($parameters) === false ? \vsprintf($translation, $parameters) : $translation;
 
-        return $result;
+        return empty($parameters) === false ? \vsprintf($translation, $parameters) : $translation;
     }
 
     /**

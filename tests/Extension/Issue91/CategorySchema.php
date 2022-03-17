@@ -26,28 +26,22 @@ use Neomerx\JsonApi\Schema\BaseSchema;
  */
 class CategorySchema extends BaseSchema
 {
-    /**
-     * @inheritdoc
-     */
+
     public function getType(): string
     {
         return 'categories';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getId($resource): ?string
+
+    public function getId(object $resource): ?string
     {
         assert($resource instanceof Category);
 
         return (string)$resource->index;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAttributes($resource, ContextInterface $context): iterable
+
+    public function getAttributes(object $resource, ContextInterface $context): array
     {
         /** @var Category $resource */
         return [
@@ -55,10 +49,8 @@ class CategorySchema extends BaseSchema
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRelationships($resource, ContextInterface $context): iterable
+
+    public function getRelationships(object $resource, ContextInterface $context): array
     {
         /** @var Category $resource */
         return [
@@ -66,17 +58,13 @@ class CategorySchema extends BaseSchema
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function isAddSelfLinkInRelationshipByDefault(string $relationshipName): bool
     {
         return false;
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function isAddRelatedLinkInRelationshipByDefault(string $relationshipName): bool
     {
         return false;

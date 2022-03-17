@@ -49,7 +49,7 @@ trait ParseRelationshipDataTrait
         string $name,
         array $description,
         int $nextLevel,
-        string $nextPathPrefix
+        string $nextPathPrefix,
     ): array {
         $hasData = \array_key_exists(SchemaInterface::RELATIONSHIP_DATA, $description);
         // either no data or data should be array/object/null
@@ -80,22 +80,19 @@ trait ParseRelationshipDataTrait
         return [$hasData, $relationshipData, $nextPosition];
     }
 
-    /**
-     * @param mixed $data
-     */
     private function parseData(
         FactoryInterface $factory,
         SchemaContainerInterface $container,
         EditableContextInterface $context,
         PositionInterface $position,
-        $data
+        mixed $data,
     ): RelationshipDataInterface {
         // support if data is callable (e.g. a closure used to postpone actual data reading)
         if (\is_callable($data) === true) {
             $data = \call_user_func($data);
         }
 
-        if ($container->hasSchema($data) === true) {
+        if (\is_object($data) && $container->hasSchema($data)) {
             return $factory->createRelationshipDataIsResource($container, $context, $position, $data);
         } elseif ($data instanceof IdentifierInterface) {
             return $factory->createRelationshipDataIsIdentifier($container, $context, $position, $data);
@@ -113,7 +110,7 @@ trait ParseRelationshipDataTrait
         }
 
         throw new InvalidArgumentException(
-            _(IdentifierAndResource::MSG_NO_SCHEMA_FOUND, \get_class($data), $position->getPath())
+            _(IdentifierAndResource::MSG_NO_SCHEMA_FOUND, $data::class, $position->getPath())
         );
     }
 }

@@ -33,10 +33,7 @@ use Neomerx\JsonApi\Contract\Schema\DocumentInterface;
  */
 class DocumentWriter extends BaseWriter implements DocumentWriterInterface
 {
-    /**
-     * @var array
-     */
-    private $addedResources;
+    private array $addedResources;
 
     public function setNullToData(): DocumentWriterInterface
     {
@@ -229,8 +226,9 @@ class DocumentWriter extends BaseWriter implements DocumentWriterInterface
             $representation[DocumentInterface::KEYWORD_RELATIONSHIPS] = $relationships;
         }
 
-        if ($resource->hasLinks() === true) {
+        if ($resource->hasLinks()) {
             $links = $this->getLinksRepresentation($this->getUrlPrefix(), $resource->getLinks());
+
             \assert(
                 \json_encode($links) !== false,
                 'Links for resource type `' . $resource->getType() .
